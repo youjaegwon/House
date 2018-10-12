@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.houseprice.project.mappers.register.registerMapper">
+
+    <insert id="insert">
+        INSERT INTO h_member (
+            mid
+            , mpw
+            , mname
+            , mphone
+        ) VALUES (
+            #{mid}
+            , #{mpw}
+            , #{mname}
+            , #{mphone}
+        )
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM h_member
+        WHERE mid = #{mid}
+    </delete>
+
+    <select id="selectAll" resultType="MemberVO">
+        <![CDATA[
+        SELECT
+            mid,
+            mpw,
+            mphone,
+            mdate,
+            mauth
+        FROM h_member
+        ORDER BY mdate DESC
+        ]]>
+    </select>
+</mapper>
