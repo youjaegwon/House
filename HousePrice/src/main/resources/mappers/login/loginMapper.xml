@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.houseprice.project.mappers.login.loginMapper">
+
+    <select id="login" resultType="MemberVO">
+    	SELECT * FROM h_member WHERE mid = #{mid}
+    </select>
+</mapper>

@@ -3,10 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <title>Title</title>
 </head>
 <body>
-
+<script>
+    alert("로그아웃 되었습니다.");
+    self.location = "/";
+</script>
 </body>
 </html>

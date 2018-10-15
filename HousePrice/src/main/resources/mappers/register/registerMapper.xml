@@ -18,22 +18,4 @@
             , #{mphone}
         )
     </insert>
-
-    <delete id="delete">
-        DELETE FROM h_member
-        WHERE mid = #{mid}
-    </delete>
-
-    <select id="selectAll" resultType="MemberVO">
-        <![CDATA[
-        SELECT
-            mid,
-            mpw,
-            mphone,
-            mdate,
-            mauth
-        FROM h_member
-        ORDER BY mdate DESC
-        ]]>
-    </select>
 </mapper>

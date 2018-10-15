@@ -1,6 +1,5 @@
 package com.houseprice.project.register.repository;
 
-import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,18 +14,7 @@ public class MemberDAOImpl implements MemberDAO{
 	private SqlSession sqlSession;
 	
 	@Override
-	public void insert(MemberVO memberVO) {	
+	public void insert(MemberVO memberVO) throws Exception{	
 		sqlSession.insert(NAMESPACE + ".insert", memberVO);
 	}
-
-	@Override
-	public List<MemberVO> selectAll() {
-		return sqlSession.selectList(NAMESPACE + ".selectAll");
-	}
-
-	@Override
-	public void delete(String mid) {
-		sqlSession.delete(NAMESPACE + ".delete", mid);
-	}
-
 }

@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.House.Project">
+	<logger name="com.houseprice.project">
 		<level value="info" />
 	</logger>
 	
