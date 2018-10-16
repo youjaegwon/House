@@ -39,4 +39,10 @@
     <select id="selectall">
     	SELECT * FROM H_MEMBER;
     </select>
+    
+    <select id="idcheck" parameterType="String" resultType="Integer">
+    	SELECT COUNT(*) FROM H_MEMBER
+    	WHERE 
+    		mid=#{mid}
+    </select>
 </mapper>

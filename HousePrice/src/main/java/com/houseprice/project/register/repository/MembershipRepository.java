@@ -30,4 +30,7 @@ public class MembershipRepository {
 	public List<MemberVO> selectAll(){
 		return sqlSession.selectList(NAMESPACE);
 	}
+	public int idcheck(String mid) {
+		return sqlSession.selectOne(NAMESPACE+".idcheck",mid);
+	}
 }

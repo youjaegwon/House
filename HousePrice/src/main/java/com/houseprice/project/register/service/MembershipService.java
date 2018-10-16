@@ -38,4 +38,8 @@ public class MembershipService {
 		
 		return repository.selectAll();
 	}
+	public int idcheck(String mid) {
+		
+		return repository.idcheck(mid);
+	}
 }
