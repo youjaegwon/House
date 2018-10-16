@@ -14,13 +14,15 @@
 		<c:if test="${not empty login}">
 			<ul>
 				<li><p>${login.mname} 님 환영합니다.</p></li>
+				<li><a href="#">마이 페이지</a></li>
+				<li><a href="/register/detail?mid=${login.mid }">정보 변경</a></li>
 				<li><a href="/login/logout">로그아웃</a></li>
 			</ul>
 		</c:if>
 		<c:if test="${empty login}">
 			<ul>
 				<li><a href="/login/login">로그인</a></li>
-				<li><a href="/register/insert">회원가입</a></li>
+				<li><a href="/register/membership">회원가입</a></li>
 			</ul>
 		</c:if>
 	</div>

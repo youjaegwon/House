@@ -7,15 +7,36 @@
 
     <insert id="insert">
         INSERT INTO h_member (
-            mid
+              mid
             , mpw
             , mname
             , mphone
+            ,mdate
+            ,mproyn
+            ,ano
         ) VALUES (
-            #{mid}
+              #{mid}
             , #{mpw}
             , #{mname}
             , #{mphone}
+            ,sysdate
+            ,#{mproyn}
+            ,#{ano}
         )
     </insert>
+    
+    <update id="update">
+    	UPDATE H_MEMBER SET 
+    	 mpw=#{mpw},
+    	  mname=#{mname},
+    	   mphone=#{mphone}
+    	   WHERE mid=#{mid}
+    	    
+    </update>
+    <select id="findByid" resultType="MemberVO">
+    	SELECT * FROM H_MEMBER WHERE mid=#{mid}
+    </select>
+    <select id="selectall">
+    	SELECT * FROM H_MEMBER;
+    </select>
 </mapper>

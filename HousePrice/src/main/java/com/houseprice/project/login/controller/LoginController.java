@@ -13,6 +13,7 @@ import com.houseprice.project.login.model.LoginDTO;
 import com.houseprice.project.login.service.LoginService;
 import com.houseprice.project.register.model.MemberVO;
 
+
 @Controller
 @RequestMapping("/login")
 public class LoginController {
@@ -20,13 +21,13 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 
-	// 로그인 페이지
+	// 濡쒓렇�씤 �럹�씠吏�
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginGET(@ModelAttribute("loginDTO") LoginDTO loginDTO) {
 		return "/login/login";
 	}
 
-	// 로그인 처리
+	// 濡쒓렇�씤 泥섎━
 	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
 	public void loginPOST(LoginDTO loginDTO, Model model) throws Exception {
 
@@ -37,7 +38,7 @@ public class LoginController {
 		}
 		model.addAttribute("member",memberVO);
 	}
-	// 로그아웃 처리
+	// 濡쒓렇�븘�썐 泥섎━
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpServletRequest request,
 	                     HttpServletResponse response,
