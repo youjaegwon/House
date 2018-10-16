@@ -3,6 +3,7 @@ package com.houseprice.project.login.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,24 +22,25 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 
-	// 濡쒓렇�씤 �럹�씠吏�
+	// 로그인 페이지 이동
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginGET(@ModelAttribute("loginDTO") LoginDTO loginDTO) {
 		return "/login/login";
 	}
 
-	// 濡쒓렇�씤 泥섎━
+	// 로그인
 	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
 	public void loginPOST(LoginDTO loginDTO, Model model) throws Exception {
 
 		MemberVO memberVO = loginService.login(loginDTO);
 		
-		if (memberVO == null /*|| !BCrypt.checkpw(loginDTO.getUserPw(), userVO.getUserPw())*/) {
+		if (memberVO == null || !BCrypt.checkpw(loginDTO.getMpw(), memberVO.getMpw())) {
 			return;
 		}
+		
 		model.addAttribute("member",memberVO);
 	}
-	// 濡쒓렇�븘�썐 泥섎━
+	// 로그아웃
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpServletRequest request,
 	                     HttpServletResponse response,
@@ -52,7 +54,7 @@ public class LoginController {
 
 	    return "/login/logout";
 	}
-	
+	// 권한 없는 사용자 관리자 페이지 접근시 에러 페이지 요청
     @RequestMapping(value= "/admin", method = RequestMethod.GET)
     public String admin() {
         return "/login/adminerror";

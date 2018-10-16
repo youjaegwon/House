@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +34,10 @@ public class MembershipController {
 		if(bindingResult.hasErrors()) {
 			return "/register/membership";
 		}
+		// 비밀번호 암호화
+		String hashpw = BCrypt.hashpw(ms.getMpw(), BCrypt.gensalt());
+		ms.setMpw(hashpw);
+		
 		String result=service.insert(ms);
 		model.addAttribute("ms", result);
 		
