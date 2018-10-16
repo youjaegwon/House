@@ -20,19 +20,18 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 
-	// 로그인 페이지
+	// 濡쒓렇�씤 �럹�씠吏�
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginGET(@ModelAttribute("loginDTO") LoginDTO loginDTO) {
 		return "/login/login";
 	}
-
-	// 로그인 처리
+	
+	// 濡쒓렇�씤 泥섎━
 	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
 	public void loginPOST(LoginDTO loginDTO, Model model) throws Exception {
 
 		MemberVO memberVO = loginService.login(loginDTO);
-		
-		if (memberVO == null /*|| !BCrypt.checkpw(loginDTO.getUserPw(), userVO.getUserPw())*/) {
+		if (memberVO == null) {
 			return;
 		}
 		model.addAttribute("member",memberVO);
@@ -52,4 +51,8 @@ public class LoginController {
 	    return "/login/logout";
 	}
 
+	@RequestMapping(value= "/admin", method = RequestMethod.GET)
+	public String admin() {
+		return "/login/adminerror";
+	}
 }
