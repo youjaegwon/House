@@ -18,13 +18,18 @@
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/header/**" location="/resources/header/" />
 	<resources mapping="/footer/**" location="/resources/footer/" />
+	<resources mapping="/login/**" location="/resources/login/" />
+	<resources mapping="/assets/**" location="/resources/assets/" />
+	<resources mapping="/smarteditor/**" location="/resources/smarteditor/" />
+	
 	<!--viewResolver 설정 -->
 	<beans:bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	<!-- interceptor 로그인 -->
+	
+	<!-- interceptor 로그인 세션 저장 -->
 	<beans:bean id="loginInterceptor"
 		class="com.houseprice.project.login.interceptor.LoginInterceptor" />
 	<interceptors>
@@ -33,15 +38,36 @@
 			<beans:ref bean="loginInterceptor" />
 		</interceptor>
 	</interceptors>
-	<!-- interceptor 권한 -->
+	
+	<!-- interceptor 로그인 세션 확인 -->
 	<beans:bean id="authInterceptor"
 		class="com.houseprice.project.login.interceptor.AuthInterceptor" />
 	<interceptors>
 		<interceptor>
-			<mapping path="/user/info" />
+			<mapping path="/blog/insert" />
+			<mapping path="/admin/**/**" />
 			<beans:ref bean="authInterceptor" />
 		</interceptor>
 	</interceptors>
+	
+	
+	<!-- interceptor 권한 확인 -->
+	<beans:bean id="adminInterceptor"
+		class="com.houseprice.project.login.interceptor.AdminInterceptor" />
+	<interceptors>
+		<interceptor>
+			<mapping path="/admin/**/**" />
+			<beans:ref bean="adminInterceptor" />
+		</interceptor>
+	</interceptors>
+	
+ 	<!-- 파일 업로드 -->
+    <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- max upload size in bytes -->
+        <beans:property name="maxUploadSize" value="20971520" /> <!-- 20MB -->
+        <!-- max size of file in memory (in bytes) -->
+        <beans:property name="maxInMemorySize" value="1048576" /> <!-- 1MB -->
+    </beans:bean>
 
 	<context:component-scan
 		base-package="com.houseprice.project" />

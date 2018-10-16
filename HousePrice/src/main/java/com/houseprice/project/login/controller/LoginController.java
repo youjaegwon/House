@@ -13,6 +13,7 @@ import com.houseprice.project.login.model.LoginDTO;
 import com.houseprice.project.login.service.LoginService;
 import com.houseprice.project.register.model.MemberVO;
 
+
 @Controller
 @RequestMapping("/login")
 public class LoginController {
@@ -25,18 +26,19 @@ public class LoginController {
 	public String loginGET(@ModelAttribute("loginDTO") LoginDTO loginDTO) {
 		return "/login/login";
 	}
-	
+
 	// 濡쒓렇�씤 泥섎━
 	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
 	public void loginPOST(LoginDTO loginDTO, Model model) throws Exception {
 
 		MemberVO memberVO = loginService.login(loginDTO);
-		if (memberVO == null) {
+		
+		if (memberVO == null /*|| !BCrypt.checkpw(loginDTO.getUserPw(), userVO.getUserPw())*/) {
 			return;
 		}
 		model.addAttribute("member",memberVO);
 	}
-	// 로그아웃 처리
+	// 濡쒓렇�븘�썐 泥섎━
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpServletRequest request,
 	                     HttpServletResponse response,
@@ -50,9 +52,10 @@ public class LoginController {
 
 	    return "/login/logout";
 	}
+	
+    @RequestMapping(value= "/admin", method = RequestMethod.GET)
+    public String admin() {
+        return "/login/adminerror";
+    }
 
-	@RequestMapping(value= "/admin", method = RequestMethod.GET)
-	public String admin() {
-		return "/login/adminerror";
-	}
 }

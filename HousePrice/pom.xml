@@ -165,9 +165,6 @@
     		<artifactId>hibernate-validator</artifactId>
     		<version>5.1.3.Final</version>
 		</dependency>
-
-
-
 	 
 <!-- 		 https://mvnrepository.com/artifact/javax.validation/validation-api  -->
 		 <dependency>
@@ -175,6 +172,7 @@
 			<artifactId>validation-api</artifactId>
 			<version>1.1.0.Final</version>
 		</dependency> 
+
 		<!-- 파일 업로드 -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
