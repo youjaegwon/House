@@ -54,10 +54,39 @@ public class LoginController {
 
 	    return "/login/logout";
 	}
+	
 	// 권한 없는 사용자 관리자 페이지 접근시 에러 페이지 요청
     @RequestMapping(value= "/admin", method = RequestMethod.GET)
     public String admin() {
         return "/login/adminerror";
     }
-
+    
+    //비밀번호 찾기 페이지
+    @RequestMapping(value = "/findpw", method = RequestMethod.GET)
+	public String findpwGET() {
+		return "/login/findpw";
+	}
+    
+    //비밀번호 찾기
+    @RequestMapping(value = "/findpw", method = RequestMethod.POST)
+	public String findpwPOST(LoginDTO loginDTO, Model model) throws Exception{
+    	MemberVO memberVO = loginService.login(loginDTO);
+    	System.out.println(memberVO.getMid());
+    	//아이디 없으면
+    	if(memberVO == null) {
+    		return "/login/findpwError";
+    	}
+    	// 임시 비밀번호 생성
+    	String pw = "";
+    	for (int i = 0; i < 9; i++) {
+    		pw += (char) ((Math.random() * 26) + 97);
+    	}
+    	memberVO.setMpw(pw);
+    	// 비밀번호 암호화
+    	String hashpw = BCrypt.hashpw(memberVO.getMpw(), BCrypt.gensalt());
+    	memberVO.setMpw(hashpw);
+    	loginService.updatepw(memberVO);
+    	model.addAttribute("pw", pw);
+		return "/login/findpwSuccess";
+	}
 }

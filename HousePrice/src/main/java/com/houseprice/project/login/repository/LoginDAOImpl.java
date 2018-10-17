@@ -20,6 +20,11 @@ public class LoginDAOImpl implements LoginDAO{
 		
 		return sqlSession.selectOne(NAMESPACE + ".login", loginDTO);
 	}
+
+	@Override
+	public int updatepw(MemberVO memberVO) throws Exception {
+		return sqlSession.update(NAMESPACE + ".update_pw", memberVO);
+	}
 	
 
 }

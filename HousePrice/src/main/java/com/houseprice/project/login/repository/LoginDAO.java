@@ -7,4 +7,6 @@ public interface LoginDAO {
 
 	// 로그인
 	MemberVO login(LoginDTO loginDTO) throws Exception;
+	// 비밀번호 변경
+	int updatepw(MemberVO memberVO) throws Exception;
 }

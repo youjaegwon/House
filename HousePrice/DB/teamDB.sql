@@ -1,4 +1,4 @@
-------------테스트 데이터 생성 sql문
+﻿------------테스트 데이터 생성 sql문
 
 -------------------------------권한 목록
 INSERT INTO H_AUTH VALUES (SEQ_H_AUTH_ANO.nextval, '관리자계정', 'A');
@@ -10,14 +10,14 @@ INSERT INTO H_AUTH VALUES (SEQ_H_AUTH_ANO.nextval, '일반계정', 'N');
 -------------------------계정 생성
 
 --관리자
-INSERT INTO H_MEMBER VALUES ('test','1234','테스트관리자','01011111111','2018-10-10','N',1);
+INSERT INTO H_MEMBER VALUES ('test','$2a$10$24R.G00XMRup4e.wz/IOzu6JHr14JqUbY/hyl6xjeae73O1x5MGF2','테스트관리자','01011111111','2018-10-10','N',1);
 
 --전문가
-INSERT INTO H_MEMBER VALUES ('test_p','1234','테스트전문가','01022222222','2018-10-11','Y',2);
-INSERT INTO H_MEMBER VALUES ('test_p2','1234','테스트전문가','01022222222','2018-10-11','Y',1);
+INSERT INTO H_MEMBER VALUES ('test_p','$2a$10$24R.G00XMRup4e.wz/IOzu6JHr14JqUbY/hyl6xjeae73O1x5MGF2','테스트전문가','01022222222','2018-10-11','Y',2);
+INSERT INTO H_MEMBER VALUES ('test_p2','$2a$10$24R.G00XMRup4e.wz/IOzu6JHr14JqUbY/hyl6xjeae73O1x5MGF2','테스트전문가','01022222222','2018-10-11','Y',1);
 --일반
-INSERT INTO H_MEMBER VALUES ('test_n','1234','테스트일반','01033333333','2018-10-12','N',3);
-INSERT INTO H_MEMBER VALUES ('test_n2','1234','테스트일반','01044444444','2018-10-12','N',3);
+INSERT INTO H_MEMBER VALUES ('test_n','$2a$10$24R.G00XMRup4e.wz/IOzu6JHr14JqUbY/hyl6xjeae73O1x5MGF2','테스트일반','01033333333','2018-10-12','N',3);
+INSERT INTO H_MEMBER VALUES ('test_n2','$2a$10$24R.G00XMRup4e.wz/IOzu6JHr14JqUbY/hyl6xjeae73O1x5MGF2','테스트일반','01044444444','2018-10-12','N',3);
 --SELECT * FROM H_MEMBER;
 
 
