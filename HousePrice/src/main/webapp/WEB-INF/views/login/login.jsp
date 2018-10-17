@@ -27,8 +27,8 @@
 					type="submit">로그인</button>
 			</form>
 			<!-- /form -->
-			<p>비밀번호를 잊으셨나요? <a href="#" class="forgot-password">비밀번호 찾기</a></p>
-			<p>회원이 아니신가요? <a href="/register/insert" class="forgot-password">회원가입 </a></p>
+			<p>비밀번호를 잊으셨나요? <a href="/login/findpw" class="forgot-password">비밀번호 찾기</a></p>
+			<p>회원이 아니신가요? <a href="/register/membership" class="forgot-password">회원가입 </a></p>
 		</div>
 		<!-- /card-container -->
 	</div>

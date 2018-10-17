@@ -19,4 +19,10 @@ public class LoginServiceImpl implements LoginService{
 		// TODO Auto-generated method stub
 		return loginDAO.login(loginDTO);
 	}
+
+	@Override
+	public int updatepw(MemberVO memberVO) throws Exception {
+		// TODO Auto-generated method stub
+		return loginDAO.updatepw(memberVO);
+	}
 }

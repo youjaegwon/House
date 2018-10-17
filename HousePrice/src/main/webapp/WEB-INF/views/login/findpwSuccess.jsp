@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,8 +8,8 @@
 </head>
 <body>
 	<script>
-        alert("접근할 수 없는 권한입니다.");
-        self.location = "/";
+        alert("임시비밀번호가 발송되었습니다. 임시비밀번호는 ${pw}입니다.");
+        self.location = "/login/login";
     </script>
 </body>
 </html>
