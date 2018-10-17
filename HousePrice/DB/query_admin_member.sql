@@ -20,7 +20,7 @@ MID = 'test_p';--해당 계정id (mid)
 
 --목록에서 '해지'클릭시 : 즉 전문가계정을 일반계정으로 변경
 UPDATE H_MEMBER SET
-ANO = 1--전문가 계정 번호(2)로 변경 
+ANO = 1--일반 계정 번호(1)로 변경 
 WHERE
 MID = 'test_p';--해당 계정id (mid)
 
