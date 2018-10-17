@@ -5,12 +5,24 @@
 -- 정렬기준: 가입일 내림차순 > 아이디 오름차순
 --ROWNUM <= 10 페이지의 마지막 게시물 번호
 --Q.RNUM >= 1 페이지의 첫 게시물 번호
---전문가등록 버튼은 ano = 1 이면 '등록' ano=2 이면 '해지'로 표시. 
+--전문가등록 버튼은 ano = 1 이면 '등록' ano=2 이면 '해지'로 표시.
+--모든 아이디 조회시 사용
+--WHERE NOT ANO=3 AND (MPROYN='Y' OR ANO=2)  >> 의 의미: 관리자를 제외하고 
+--회원이 회원정보의 "전문가 등록 신청에 체크"했을경우 또는 이미 "전문가"인 경우 조회하도록 조건 설정한 것임
+
 SELECT * FROM 
 (SELECT ROWNUM RNUM, M.* FROM
-(SELECT * FROM H_MEMBER WHERE MPROYN='Y' OR ANO=2 ORDER BY mdate DESC, mid ASC) M
+(SELECT * FROM H_MEMBER WHERE NOT ANO=3 AND (MPROYN='Y' OR ANO=2) ORDER BY mdate DESC, mid ASC) M
 WHERE ROWNUM <= 10) M
 WHERE M.RNUM >= 1;
+
+--검색 조회시 사용 :  AND mid LIKE '%사용자id(mid)%' 구문 추가
+SELECT * FROM 
+(SELECT ROWNUM RNUM, M.* FROM
+(SELECT * FROM H_MEMBER WHERE NOT ANO=3 AND (MPROYN='Y' OR ANO=2) AND mid LIKE '%사용자id(mid)%' ORDER BY mdate DESC, mid ASC) M
+WHERE ROWNUM <= 10) M
+WHERE M.RNUM >= 1;
+
 
 --목록에서 '등록'클릭시 : 즉 전문가가 아닌계정을 전문가로 변경
 UPDATE H_MEMBER SET

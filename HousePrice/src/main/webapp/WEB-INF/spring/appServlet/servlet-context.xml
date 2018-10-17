@@ -15,6 +15,7 @@
 	<annotation-driven />
 
 	<!--정적자원 매핑 -->
+	<resources mapping="/img/**" location="/resources/img/" />
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/header/**" location="/resources/header/" />
 	<resources mapping="/footer/**" location="/resources/footer/" />
