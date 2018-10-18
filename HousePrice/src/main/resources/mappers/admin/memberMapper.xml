@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.houseprice.project.mappers.admin.memberMapper">
+
+	<!-- 회원 조회 -->
+	<select id="selectList" resultType="AdminMemberVO">
+	<![CDATA[
+	SELECT * FROM
+	(SELECT ROWNUM  RNUM, M.* FROM
+	(SELECT * FROM h_member hm INNER JOIN h_auth an ON hm.ano = an.ano WHERE hm.mproyn='Y' AND (hm.ano=2 OR hm.ano=3) ORDER BY hm.mdate DESC, hm.mid ASC) M
+	WHERE ROWNUM <= 10) M
+	WHERE M.RNUM >= 1
+	]]> 
+	</select>
+	<update id="exportUpdate">
+		UPDATE H_MEMBER SET
+		ANO = 2
+		WHERE
+		MID = #{mid}
+	</update>
+	<update id="userUpdate">
+		UPDATE H_MEMBER SET
+		ANO = 3
+		WHERE
+		MID = #{mid}
+	</update>
+</mapper>

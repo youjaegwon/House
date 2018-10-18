@@ -18,3 +18,4 @@
 
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="${path}/assets/js/demo.js"></script>
+</div>

@@ -45,7 +45,9 @@
 		class="com.houseprice.project.login.interceptor.AuthInterceptor" />
 	<interceptors>
 		<interceptor>
-			<mapping path="/blog/insert" />
+			<mapping path="/question/modify"/>
+			<mapping path="/question/write"/>
+			<mapping path="/question/read"/>
 			<mapping path="/admin/**/**" />
 			<beans:ref bean="authInterceptor" />
 		</interceptor>

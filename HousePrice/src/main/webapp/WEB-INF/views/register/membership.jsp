@@ -49,7 +49,7 @@
 				
 				<tr>
 					<th>권한</th>
-					 <td><input type="radio" name="mproyn" id="radio1" value="P">
+					 <td><input type="radio" name="mproyn" id="radio1" value="Y">
 						<label for="radio1">전문가</label>
 						<input type="radio" name="mproyn" id="radi2" value="N">
 						<label for="radio2">일반</label>
