@@ -1,16 +1,10 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" pageEncoding="utf-8" %>
+<%@ page session="true" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html>
-
-<head>
-
-<title>수정 페이지</title>
-</head>
-<body>
-
 <%@ include file="../include/head.jsp" %>
+<body>
 <%@ include file="../include/main_header.jsp" %>
 <div class="container-fluid">
 <form action="update" method="post" >

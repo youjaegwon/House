@@ -32,4 +32,10 @@ public class AdminMemberServiceImpl implements AdminMemberService{
 		// TODO Auto-generated method stub
 		return adminmemberDAO.userUpdate(mid);
 	}
+
+	@Override
+	public List<AdminMemberVO> findBymid(AdminMemberVO adminMemberVO) {
+		
+		return adminmemberDAO.findByMid(adminMemberVO);
+	}
 }
