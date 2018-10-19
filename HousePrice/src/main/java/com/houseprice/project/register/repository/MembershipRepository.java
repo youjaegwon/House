@@ -2,7 +2,6 @@ package com.houseprice.project.register.repository;
 
 
 import java.util.List;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,6 +15,7 @@ public class MembershipRepository {
 	private SqlSession sqlSession;
 	
 	private static final String NAMESPACE="com.houseprice.project.mappers.register.registerMapper";
+	private static final String NAMESPACE2="com.houseprice.project.mappers.admin.adminMapper";
 	
 	public int insert(MemberVO membership) {
 		
@@ -33,4 +33,5 @@ public class MembershipRepository {
 	public int idcheck(String mid) {
 		return sqlSession.selectOne(NAMESPACE+".idcheck",mid);
 	}
+	 
 }

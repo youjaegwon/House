@@ -2,9 +2,7 @@ package com.houseprice.project.register.controller;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.validation.Valid;
-
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.houseprice.project.register.model.MemberVO;
 import com.houseprice.project.register.service.MembershipService;
 
@@ -27,11 +24,14 @@ public class MembershipController {
 	@Autowired
 	MembershipService service;
 	
+	
+	
 	// db insert 
 	@RequestMapping(value="/membership", method=RequestMethod.POST)
 	public String insert(@Valid MemberVO ms,BindingResult bindingResult,Model model) {
 		
 		if(bindingResult.hasErrors()) {
+			System.out.println("에러");
 			return "/register/membership";
 		}
 		// 비밀번호 암호화
@@ -40,12 +40,40 @@ public class MembershipController {
 		
 		String result=service.insert(ms);
 		model.addAttribute("ms", result);
-		
-			return "/login/login";
+		System.out.println("가입성공");
+			return "/register/joinSuccess";
 		
 
 	}
-	
+	// 아이디 중복검사
+	@ResponseBody
+	@RequestMapping(value="/idcheck", method=RequestMethod.POST)
+    public Map<Object, Object> idcheck(@RequestBody String mid) {
+        
+        int count = 0;
+        Map<Object, Object> map = new HashMap<Object, Object>();
+ 
+        count = service.idcheck(mid);
+        map.put("cnt", count);
+        
+        return map;
+    }
+	//비밀번호 재확인
+//	@RequestMapping(value="/checkPw",method=RequestMethod.GET)
+//	public String pwcheck(@RequestParam String mpw,Model model) {
+//		MemberVO membership=service.findByid(mid);
+//		
+//		
+//		model.addAttribute("check", membership);
+//		
+//		MemberVO memberVO = loginService.login(loginDTO);
+//		
+//		if (memberVO == null || !BCrypt.checkpw(loginDTO.getMpw(), memberVO.getMpw())) {
+//			return;
+//		}
+//		return "/register/checkPw";
+//		
+//	}
 	// 회원가입
 	@RequestMapping(value="/membership", method=RequestMethod.GET)
 	public String membership(MemberVO membership,Model model) {
@@ -53,32 +81,22 @@ public class MembershipController {
 		return "/register/membership";
 	}
 	
-	@RequestMapping("/membership")
-	@ResponseBody
-	public Map<Object,Object> idcheck(@RequestBody String mid){
-		
-		int count=0;
-		 Map<Object, Object> map = new HashMap<Object, Object>();
-		 
-	        count = service.idcheck(mid);
-	        map.put("cnt", count);
-	 
-	        return map;
-	}
 	
-
-	// 정보변경
+	// 마이페이지
 	@RequestMapping(value="/detail", method=RequestMethod.GET)
 	@ModelAttribute("member")
 	public MemberVO detail(@RequestParam String mid) { 
 		
 		MemberVO membership=service.findByid(mid);
+//		membership.setMpw(null);
 		return membership;
 	}
-	
+	//정보변경
 	@RequestMapping(value="/update",method=RequestMethod.POST)
 	public String update(MemberVO membership,Model model) {
-		
+		// 비밀번호 암호화
+		String hashpw = BCrypt.hashpw(membership.getMpw(), BCrypt.gensalt());
+		membership.setMpw(hashpw);
 		String result=service.update(membership);
 		model.addAttribute("result", result);
 		return "/register/result";

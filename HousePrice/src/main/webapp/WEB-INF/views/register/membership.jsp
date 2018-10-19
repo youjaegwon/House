@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
 <!DOCTYPE html>
 <html>
-<%@ include file="../include/head.jsp" %>
-<body>
+<head>
+
 <style type="text/css">
 	.error{
 		color:red;
 	}
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
-//아이디 체크여부 확인 (아이디 중복일 경우 = 0 , 중복이 아닐경우 = 1 )
 var idck = 0;
 $(function() {
     //idck 버튼을 클릭했을 때 
@@ -23,7 +24,7 @@ $(function() {
             async: true,
             type : 'POST',
             data : mid,
-            url : "/register/membership",
+            url : "/register/idcheck",
             dataType : "json",
             contentType: "application/json; charset=UTF-8",
             success : function(data) {
@@ -33,7 +34,7 @@ $(function() {
                     //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
                     $("#divInputId").addClass("has-error")
                     $("#divInputId").removeClass("has-success")
-                    $("#userid").focus();
+                    $("#mid").focus();
                     
                 
                 } else {
@@ -41,7 +42,7 @@ $(function() {
                     //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
                     $("#divInputId").addClass("has-success")
                     $("#divInputId").removeClass("has-error")
-                    $("#userpwd").focus();
+                    $("#mid").focus();
                     //아이디가 중복하지 않으면  idck = 1 
                     idck = 1;
                     
@@ -55,8 +56,13 @@ $(function() {
     });
 });
  
- 
 </script>
+</head>
+<%@ include file="../include/head.jsp" %>
+<body>
+
+
+
 
 
 <%@ include file="../include/main_header.jsp" %>
@@ -67,15 +73,21 @@ $(function() {
 			<table>
 				<tr>
 					<th>아이디</th>
-					 <td><input type="text" name="mid" placeholder="아이디" />
-						<form:errors path="mid" cssClass="error"/>
-						<input type="button" id="idck" value="중복 검사">
+					 <td>
+					 <input type="text" name="mid" id="mid" placeholder="아이디" />
+					 
+					 <form:errors path="mid" cssClass="error"/>
+					 <input type="button" id="idck" value="중복 검사">
+						<div id="checkMsg"></div>
 					</td> 
 					
 				</tr>
+				
 				<tr>
 					<th>패스워드</th>
-					 <td><input type="password" name="mpw" placeholder="패스워드"/>
+					 <td>
+<!-- 					 <input type="password" name="mpw" placeholder="패스워드"/> -->
+					 		<form:input path="mpw" size="20" />
 						<form:errors path="mpw" cssClass="error"/>
 					</td> 
 					
@@ -98,9 +110,9 @@ $(function() {
 				
 				<tr>
 					<th>권한</th>
-					 <td><input type="radio" name="mproyn" id="radio1" value="P">
+					 <td><input type="radio" name="mproyn" id="radio1" value="Y" >
 						<label for="radio1">전문가</label>
-						<input type="radio" name="mproyn" id="radi2" value="N">
+						<input type="radio" name="mproyn" id="radi2" value="N" checked="checked">
 						<label for="radio2">일반</label>
 						<form:errors path="mproyn" cssClass="error"/>
 					 </td> 

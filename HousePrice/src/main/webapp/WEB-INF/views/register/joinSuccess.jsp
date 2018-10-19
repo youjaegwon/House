@@ -3,17 +3,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-
+<title>회원가입 성공</title>
 </head>
 <body>
 <%@ include file="../include/head.jsp" %>
 <%@ include file="../include/main_header.jsp" %>
 <div class="container-fluid">
-<h2>${result}</h2>
-<h3>다시 로그인 해주세요!</h3>
-<a href="/include/main_header">홈으로</a>
+<h3>회원가입 성공</h3>
 <a href="/login/login">로그인</a>
 </div>
 <%@ include file="../include/main_footer.jsp" %>
+</body>
 </html>

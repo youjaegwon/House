@@ -23,6 +23,7 @@ public class MembershipService {
 		return result;
 	}
 	public String update(MemberVO membership) {
+		
 		int update=repository.update(membership);
 		String result="변경실패";
 		if(update>0) {

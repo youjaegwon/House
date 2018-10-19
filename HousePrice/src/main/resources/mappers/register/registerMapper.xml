@@ -25,7 +25,7 @@
         )
     </insert>
     
-    <update id="update">
+    <update id="update" parameterType="MemberVO">
     	UPDATE H_MEMBER SET 
     	 mpw=#{mpw},
     	  mname=#{mname},
