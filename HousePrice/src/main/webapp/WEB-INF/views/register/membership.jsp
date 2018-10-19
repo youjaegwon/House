@@ -86,8 +86,7 @@ $(function() {
 				<tr>
 					<th>패스워드</th>
 					 <td>
-<!-- 					 <input type="password" name="mpw" placeholder="패스워드"/> -->
-					 		<form:input path="mpw" size="20" />
+					 <input type="password" name="mpw" placeholder="패스워드"/> 
 						<form:errors path="mpw" cssClass="error"/>
 					</td> 
 					
@@ -110,7 +109,6 @@ $(function() {
 				
 				<tr>
 					<th>권한</th>
-					 <td><input type="radio" name="mproyn" id="radio1" value="Y" >
 					 <td><input type="radio" name="mproyn" id="radio1" value="Y">
 						<label for="radio1">전문가</label>
 						<input type="radio" name="mproyn" id="radi2" value="N" checked="checked">

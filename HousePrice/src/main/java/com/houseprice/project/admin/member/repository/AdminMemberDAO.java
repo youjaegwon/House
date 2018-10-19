@@ -13,4 +13,7 @@ public interface AdminMemberDAO {
 	int expertUpdate(String mid) throws Exception;
 	// 일반 사용자 권한 변경
 	int userUpdate(String mid) throws Exception;
+	//회원정보 검색
+	List<AdminMemberVO> findByMid(AdminMemberVO AdminMemberVO);
+	
 }

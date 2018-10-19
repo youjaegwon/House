@@ -12,7 +12,7 @@
 				var formData = $("#ReadingInfoSelectForm").serialize();
 				$.ajax({
 					type : "POST",
-					url : "/admin/member/exportUpdate",
+					url : "/admin/member/expertUpdate",
 					cache : false,
 					data : formData,
 					success : onSuccess
@@ -45,6 +45,12 @@
 							<h4 class="title">회원관리</h4>
 							<p class="category">전문가 등록을 위한 권한지정</p>
 						</div>
+						<form action="findBymid" method="get">
+						<div>
+							<input type="text" placeholder="아이디입력" id="mid" name="mid">
+							<input type="submit" value="검색">
+						</div>
+						</form>
 						<div class="content table-responsive table-full-width">
 							<table class="table table-hover table-striped">
 								<thead>
@@ -55,6 +61,32 @@
 									<th>전문가등록</th>
 								</thead>
 								<tbody>
+								<c:choose>
+								<c:when test="${not empty searchId}">
+										<c:forEach var="find" items="${idlist }">
+											<tr>
+												<td>${find.mid }</td>
+												<td>${find.mdate }</td>
+												<td>${find.mproyn }</td>
+												<td>${find.aname}</td>
+												<c:if test="${3 eq find.ano}">
+												<td><form id="ReadingInfoSelectForm">
+														<input type="hidden" value="${find.mid}" name="mid"><input
+															id="ReadingInfoSelectBtn" type="button" value="등록">
+													</form></td>
+											</c:if>
+											<c:if test="${2 eq find.ano}">
+												<td><form id="ReadingInfoSelectForm2">
+														<input type="hidden" value="${find.mid}" name="mid"><input
+															id="ReadingInfoSelectBtn2" type="button" value="해제">
+													</form></td>
+											</c:if>
+												
+											</tr>
+										
+										</c:forEach>
+								</c:when>
+								<c:otherwise>
 									<c:forEach var="member" items="${member}">
 										<tr>
 											<td>${member.mid}</td>
@@ -75,7 +107,10 @@
 											</c:if>
 										</tr>
 									</c:forEach>
+								</c:otherwise>
+								</c:choose>
 								</tbody>
+								
 							</table>
 						</div>
 					</div>

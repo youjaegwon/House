@@ -11,12 +11,12 @@
 	<![CDATA[
 	SELECT * FROM
 	(SELECT ROWNUM  RNUM, M.* FROM
-	(SELECT * FROM h_member hm INNER JOIN h_auth an ON hm.ano = an.ano WHERE hm.mproyn='Y' AND (hm.ano=2 OR hm.ano=3) ORDER BY hm.mdate DESC, hm.mid ASC) M
+	(SELECT * FROM h_member hm INNER JOIN h_auth an ON hm.ano = an.ano WHERE hm.mproyn='Y' AND (hm.ano=2 OR hm.ano=3)  ORDER BY hm.mdate DESC, hm.mid ASC) M
 	WHERE ROWNUM <= 10) M
 	WHERE M.RNUM >= 1
 	]]> 
 	</select>
-	<update id="exportUpdate">
+	<update id="expertUpdate">
 		UPDATE H_MEMBER SET
 		ANO = 2
 		WHERE
@@ -28,4 +28,11 @@
 		WHERE
 		MID = #{mid}
 	</update>
+	
+	<select id="findBymid" parameterType="AdminMemberVO" resultType="AdminMemberVO">
+		SELECT * FROM H_MEMBER WHERE 1=1
+		<if test="mid!=null and !mid.equals('')">
+		AND mid like '%'||#{mid}||'%' 
+		</if>	
+	</select>
 </mapper>

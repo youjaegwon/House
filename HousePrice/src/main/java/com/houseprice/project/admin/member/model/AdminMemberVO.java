@@ -50,5 +50,10 @@ public class AdminMemberVO {
 	public void setMproyn(String mproyn) {
 		this.mproyn = mproyn;
 	}
+	@Override
+	public String toString() {
+		return "AdminMemberVO [mid=" + mid + ", mdate=" + mdate + ", mproyn=" + mproyn + ", ano=" + ano + ", aname="
+				+ aname + ", amark=" + amark + "]";
+	}
 	
 }

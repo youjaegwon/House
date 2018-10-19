@@ -1,7 +1,6 @@
 package com.houseprice.project.admin.member.repository;
 
 import java.util.List;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -24,11 +23,17 @@ public class AdminMemberDAOImpl implements AdminMemberDAO{
 
 	@Override
 	public int expertUpdate(String mid) throws Exception {
-		return sqlSession.update(NAMESPACE+ ".exportUpdate", mid);
+		return sqlSession.update(NAMESPACE+ ".expertUpdate", mid);
 	}
 
 	@Override
 	public int userUpdate(String mid) throws Exception {
 		return sqlSession.update(NAMESPACE+ ".userUpdate", mid);
+	}
+
+	@Override
+	public List<AdminMemberVO> findByMid(AdminMemberVO AdminMemberVO) {
+		
+		return sqlSession.selectList(NAMESPACE+".findBymid",AdminMemberVO);
 	}
 }
