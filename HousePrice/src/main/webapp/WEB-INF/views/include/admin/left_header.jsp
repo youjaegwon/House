@@ -15,7 +15,7 @@
 				<li><a href="dashboard.html"> <i class="pe-7s-graph"></i>
 						<p>대쉬보드</p>
 				</a></li>
-				<li><a href="user.html"> <i class="pe-7s-user"></i>
+				<li><a href="/admin/member/move"> <i class="pe-7s-user"></i>
 						<p>회원관리</p>
 				</a></li>
 				<li><a href="table.html"> <i class="pe-7s-note2"></i>

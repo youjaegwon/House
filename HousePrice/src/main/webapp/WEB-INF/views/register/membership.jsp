@@ -111,6 +111,7 @@ $(function() {
 				<tr>
 					<th>권한</th>
 					 <td><input type="radio" name="mproyn" id="radio1" value="Y" >
+					 <td><input type="radio" name="mproyn" id="radio1" value="Y">
 						<label for="radio1">전문가</label>
 						<input type="radio" name="mproyn" id="radi2" value="N" checked="checked">
 						<label for="radio2">일반</label>

@@ -16,6 +16,10 @@ public class QuestionVO {
 	private int chit;
 	// 작성자
 	private String mid;
+	// 답변 여부
+	private String answered;
+	// 테이블 번호
+	private int rnum;
 	
 	public int getCno() {
 		return cno;
@@ -52,5 +56,17 @@ public class QuestionVO {
 	}
 	public void setMid(String mid) {
 		this.mid = mid;
+	}
+	public String getAnswered() {
+		return answered;
+	}
+	public void setAnswered(String answered) {
+		this.answered = answered;
+	}
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 }
