@@ -1,5 +1,9 @@
 package com.houseprice.project.question.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.houseprice.project.question.model.QuestionVO;
-import com.houseprice.project.question.paging.Criteria;
-import com.houseprice.project.question.paging.PageMaker;
+import com.houseprice.project.question.paging.PagingVo;
 import com.houseprice.project.question.service.QuestionService;
 
 @Controller
@@ -26,18 +29,25 @@ public class QuestionController {
 	
 	// 목록 페이지 이동
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(Criteria criteria, Model model) throws Exception {
+	public String list(PagingVo paging, Model model) throws Exception {
 
+		Date date = new Date();
+		SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd");
+		String year = (String)simpleDate.format(date);
+		System.out.println(year);
+		int qnew = 0;
+		List<QuestionVO> list = questionService.listAll(paging);
+		for(QuestionVO qv : list) {
+			qv.setCregdate(qv.getCregdate().substring(0, 10));
+			if(year.equals(qv.getCregdate())) {
+				qnew = 1;
+			}
+		}
 	    logger.info("리스트 페이지 이동...");
-	    PageMaker pageMaker = new PageMaker();
-	    pageMaker.setCriteria(criteria);
-	    pageMaker.setTotalCount(100);
-	    model.addAttribute("pageMaker", pageMaker);
-	    System.out.println(questionService.countArticles(criteria));
-	    model.addAttribute("questions", questionService.listAll(criteria));
-	    System.out.println(criteria.getPageStart());
-	    System.out.println(criteria.getPerPageNum());
-	    
+	    paging.setTotal(questionService.countArticles(paging));
+	    model.addAttribute("questions", questionService.listAll(paging));
+	    model.addAttribute("p",paging);
+	    model.addAttribute("year",qnew);
 	    return "/question/question_list";
 	}
 	
@@ -67,8 +77,9 @@ public class QuestionController {
 	                   Model model) throws Exception {
 
 	    logger.info("질문 상세 페이지 이동...");
+		questionService.hitupdate(cno);
 	    model.addAttribute("question", questionService.read(cno));
-
+	    
 	    return "/question/question_read";
 	}
 	

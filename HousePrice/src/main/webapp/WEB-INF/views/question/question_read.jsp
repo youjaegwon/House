@@ -15,15 +15,13 @@
 					${question.ccontent}</div>
 				<div class="box-footer">
 					<div class="user-block">
-						<img class="img-circle img-bordered-sm"
-							src="/dist/img/user1-128x128.jpg" alt="user image"> <span
+						<span
 							class="username"> <a href="#">${question.mid}</a>
-						</span> <span class="description"><fmt:formatDate
-								pattern="yyyy-MM-dd a HH:mm" value="${question.cregdate}" /></span>
+						</span>${question.cregdate}
 					</div>
 				</div>
 				<div class="box-footer">
-					<form role="form" method="post">
+					<form role="form" method="get">
 						<input type="hidden" name="cno" value="${question.cno}">
 					</form>
 					<button type="submit" class="btn btn-primary listBtn">
@@ -54,7 +52,7 @@
 			});
 
 			$(".listBtn").on("click", function() {
-				self.location = "/question/list;
+				self.location = "/question/list";
 			});
 
 		});

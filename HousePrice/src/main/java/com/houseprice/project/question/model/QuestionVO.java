@@ -11,7 +11,7 @@ public class QuestionVO {
 	// 문의 내용
 	private String ccontent;
 	// 작성일
-	private Date cregdate;
+	private String cregdate;
 	// 조회수
 	private int chit;
 	// 작성자
@@ -39,10 +39,10 @@ public class QuestionVO {
 	public void setCcontent(String ccontent) {
 		this.ccontent = ccontent;
 	}
-	public Date getCregdate() {
+	public String getCregdate() {
 		return cregdate;
 	}
-	public void setCregdate(Date cregdate) {
+	public void setCregdate(String cregdate) {
 		this.cregdate = cregdate;
 	}
 	public int getChit() {

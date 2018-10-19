@@ -2,7 +2,7 @@ package com.houseprice.project.question.repository;
 
 import java.util.List;
 import com.houseprice.project.question.model.QuestionVO;
-import com.houseprice.project.question.paging.Criteria;
+import com.houseprice.project.question.paging.PagingVo;
 
 public interface QuestionDAO {
 
@@ -12,8 +12,10 @@ public interface QuestionDAO {
 
 	void update(QuestionVO questionVO) throws Exception;
 
-	List<QuestionVO> listAll(Criteria criteria) throws Exception;
+	List<QuestionVO> listAll(PagingVo paging) throws Exception;
 
-	int countArticles(Criteria criteria) throws Exception;
+	int countArticles(PagingVo paging) throws Exception;
+	
+	void hitupdate(int cno) throws Exception;
 
 }

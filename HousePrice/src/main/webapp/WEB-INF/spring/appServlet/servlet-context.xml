@@ -22,6 +22,7 @@
 	<resources mapping="/login/**" location="/resources/login/" />
 	<resources mapping="/assets/**" location="/resources/assets/" />
 	<resources mapping="/smarteditor/**" location="/resources/smarteditor/" />
+	<resources mapping="/question/**" location="/resources/question/" />
 	
 	<!--viewResolver 설정 -->
 	<beans:bean

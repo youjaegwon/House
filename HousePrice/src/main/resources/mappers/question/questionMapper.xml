@@ -44,8 +44,8 @@
 		(SELECT Q.*, NVL2(A.ANO,'답변','미답변') ANSWERED 
 		FROM H_QUESTION Q LEFT OUTER JOIN H_ANSWER A ON Q.cno = A.cno) Q
 		ORDER BY q.CREGDATE DESC, Q.CNO DESC) Q
-		WHERE ROWNUM <= #{perPageNum}) Q
-		WHERE Q.RNUM >= #{pageStart}
+		WHERE ROWNUM <= #{last}) Q
+		WHERE Q.RNUM >= #{start}
         ]]>
     </select>
     
@@ -55,6 +55,10 @@
        	 COUNT(*)
     	FROM H_QUESTION
     ]]>
-</select>
-    
+	</select>
+    <update id="hitupdate" parameterType="int">
+    	UPDATE H_QUESTION SET
+		CHIT = CHIT + 1
+		WHERE cno=#{cno}
+    </update>
 </mapper>

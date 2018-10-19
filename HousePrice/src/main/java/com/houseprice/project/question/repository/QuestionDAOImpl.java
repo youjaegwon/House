@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.houseprice.project.question.model.QuestionVO;
-import com.houseprice.project.question.paging.Criteria;
+import com.houseprice.project.question.paging.PagingVo;
 
 @Repository
 public class QuestionDAOImpl implements QuestionDAO{
@@ -35,13 +35,19 @@ public class QuestionDAOImpl implements QuestionDAO{
 	}
 
 	@Override
-	public List<QuestionVO> listAll(Criteria criteria) throws Exception {
+	public List<QuestionVO> listAll(PagingVo paging) throws Exception {
 		
-		return sqlSession.selectList(NAMESPACE + ".qlistAll", criteria);
+		return sqlSession.selectList(NAMESPACE + ".qlistAll", paging);
 	}
 	
 	@Override
-	public int countArticles(Criteria criteria) throws Exception {
-	    return sqlSession.selectOne(NAMESPACE + ".countArticles", criteria);
+	public int countArticles(PagingVo paging) throws Exception {
+	    return sqlSession.selectOne(NAMESPACE + ".countArticles", paging);
+	}
+
+	@Override
+	public void hitupdate(int cno) throws Exception {
+		
+		sqlSession.update(NAMESPACE + ".hitupdate", cno);
 	}
 }

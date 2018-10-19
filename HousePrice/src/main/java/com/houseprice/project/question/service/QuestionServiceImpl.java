@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.houseprice.project.question.model.QuestionVO;
-import com.houseprice.project.question.paging.Criteria;
+import com.houseprice.project.question.paging.PagingVo;
 import com.houseprice.project.question.repository.QuestionDAO;
 
 
@@ -34,15 +34,21 @@ public class QuestionServiceImpl implements QuestionService{
 	}
 
 	@Override
-	public List<QuestionVO> listAll(Criteria criteria) throws Exception {
+	public List<QuestionVO> listAll(PagingVo paging) throws Exception {
 		
-		return questionDAO.listAll(criteria);
+		return questionDAO.listAll(paging);
 	}
 
 	@Override
-	public int countArticles(Criteria criteria) throws Exception {
+	public int countArticles(PagingVo paging) throws Exception {
 		
-		return questionDAO.countArticles(criteria);
+		return questionDAO.countArticles(paging);
+	}
+
+	@Override
+	public void hitupdate(int cno) throws Exception {
+		
+		questionDAO.hitupdate(cno);
 	}
 
 	
