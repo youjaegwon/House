@@ -9,7 +9,7 @@
 		</h1>
 
 		<nav>
-			<a href="#">내년도 집값 예상</a><a href="#">블로그</a><a href="#">뉴스</a><a href="/question/list?mid=${login.mid}">질문/답변</a>
+			<a href="#">내년도 집값 예상</a><a href="#">블로그</a><a href="#">뉴스</a><a href="/question/list">질문/답변</a>
 		</nav>
 		<c:if test="${not empty login}">
 		    <c:choose>

@@ -34,7 +34,6 @@ public class QuestionController {
 		Date date = new Date();
 		SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd");
 		String year = (String)simpleDate.format(date);
-		System.out.println(year);
 		int qnew = 0;
 		List<QuestionVO> list = questionService.listAll(paging);
 		for(QuestionVO qv : list) {
