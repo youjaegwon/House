@@ -3,40 +3,41 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.houseprice.project.mappers.question.questionMapper">
+<mapper
+	namespace="com.houseprice.project.mappers.question.questionMapper">
 
-    <insert id="qcreate">
-        INSERT INTO H_QUESTION 
-        	VALUES (
-            SEQ_H_QUESTION_CNO.nextval
-            , #{ctitle}
-            , #{ccontent}
-            , sysdate
-            , 0
-            , #{mid}
-        )
-    </insert>
+	<insert id="qcreate">
+		INSERT INTO H_QUESTION
+		VALUES (
+		SEQ_H_QUESTION_CNO.nextval
+		, #{ctitle}
+		, #{ccontent}
+		, sysdate
+		, 0
+		, #{mid}
+		)
+	</insert>
 
-    <select id="qread" resultType="QuestionVO">
-        SELECT 
-        	* 
-        FROM 
-        	H_QUESTION 
-        WHERE 
-        	cno = #{cno}
-    </select>
-
-    <update id="qupdate">
-        UPDATE H_QUESTION SET
-			ctitle = #{ctitle},
-			ccontent = #{ccontent},
-			cregdate = sysdate
+	<select id="qread" resultType="QuestionVO">
+		SELECT
+		*
+		FROM
+		H_QUESTION
 		WHERE
-			cno = #{cno}
-			and mid = #{mid}
-    </update>
+		cno = #{cno}
+	</select>
 
-    <select id="qlistAll" resultType="QuestionVO">
+	<update id="qupdate">
+		UPDATE H_QUESTION SET
+		ctitle = #{ctitle},
+		ccontent = #{ccontent},
+		cregdate = sysdate
+		WHERE
+		cno = #{cno}
+		and mid = #{mid}
+	</update>
+
+	<select id="qlistAll" resultType="QuestionVO">
         <![CDATA[
         SELECT * FROM 
 		(SELECT ROWNUM RNUM, Q.* FROM 
@@ -47,18 +48,58 @@
 		WHERE ROWNUM <= #{last}) Q
 		WHERE Q.RNUM >= #{start}
         ]]>
-    </select>
-    
-    <select id="countArticles" resultType="int">
+	</select>
+
+	<select id="countArticles" resultType="int">
     <![CDATA[
     	SELECT
        	 COUNT(*)
     	FROM H_QUESTION
     ]]>
 	</select>
-    <update id="hitupdate" parameterType="int">
-    	UPDATE H_QUESTION SET
+	<select id="countArticles2" resultType="int">
+    <![CDATA[
+    	SELECT
+       	 COUNT(*)
+    	FROM H_QUESTION WHERE mid = #{mid} 
+    ]]>
+	</select>
+	<select id="countArticles3" resultType="int">
+    <![CDATA[
+    	SELECT
+       	 COUNT(*)
+    	FROM H_QUESTION WHERE mid = #{mid} and ctitle like '%' ||  #{keyword} || '%'
+    ]]>
+	</select>
+	<update id="hitupdate" parameterType="int">
+		UPDATE H_QUESTION SET
 		CHIT = CHIT + 1
 		WHERE cno=#{cno}
-    </update>
+	</update>
+
+	<select id="qmylistAll" resultType="QuestionVO">
+        <![CDATA[
+        SELECT * FROM 
+		(SELECT ROWNUM RNUM, Q.* FROM 
+		(SELECT * FROM
+		(SELECT Q.*, NVL2(A.ANO,'답변','미답변') ANSWERED 
+		FROM H_QUESTION Q LEFT OUTER JOIN H_ANSWER A ON Q.cno = A.cno WHERE Q.mid = #{mid}) Q
+		ORDER BY q.CREGDATE DESC, Q.CNO DESC) Q
+		WHERE ROWNUM <= #{last}) Q
+		WHERE Q.RNUM >= #{start}
+        ]]>
+	</select>
+	
+	<select id="qsearchlistAll" resultType="QuestionVO">
+        <![CDATA[
+		SELECT * FROM 
+		(SELECT ROWNUM RNUM, Q.* FROM 
+		(SELECT * FROM
+		(SELECT Q.*, NVL2(A.ANO,'답변','미답변') ANSWERED 
+		FROM H_QUESTION Q LEFT OUTER JOIN H_ANSWER A ON Q.cno = A.cno WHERE Q.mid = #{mid} and ctitle like '%' ||  #{keyword} || '%') Q
+		ORDER BY q.CREGDATE DESC, Q.CNO DESC) Q
+		WHERE ROWNUM <= #{last}) Q
+		WHERE Q.RNUM >= #{start}
+        ]]>
+	</select>
 </mapper>

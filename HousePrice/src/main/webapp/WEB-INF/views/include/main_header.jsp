@@ -17,14 +17,14 @@
                     <ul>
                         <li><p>${login.mname} 님 환영합니다.</p></li>
                         <li><a href="/admin/main/move">관리자 페이지</a></li>
-                        <li><a href="/register/detail">마이 페이지</a></li>
+                        <li><a href="/mypage/move">마이 페이지</a></li>
                         <li><a href="/login/logout">로그아웃</a></li>
                     </ul>
                 </c:when>
                 <c:when test="${ 3 eq login.ano || 2 eq login.ano}">
                     <ul>
                         <li><p>${login.mname} 님 환영합니다.</p></li>
-                        <li><a href="/register/detail">마이 페이지</a></li>
+                        <li><a href="/mypage/move">마이 페이지</a></li>
                         <li><a href="/login/logout">로그아웃</a></li>
                     </ul>
                 </c:when>

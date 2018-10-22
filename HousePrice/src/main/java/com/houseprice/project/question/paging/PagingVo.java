@@ -1,4 +1,13 @@
 package com.houseprice.project.question.paging;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import com.houseprice.project.question.search.QuestionSearchVO;
+
 //1. PagingVo
 public class PagingVo {
     
@@ -7,7 +16,7 @@ public class PagingVo {
     private int pageStartNum;    // 출력할 페이지 시작 번호
     private int listCnt;          // 출력할 리스트 갯수
     private int total;            // 리스트 총 갯수    
-    
+    private String mid; 		// 사용자 아이디
     {
         pageCnt = 5;
         index = 0;
@@ -74,8 +83,15 @@ public class PagingVo {
     public void setTotal(int total) {
         this.total = total;
     }
-    
-    @Override
+    public String getMid() {
+		return mid;
+	}
+
+	public void setMid(String mid) {
+		this.mid = mid;
+	}
+
+	@Override
     public String toString() {
         return "PagingDto [pageCnt=" + pageCnt + ", index=" + index + ", pageStartNum=" + pageStartNum + ", listCnt="
                 + listCnt + ", total=" + total + "]";

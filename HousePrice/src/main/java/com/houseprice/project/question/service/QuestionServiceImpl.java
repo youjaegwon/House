@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.houseprice.project.question.model.QuestionVO;
 import com.houseprice.project.question.paging.PagingVo;
 import com.houseprice.project.question.repository.QuestionDAO;
+import com.houseprice.project.question.search.QuestionSearchVO;
 
 
 @Service
@@ -46,10 +47,31 @@ public class QuestionServiceImpl implements QuestionService{
 	}
 
 	@Override
+	public int countArticles2(PagingVo paging) throws Exception {
+		
+		return questionDAO.countArticles2(paging);
+	}
+	
+	@Override
+	public int countArticles3(QuestionSearchVO questionsearchVO) throws Exception {
+		
+		return questionDAO.countArticles3(questionsearchVO);
+	}
+	
+	@Override
 	public void hitupdate(int cno) throws Exception {
 		
 		questionDAO.hitupdate(cno);
 	}
 
-	
+	@Override
+	public List<QuestionVO> mylist(PagingVo paging) throws Exception {
+		
+		return questionDAO.mylist(paging);
+	}
+	@Override
+	public List<QuestionVO> searchlist(QuestionSearchVO questionsearchVO) throws Exception {
+		
+		return questionDAO.searchlist(questionsearchVO);
+	}
 }

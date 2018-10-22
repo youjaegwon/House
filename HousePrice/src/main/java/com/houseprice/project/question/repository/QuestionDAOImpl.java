@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.houseprice.project.question.model.QuestionVO;
 import com.houseprice.project.question.paging.PagingVo;
+import com.houseprice.project.question.search.QuestionSearchVO;
 
 @Repository
 public class QuestionDAOImpl implements QuestionDAO{
@@ -44,10 +45,30 @@ public class QuestionDAOImpl implements QuestionDAO{
 	public int countArticles(PagingVo paging) throws Exception {
 	    return sqlSession.selectOne(NAMESPACE + ".countArticles", paging);
 	}
-
+	@Override
+	public int countArticles2(PagingVo paging) throws Exception {
+	    return sqlSession.selectOne(NAMESPACE + ".countArticles2", paging);
+	}
+	
+	@Override
+	public int countArticles3(QuestionSearchVO questionsearchVO) throws Exception {
+	    return sqlSession.selectOne(NAMESPACE + ".countArticles3", questionsearchVO);
+	}
 	@Override
 	public void hitupdate(int cno) throws Exception {
 		
 		sqlSession.update(NAMESPACE + ".hitupdate", cno);
+	}
+	
+	@Override
+	public List<QuestionVO> mylist(PagingVo paging) throws Exception {
+		
+		return sqlSession.selectList(NAMESPACE + ".qmylistAll", paging);
+	}
+	
+	@Override
+	public List<QuestionVO> searchlist(QuestionSearchVO questionsearchVO) throws Exception {
+		
+		return sqlSession.selectList(NAMESPACE + ".qsearchlistAll", questionsearchVO);
 	}
 }

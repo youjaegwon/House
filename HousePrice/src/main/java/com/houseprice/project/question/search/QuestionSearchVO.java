@@ -19,6 +19,4 @@ public class QuestionSearchVO extends PagingVo{
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-
-	// Getter, Setter, toString() 생략
 }
