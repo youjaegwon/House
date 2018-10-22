@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.houseprice.project.mappers.admin.questionMapper">
+	
+<select id="qlistAll" resultType="QuestionVO">
+        <![CDATA[
+        SELECT * FROM 
+		(SELECT ROWNUM RNUM, Q.* FROM 
+		(SELECT * FROM
+		(SELECT Q.*, NVL2(A.ANO,'답변','미답변') ANSWERED 
+		FROM H_QUESTION Q LEFT OUTER JOIN H_ANSWER A ON Q.cno = A.cno) Q
+		ORDER BY q.CREGDATE DESC, Q.CNO DESC) Q
+		WHERE ROWNUM <= #{last}) Q
+		WHERE Q.RNUM >= #{start}
+        ]]>
+	</select>
+	<select id="countArticles" resultType="int">
+    <![CDATA[
+    	SELECT
+       	 COUNT(*)
+    	FROM H_QUESTION
+    ]]>
+	</select>
+<delete id="qdelete">
+	DELETE FROM h_question WHERE cno= #{cno}
+</delete>
+<delete id="qdelete2">
+	DELETE FROM h_answer WHERE cno= #{cno}
+</delete>
+</mapper>

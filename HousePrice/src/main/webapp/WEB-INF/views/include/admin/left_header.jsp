@@ -27,7 +27,7 @@
 				<li><a href="icons.html"> <i class="pe-7s-science"></i>
 						<p>블로그</p>
 				</a></li>
-				<li><a href="table.html"> <i class="pe-7s-note2"></i>
+				<li><a href="/admin/question/list"> <i class="pe-7s-note2"></i>
 						<p>질문</p>
 				</a></li>
 				<li><a href="typography.html"> <i class="pe-7s-news-paper"></i>
