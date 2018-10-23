@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.houseprice.project.admin.question.service.AdminQuestionService;
 import com.houseprice.project.question.paging.PagingVo;
+import com.houseprice.project.question.search.QuestionSearchVO;
 
 
 @Controller
@@ -21,7 +22,7 @@ import com.houseprice.project.question.paging.PagingVo;
 public class AdminQuestionController {
 
 	private static final Logger logger = LoggerFactory.getLogger(AdminQuestionController.class);
-	
+
 	@Autowired
 	AdminQuestionService adminquestionService;
 	// 목록 페이지 이동
@@ -41,5 +42,14 @@ public class AdminQuestionController {
 			adminquestionService.questionDelete(cno);
 		}
 		return "redirect:/admin/question/list";
+	}
+	// 검색 결과
+	@RequestMapping(value = "/searchlist", method = RequestMethod.GET)
+	public String searchlist(QuestionSearchVO questionSearchVO, Model model) throws Exception {
+		logger.info("관리자 질문 리스트 이동...");
+		questionSearchVO.setTotal(adminquestionService.countArticles2(questionSearchVO));
+		model.addAttribute("questions", adminquestionService.searchlist(questionSearchVO));
+		model.addAttribute("p",questionSearchVO);
+		return "/admin/question/admin_question_list";
 	}
 }

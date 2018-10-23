@@ -30,9 +30,9 @@ public class AdminQuestionServiceImpl implements AdminQuestionService{
 	}
 
 	@Override
-	public int countArticles2(PagingVo paging) throws Exception {
+	public int countArticles2(QuestionSearchVO questionsearchVO) throws Exception {
 		
-		return adminquestionDAO.countArticles2(paging);
+		return adminquestionDAO.countArticles2(questionsearchVO);
 	}
 	
 	@Override

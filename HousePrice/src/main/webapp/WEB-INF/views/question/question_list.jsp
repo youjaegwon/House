@@ -28,7 +28,7 @@
 								<tr>
 									<td>${questions.rnum}</td>
 									<td><a href="${path}/question/read?cno=${questions.cno}">${questions.ctitle}</a>
-									<c:if test="${year eq 1 }">
+									<c:if test="${questions.qnew eq 1 }">
 									<img src='${path}/question/img/new.jpg'>
 									</c:if>
 									</td>

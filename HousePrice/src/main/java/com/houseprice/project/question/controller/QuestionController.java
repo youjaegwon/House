@@ -39,15 +39,18 @@ public class QuestionController {
 		List<QuestionVO> list = questionService.listAll(paging);
 		for(QuestionVO qv : list) {
 			qv.setCregdate(qv.getCregdate().substring(0, 10));
-			if(year.equals(qv.getCregdate())) {
+			if(qv.getCregdate().equals(year)) {
 				qnew = 1;
+				qv.setQnew(qnew);
+			}else if(!qv.getCregdate().equals(year)){
+				qnew = 0;
+				qv.setQnew(qnew);
 			}
 		}
 		logger.info("리스트 페이지 이동...");
 		paging.setTotal(questionService.countArticles(paging));
-		model.addAttribute("questions", questionService.listAll(paging));
+		model.addAttribute("questions", list);
 		model.addAttribute("p",paging);
-		model.addAttribute("year",qnew);
 		return "/question/question_list";
 	}
 

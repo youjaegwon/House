@@ -29,8 +29,8 @@ public class AdminQuestionDAOImpl implements AdminQuestionDAO{
 	    return sqlSession.selectOne(NAMESPACE + ".countArticles", paging);
 	}
 	@Override
-	public int countArticles2(PagingVo paging) throws Exception {
-	    return sqlSession.selectOne(NAMESPACE + ".countArticles2", paging);
+	public int countArticles2(QuestionSearchVO questionsearchVO) throws Exception {
+	    return sqlSession.selectOne(NAMESPACE + ".countArticles2", questionsearchVO);
 	}
 	
 	@Override

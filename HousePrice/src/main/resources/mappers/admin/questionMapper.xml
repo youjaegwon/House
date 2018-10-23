@@ -4,8 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
 	namespace="com.houseprice.project.mappers.admin.questionMapper">
-	
-<select id="qlistAll" resultType="QuestionVO">
+
+	<select id="qlistAll" resultType="QuestionVO">
         <![CDATA[
         SELECT * FROM 
 		(SELECT ROWNUM RNUM, Q.* FROM 
@@ -17,6 +17,23 @@
 		WHERE Q.RNUM >= #{start}
         ]]>
 	</select>
+	<select id="qsearchlistAll" resultType="QuestionVO">
+        <![CDATA[
+        SELECT * FROM 
+		(SELECT ROWNUM RNUM, Q.* FROM 
+		(SELECT * FROM
+		(SELECT Q.*, NVL2(A.ANO,'답변','미답변') ANSWERED 
+		FROM H_QUESTION Q LEFT OUTER JOIN H_ANSWER A ON Q.cno = A.cno
+		]]>
+		<include refid="search"></include>
+		<![CDATA[
+		) Q
+		ORDER BY q.CREGDATE DESC, Q.CNO DESC) Q
+		WHERE ROWNUM <= #{last}) Q
+		WHERE Q.RNUM >= #{start}
+        ]]>
+	</select>
+
 	<select id="countArticles" resultType="int">
     <![CDATA[
     	SELECT
@@ -24,10 +41,52 @@
     	FROM H_QUESTION
     ]]>
 	</select>
-<delete id="qdelete">
-	DELETE FROM h_question WHERE cno= #{cno}
-</delete>
-<delete id="qdelete2">
-	DELETE FROM h_answer WHERE cno= #{cno}
-</delete>
+
+	<select id="countArticles2" resultType="int">
+    <![CDATA[
+    	SELECT
+       	 COUNT(*)
+    	FROM H_QUESTION
+    ]]>
+		<include refid="search2"></include>
+	</select>
+
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 'n'.toString()">
+				WHERE ctitle like '%' || #{keyword} || '%'
+			</if>
+			<if test="searchType == 't'.toString()">
+				WHERE ctitle like '%' || #{keyword} || '%'
+			</if>
+			<if test="searchType == 'c'.toString()">
+				WHERE ccontent like '%' || #{keyword} || '%'
+			</if>
+			<if test="searchType == 'w'.toString()">
+				WHERE Q.mid like '%' || #{keyword} || '%'
+			</if>
+		</if>
+	</sql>
+	<sql id="search2">
+		<if test="searchType != null">
+			<if test="searchType == 'n'.toString()">
+				WHERE ctitle like '%' || #{keyword} || '%'
+			</if>
+			<if test="searchType == 't'.toString()">
+				WHERE ctitle like '%' || #{keyword} || '%'
+			</if>
+			<if test="searchType == 'c'.toString()">
+				WHERE ccontent like '%' || #{keyword} || '%'
+			</if>
+			<if test="searchType == 'w'.toString()">
+				WHERE mid like '%' || #{keyword} || '%'
+			</if>
+		</if>
+	</sql>
+	<delete id="qdelete">
+		DELETE FROM h_question WHERE cno= #{cno}
+	</delete>
+	<delete id="qdelete2">
+		DELETE FROM h_answer WHERE cno= #{cno}
+	</delete>
 </mapper>

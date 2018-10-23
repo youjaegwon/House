@@ -20,6 +20,8 @@ public class QuestionVO {
 	private String answered;
 	// 테이블 번호
 	private int rnum;
+	// 새글 여부
+	private int qnew;
 	
 	public int getCno() {
 		return cno;
@@ -69,4 +71,11 @@ public class QuestionVO {
 	public void setRnum(int rnum) {
 		this.rnum = rnum;
 	}
+	public int getQnew() {
+		return qnew;
+	}
+	public void setQnew(int qnew) {
+		this.qnew = qnew;
+	}
+	
 }

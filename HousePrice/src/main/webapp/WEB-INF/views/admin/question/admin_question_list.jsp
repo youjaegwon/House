@@ -15,40 +15,74 @@
 						<div class="header">
 							<h4 class="title">질문관리</h4>
 						</div>
-						<form action="findBymid" method="get">
-							<div>
+						<form action="/admin/question/searchlist" method="get">
+							<input type='hidden' name='index' value='${p.index}'> <input
+								type='hidden' name='pageStartNum' id='pageStartNum'
+								value='${p.pageStartNum}'> <input type='hidden'
+								name='listCnt' id='listCnt' value='${p.listCnt}'>
+							<div class="box-footer">
+								<div class="form-group col-sm-2">
+									<select class="form-control" name="searchType" id="searchType">
+										<option value="n">:::::: 선택 ::::::</option>
+										<option value="t">제목</option>
+										<option value="c">내용</option>
+										<option value="w">작성자</option>
+									</select>
+								</div>
+								<div class="form-group col-sm-10">
+									<div class="input-group">
+										<input type="text" class="form-control" name="keyword"
+											id="keywordInput" placeholder="검색어"> <span
+											class="input-group-btn">
+											<button type="submit" class="btn btn-primary btn-flat"
+												id="searchBtn">
+												<i class="fa fa-search"></i> 검색
+											</button>
+										</span>
+									</div>
+								</div>
 							</div>
 						</form>
 						<div class="content table-responsive table-full-width">
-						<form action="/admin/question/delete"  method="get" id='userForm' name='userForm' >
-									<button type="submit" class="btn btn-success btn-flat"
-										id="writeBtn">
-										<i class="fa fa-pencil"></i> 선택삭제
-									</button>
+							<form action="/admin/question/delete" method="get" id='userForm'
+								name='userForm'>
+								<button type="submit" class="btn btn-success btn-flat"
+									id="writeBtn">
+									<i class="fa fa-pencil"></i> 선택삭제
+								</button>
 
-							<table class="table table-hover table-striped">
-								<thead>
-									<th><input type="checkbox" id="allCheck"
-										onclick="allChk(this);" /></th>
-									<th>글번호</th>
-									<th>제목</th>
-									<th>작성자아이디</th>
-									<th>등록일자</th>
-								</thead>
-								<tbody>
-									<c:forEach var="question" items="${questions}">
+								<table class="table table-hover table-striped">
+									<thead>
+										<th><input type="checkbox" id="allCheck"
+											onclick="allChk(this);" /></th>
+										<th>글번호</th>
+										<th>제목</th>
+										<th>작성자아이디</th>
+										<th>등록일자</th>
+									</thead>
+									<tbody>
+										<c:if test="${empty questions}">
 										<tr>
-											<td><input ﻿ name="RowCheck" type="checkbox"
-												value="${question.cno}" /></td>
-											<td>${question.ctitle}</td>
-											<td>${question.ccontent}</td>
-											<td>${question.mid}</td>
-											<td>${question.cregdate}</td>
+										<td colspan="5">
+										<h2>질문이 없습니다.</h2>
+										</td>
 										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-																</form>
+										</c:if>
+										<c:if test="${not empty questions}">
+											<c:forEach var="question" items="${questions}">
+												<tr>
+													<td><input ﻿ name="RowCheck" type="checkbox"
+														value="${question.cno}" /></td>
+													<td>${question.ctitle}</td>
+													<td>${question.ccontent}</td>
+													<td>${question.mid}</td>
+													<td>${question.cregdate}</td>
+												</tr>
+											</c:forEach>
+										</c:if>
+									</tbody>
+								</table>
+							</form>
 						</div>
 						<div class="box-footer">
 							<div class="text-center">
@@ -86,9 +120,7 @@
 							</div>
 						</div>
 						<div class="box-footer">
-							<div class="pull-right">
-									
-							</div>
+							<div class="pull-right"></div>
 						</div>
 					</div>
 				</div>

@@ -12,7 +12,7 @@ public interface AdminQuestionService {
 	
 	int countArticles(PagingVo paging) throws Exception;
 	
-	int countArticles2(PagingVo paging) throws Exception;
+	int countArticles2(QuestionSearchVO questionsearchVO) throws Exception;
 	
 	List<QuestionVO> searchlist(QuestionSearchVO questionsearchVO) throws Exception;
 	
