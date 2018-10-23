@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.houseprice.project.admin.member.model.AdminMemberVO;
 import com.houseprice.project.admin.member.service.AdminMemberService;
+import com.houseprice.project.question.paging.PagingVo;
 
 @Controller
 @RequestMapping("/admin/member")
@@ -17,12 +18,14 @@ public class AdminMemberController {
 
 	@Autowired
 	private AdminMemberService adminmemberService;
-	// 로그인 페이지
+	// 회원관리 페이지
 	@RequestMapping(value = "/move", method = RequestMethod.GET)
-	public String memberGET(Model model) throws Exception{
+	public String memberGET(PagingVo paging,Model model) throws Exception{
 		
-		List<AdminMemberVO> member = adminmemberService.memberSelectAll();
+		List<AdminMemberVO> member = adminmemberService.memberSelectAll(paging);
+		paging.setTotal(adminmemberService.countArticles(paging));
 		model.addAttribute("member", member);
+		model.addAttribute("p", paging);
 		return "/admin/member/admin_member_list";
 	}
 	//
@@ -37,11 +40,12 @@ public class AdminMemberController {
 		return "/admin/member/move";
 	}
 	@RequestMapping(value ="/findBymid",method=RequestMethod.GET)
-	public String searchId(@ModelAttribute("searchId") AdminMemberVO adminmemberVO,Model model ) {
+	public String searchId(@ModelAttribute("searchId") AdminMemberVO adminmemberVO,Model model,PagingVo paging ) throws Exception {
 		
 		List<AdminMemberVO> idlist= adminmemberService.findBymid(adminmemberVO);
-		
+		paging.setTotal(adminmemberService.countArticles2(paging));
 		model.addAttribute("idlist", idlist);
+		model.addAttribute("p", paging);
 		if(adminmemberVO.getMid() != null && adminmemberVO.getMid().trim().length()>0)
 			model.addAttribute("searchId", adminmemberVO.getMid());
 		return "/admin/member/admin_member_list";

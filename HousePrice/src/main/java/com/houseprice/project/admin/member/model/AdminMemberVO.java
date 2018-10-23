@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.houseprice.project.register.model.MemberVO;
 
-public class AdminMemberVO {
+public class AdminMemberVO{
 
 	private String mid;
 	private Date mdate;

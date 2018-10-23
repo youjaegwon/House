@@ -39,5 +39,13 @@ MID = 'test_p';--해당 계정id (mid)
 --테스트 전체 목록 조회용 쿼리 
 SELECT * FROM H_MEMBER  ORDER BY mdate DESC, mid ASC;
 
+	<![CDATA[
+	SELECT * FROM
+	(SELECT ROWNUM  RNUM, M.* FROM
+	(SELECT * FROM h_member hm INNER JOIN h_auth an ON hm.ano = an.ano WHERE hm.mproyn='Y' AND (hm.ano=2 OR hm.ano=3) ORDER BY hm.mdate DESC, hm.mid ASC) M
+	WHERE ROWNUM <= 10) M
+	WHERE M.RNUM >= 1
+	]]> 
+
 
 

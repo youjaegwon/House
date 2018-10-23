@@ -12,8 +12,8 @@
 	SELECT * FROM
 	(SELECT ROWNUM  RNUM, M.* FROM
 	(SELECT * FROM h_member hm INNER JOIN h_auth an ON hm.ano = an.ano WHERE hm.mproyn='Y' AND (hm.ano=2 OR hm.ano=3)  ORDER BY hm.mdate DESC, hm.mid ASC) M
-	WHERE ROWNUM <= 10) M
-	WHERE M.RNUM >= 1
+	WHERE ROWNUM <= #{last}) M
+	WHERE M.RNUM >= #{start}
 	]]> 
 	</select>
 	<update id="expertUpdate">
@@ -34,5 +34,21 @@
 		<if test="mid!=null and !mid.equals('')">
 		AND mid like '%'||#{mid}||'%' 
 		</if>	
+	</select>
+	
+	 <select id="countArticles" resultType="int">
+    <![CDATA[
+    	SELECT
+       	 COUNT(*)
+    	FROM H_MEMBER WHERE mproyn='Y' AND (ano=2 OR ano=3)  
+    ]]>
+	</select>
+	
+	 <select id="countArticles2" resultType="int">
+    <![CDATA[
+    	SELECT
+       	 COUNT(*)
+    	FROM H_MEMBER WHERE mproyn='Y' AND (ano=2 OR ano=3) AND mid like '%'||#{mid}||'%' 
+    ]]>
 	</select>
 </mapper>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.houseprice.project.admin.member.model.AdminMemberVO;
 import com.houseprice.project.admin.member.repository.AdminMemberDAO;
+import com.houseprice.project.question.paging.PagingVo;
 
 
 
@@ -16,9 +17,9 @@ public class AdminMemberServiceImpl implements AdminMemberService{
 	private AdminMemberDAO adminmemberDAO;
 
 	@Override
-	public List<AdminMemberVO> memberSelectAll() throws Exception {
+	public List<AdminMemberVO> memberSelectAll(PagingVo paging) throws Exception {
 		// TODO Auto-generated method stub
-		return adminmemberDAO.memberSelectAll();
+		return adminmemberDAO.memberSelectAll(paging);
 	}
 
 	@Override
@@ -37,5 +38,17 @@ public class AdminMemberServiceImpl implements AdminMemberService{
 	public List<AdminMemberVO> findBymid(AdminMemberVO adminMemberVO) {
 		
 		return adminmemberDAO.findByMid(adminMemberVO);
+	}
+
+	@Override
+	public int countArticles(PagingVo paging) throws Exception {
+		
+		return adminmemberDAO.countArticles(paging);
+	}
+
+	@Override
+	public int countArticles2(PagingVo paging) throws Exception {
+		
+		return adminmemberDAO.countArticles2(paging);
 	}
 }

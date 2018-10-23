@@ -2,33 +2,22 @@ package com.houseprice.project.register.model;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-import org.hibernate.annotations.Entity;
-import org.hibernate.validator.constraints.NotEmpty;
-
-//database로 넘기기전에 validation체크
-@Entity
 public class MemberVO {
-	 @Column
-	 @Pattern(regexp="^[a-zA-Z]{1}[a-zA-Z0-9_]{4,11}$",message="4~11 문자나 숫자를 입력해주세요.")
+	
 	 private String mid;
-	 @Column
-	 @Size(min=4,max=10,message="비밀번호는 4~10자리를 입력해주세요.")
+	
+	
 	 private String mpw;
-	 @Column
-     @Size(min=2,max=6,message="이름은 2자리에서 6자리를 입력해주세요")
-	 private String mname;
-	 @Column
-	 @Size(min=10,max=11,message="10~11자리를 입력해주세요.")
-	 private String mphone;
-	 @Column
-	 private Date mdate;
-	 @Column
-	 @NotEmpty(message="한 목록에 체크해주세요.")
-	 private String mproyn;
 	 
+    
+	 private String mname;
+	 
+	 private String mphone;
+	 
+	 private Date mdate;
+	 
+	 private String mproyn;
+	
 	 private int ano;
 	 
 	 

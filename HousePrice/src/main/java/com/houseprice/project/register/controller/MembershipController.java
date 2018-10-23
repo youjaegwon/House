@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.support.HttpRequestHandlerServlet;
 
 import com.houseprice.project.register.model.MemberVO;
 import com.houseprice.project.register.service.MembershipService;
@@ -33,12 +33,12 @@ public class MembershipController {
 	
 	// db insert 
 	@RequestMapping(value="/membership", method=RequestMethod.POST)
-	public String insert(@Valid MemberVO ms,BindingResult bindingResult,Model model) {
+	public String insert( MemberVO ms/*,BindingResult bindingResult*/,Model model) {
 		
-		if(bindingResult.hasErrors()) {
-			System.out.println("에러");
-			return "/register/membership";
-		}
+//		if(bindingResult.hasErrors()) {
+//			
+//			return "/register/membership";
+//		}
 		// 비밀번호 암호화
 		String hashpw = BCrypt.hashpw(ms.getMpw(), BCrypt.gensalt());
 		ms.setMpw(hashpw);

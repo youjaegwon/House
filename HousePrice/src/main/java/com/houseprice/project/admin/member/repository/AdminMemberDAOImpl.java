@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.houseprice.project.admin.member.model.AdminMemberVO;
+import com.houseprice.project.question.paging.PagingVo;
 
 
 @Repository
@@ -16,9 +17,9 @@ public class AdminMemberDAOImpl implements AdminMemberDAO{
 	private SqlSession sqlSession;
 
 	@Override
-	public List<AdminMemberVO> memberSelectAll() throws Exception {
+	public List<AdminMemberVO> memberSelectAll(PagingVo paging) throws Exception {
 		
-		return sqlSession.selectList(NAMESPACE+ ".selectList");
+		return sqlSession.selectList(NAMESPACE+ ".selectList",paging);
 	}
 
 	@Override
@@ -35,5 +36,16 @@ public class AdminMemberDAOImpl implements AdminMemberDAO{
 	public List<AdminMemberVO> findByMid(AdminMemberVO AdminMemberVO) {
 		
 		return sqlSession.selectList(NAMESPACE+".findBymid",AdminMemberVO);
+	}
+
+	@Override
+	public int countArticles(PagingVo paging) throws Exception {
+		
+		return sqlSession.selectOne(NAMESPACE + ".countArticles", paging);
+	}
+
+	@Override
+	public int countArticles2(PagingVo paging) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".countArticles2", paging);
 	}
 }

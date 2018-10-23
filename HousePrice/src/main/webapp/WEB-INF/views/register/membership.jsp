@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +13,10 @@
 		color:red;
 	}
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="${path}/register/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="${path}/register/js/messages_ko.min.js"></script>
+<script type="text/javascript" src="${path}/register/js/additional-methods.min.js"></script>
 <script type="text/javascript">
 var idck = 0;
 $(function() {
@@ -54,29 +60,79 @@ $(function() {
             }
         });
     });
-});
- 
+    
+    $("#membership").validate({
+        //validation이 끝난 이후의 submit 직전 추가 작업할 부분
+        submitHandler: function() {
+            var f = confirm("회원가입을 완료하겠습니까?");
+            if(f){
+                return true;
+            } else {
+                return false;
+            }
+        },
+        //규칙
+        rules: {
+            mid: {
+                required : true,
+                minlength : 5,
+                
+            },
+            mpw: {
+                required : true,
+                minlength : 3
+            },
+           
+            mname: {
+                required : true,
+                minlength : 2
+            },
+            mphone: {
+            	required:true,
+                digits : true,
+                minlength : 10
+            }
+            
+        },
+        //규칙체크 실패시 출력될 메시지
+        messages : {
+            mid: {
+                required : "필수로입력하세요",
+                minlength : "최소 {0}글자이상이어야 합니다",
+            },
+            mpw: {
+                required : "필수로입력하세요",
+                minlength : "최소 {0}글자이상이어야 합니다"
+            },
+           
+            mname: {
+                required : "필수로입력하세요",
+                minlength : "최소 {0}글자이상이어야 합니다"
+            },
+            mphone: {
+            	required : "필수로입력하세요",
+                digits : "숫자만입력하세요",
+                minlength : "최소 {0}글자이상이어야 합니다"
+            }
+        }
+    });
+}); 
+
 </script>
 </head>
 <%@ include file="../include/head.jsp" %>
 <body>
 
-
-
-
-
 <%@ include file="../include/main_header.jsp" %>
 <div class="container-fluid">
 	<h1>회원가입</h1>
-	<form:form action="membership" method="post" commandName="membership">
+	<form action="membership" method="post" id="membership">
 		<fieldset>
 			<table>
 				<tr>
 					<th>아이디</th>
 					 <td>
 					 <input type="text" name="mid" id="mid" placeholder="아이디" />
-					 
-					 <form:errors path="mid" cssClass="error"/>
 					 <input type="button" id="idck" value="중복 검사">
 						<div id="checkMsg"></div>
 					</td> 
@@ -86,23 +142,23 @@ $(function() {
 				<tr>
 					<th>패스워드</th>
 					 <td>
-					 <input type="password" name="mpw" placeholder="패스워드"/> 
-						<form:errors path="mpw" cssClass="error"/>
+					 <input type="password" id="mpw" name="mpw" placeholder="패스워드"/> 
+						
 					</td> 
 					
 					
 				</tr>
 				<tr>
 					<th>이름</th>
-					 <td><input type="text" name="mname" placeholder="이름"/>
-						<form:errors path="mname" cssClass="error"/>
+					 <td><input type="text" id="mname" name="mname" placeholder="이름"/>
+						
 					</td> 
 					
 				</tr>
 				<tr>
 					<th>휴대폰</th>
-					 <td><input type="text" name="mphone" placeholder="휴대폰">
-						<form:errors path="mphone" cssClass="error"/>
+					 <td><input type="text" id="mphone" name="mphone" placeholder="휴대폰">
+						
 					</td> 
 					
 				</tr>
@@ -113,7 +169,7 @@ $(function() {
 						<label for="radio1">전문가</label>
 						<input type="radio" name="mproyn" id="radi2" value="N" checked="checked">
 						<label for="radio2">일반</label>
-						<form:errors path="mproyn" cssClass="error"/>
+					
 					 </td> 
 					
 				</tr>
@@ -127,11 +183,11 @@ $(function() {
 				
 				<tr>
 					
-					<td><input type="submit" value="회원가입"/></td>
+					<td><input id="send" type="submit" value="회원가입"/></td>
 				</tr>
 			</table>
 		</fieldset>
-	</form:form>
+	</form>
 </div>
 <%@ include file="../include/main_footer.jsp" %>
 </body>

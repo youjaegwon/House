@@ -3,7 +3,9 @@
 <!DOCTYPE html>
 <html>
 <%@ include file="../../include/admin/head.jsp"%>
+<script type="text/javascript" src="${path}/question/js/paging.js"></script>
 <body>
+
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript">
@@ -47,6 +49,9 @@
 						</div>
 						<form action="findBymid" method="get">
 						<div>
+						 	<input type='hidden' name='index' value='${p.index}'>
+							<input type='hidden' name='pageStartNum' id='pageStartNum' value='${p.pageStartNum}'> 
+							<input type='hidden' name='listCnt' id='listCnt' value='${p.listCnt}'> 
 							<input type="text" placeholder="아이디입력" id="mid" name="mid">
 							<input type="submit" value="검색">
 						</div>
@@ -85,7 +90,10 @@
 											</tr>
 										
 										</c:forEach>
+			
 								</c:when>
+								
+								
 								<c:otherwise>
 									<c:forEach var="member" items="${member}">
 										<tr>
@@ -107,11 +115,52 @@
 											</c:if>
 										</tr>
 									</c:forEach>
+						
 								</c:otherwise>
+					
+					
 								</c:choose>
+								
+				
 								</tbody>
 								
 							</table>
+							
+					<div class="box-footer">
+						<div class="text-center">
+					
+						<ul class="pagination">
+							<c:if test="${p.pageStartNum ne 1}">
+								
+								<li><a onclick='pagePre(${p.pageCnt+1},${p.pageCnt});'>&laquo;</a></li>
+								
+								<li><a onclick='pagePre(${p.pageStartNum},${p.pageCnt});'>&lsaquo;</a></li>
+							</c:if>
+
+							
+							<c:forEach var='i' begin="${p.pageStartNum}"
+								end="${p.pageLastNum}" step="1">
+								<li class='pageIndex${i}'><a onclick='pageIndex(${i});'>${i}</a></li>
+							</c:forEach>
+
+							<c:if test="${p.lastChk}">
+								
+								<li><a
+									onclick='pageNext(${p.pageStartNum},${p.total},${p.listCnt},${p.pageCnt});'>&rsaquo;</a></li>
+								
+								<li><a
+									onclick='pageLast(${p.pageStartNum},${p.total},${p.listCnt},${p.pageCnt});'>&raquo;</a></li>
+									 
+							</c:if>
+						</ul>
+						<form action="/admin/member/move" method="get" id='frmPaging'>
+						
+							<input type='hidden' name='index' id='index' value='${p.index}'>
+							<input type='hidden' name='pageStartNum' id='pageStartNum' value='${p.pageStartNum}'> 
+							<input type='hidden' name='listCnt' id='listCnt' value='${p.listCnt}'>
+						</form>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
