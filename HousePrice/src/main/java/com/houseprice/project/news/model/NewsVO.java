@@ -13,9 +13,26 @@ public class NewsVO {
 	//게시여부
 	private char ayn;
 	
+	private String description;
+	
 	public int getAno() {
 		return ano;
 	}
+	
+	
+	
+	public String getDescription() {
+		return description;
+	}
+
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+
 	public void setAno(int ano) {
 		this.ano = ano;
 	}
