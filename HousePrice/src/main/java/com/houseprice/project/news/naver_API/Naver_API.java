@@ -38,7 +38,7 @@ public class Naver_API {
         String clientSecret = API_INFO.clientSecret;//애플리케이션 클라이언트 시크릿값";
         try {
             String text = URLEncoder.encode(keyWord, "UTF-8");
-            String apiURL = "https://openapi.naver.com/v1/search/news?query="+ text; // json 결과
+            String apiURL = "https://openapi.naver.com/v1/search/news?query="+ text +"&display=20&sort=date"; // json 결과
             //String apiURL = "https://openapi.naver.com/v1/search/news.xml?query="+ text; // xml 결과
             URL url = new URL(apiURL);
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
