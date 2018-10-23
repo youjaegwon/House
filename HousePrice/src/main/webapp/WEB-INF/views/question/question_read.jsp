@@ -27,11 +27,13 @@
 					<button type="submit" class="btn btn-primary listBtn">
 						<i class="fa fa-list"></i> 목록
 					</button>
+					<c:if test="${login.mid eq question.mid }">
 					<div class="pull-right">
 						<button type="submit" class="btn btn-warning modBtn">
 							<i class="fa fa-edit"></i> 수정
 						</button>
 					</div>
+					</c:if>
 				</div>
 			</div>
 		</div>
