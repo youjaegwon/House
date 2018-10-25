@@ -36,7 +36,7 @@ public class AdminQuestionController {
 	}
 	// 삭제
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public String delete(@RequestParam("RowCheck") int[] RowCheck) throws Exception {
+	public String delete(@RequestParam("RowCheck") int[] RowCheck, Model model) throws Exception {
 		for(int cno : RowCheck) {
 			adminquestionService.questionDelete2(cno);
 			adminquestionService.questionDelete(cno);

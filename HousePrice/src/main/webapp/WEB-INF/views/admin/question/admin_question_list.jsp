@@ -15,15 +15,16 @@
 						<div class="header">
 							<h4 class="title">질문관리</h4>
 						</div>
-						<form action="/admin/question/searchlist" method="get">
+						<div class="col-sm-6">
+						</div>
+						<form action="/admin/question/searchlist" method="get" class="form-group col-sm-6">
 							<input type='hidden' name='index' value='${p.index}'> <input
-								type='hidden' name='pageStartNum' id='pageStartNum'
+								type='hidden' name='pageStartNum' 
 								value='${p.pageStartNum}'> <input type='hidden'
 								name='listCnt' id='listCnt' value='${p.listCnt}'>
 							<div class="box-footer">
 								<div class="form-group col-sm-2">
 									<select class="form-control" name="searchType" id="searchType">
-										<option value="n">:::::: 선택 ::::::</option>
 										<option value="t">제목</option>
 										<option value="c">내용</option>
 										<option value="w">작성자</option>
@@ -46,9 +47,8 @@
 						<div class="content table-responsive table-full-width">
 							<form action="/admin/question/delete" method="get" id='userForm'
 								name='userForm'>
-								<button type="submit" class="btn btn-success btn-flat"
-									id="writeBtn">
-									<i class="fa fa-pencil"></i> 선택삭제
+								<button type="submit" class="btn btn-primary" id="writeBtn">
+									<i class="fa fa-pencil"></i>선택 삭제
 								</button>
 
 								<table class="table table-hover table-striped">
@@ -62,11 +62,11 @@
 									</thead>
 									<tbody>
 										<c:if test="${empty questions}">
-										<tr>
-										<td colspan="5">
-										<h2>질문이 없습니다.</h2>
-										</td>
-										</tr>
+											<tr>
+												<td colspan="5">
+													<h2>질문이 없습니다.</h2>
+												</td>
+											</tr>
 										</c:if>
 										<c:if test="${not empty questions}">
 											<c:forEach var="question" items="${questions}">
@@ -119,9 +119,6 @@
 								</form>
 							</div>
 						</div>
-						<div class="box-footer">
-							<div class="pull-right"></div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -129,7 +126,6 @@
 	</div>
 	<%@ include file="../../include/admin/plugin_js.jsp"%>
 	<script type="text/javascript">
-
 	// 1.모두 체크
 	  function allChk(obj){
 	      var chkObj = document.getElementsByName("RowCheck");
@@ -145,7 +141,7 @@
 	           if(chkObj[i].type == "checkbox"){
 	               chkObj[i].checked = false; 
 	           }
-	          }
+	         }
 	      }
 	  } ﻿
 	</script>

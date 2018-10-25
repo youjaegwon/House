@@ -74,6 +74,5 @@
     </beans:bean>
     
 
-	<context:component-scan
-		base-package="com.houseprice.project" />
+	<context:component-scan base-package="com.houseprice.project" />
 </beans:beans>

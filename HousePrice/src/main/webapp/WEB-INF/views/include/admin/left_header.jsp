@@ -7,8 +7,8 @@
 		<!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
 		<div class="sidebar-wrapper">
 			<div class="logo">
-				<a href="http://www.creative-tim.com" class="simple-text">
-					HP-Comapny </a>
+				<a href="/admin/main/move" class="simple-text">
+					<img src="https://previews.123rf.com/images/rrraven/rrraven1411/rrraven141100098/33530514-%EC%A7%91-%EC%95%84%EC%9D%B4%EC%BD%98.jpg" width="200px" height="100px"></a>
 			</div>
 
 			<ul class="nav">
@@ -33,7 +33,7 @@
 				<li><a href="typography.html"> <i class="pe-7s-news-paper"></i>
 						<p>답변</p>
 				</a></li>
-				<li class="active-pro"><a href="upgrade.html"> <i
+				<li class="active-pro"><a href="/admin/main/move"> <i
 						class="pe-7s-rocket"></i>
 						<p>HP-Company</p>
 				</a></li>
