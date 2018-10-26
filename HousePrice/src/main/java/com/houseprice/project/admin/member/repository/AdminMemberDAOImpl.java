@@ -33,9 +33,9 @@ public class AdminMemberDAOImpl implements AdminMemberDAO{
 	}
 
 	@Override
-	public List<AdminMemberVO> findByMid(AdminMemberVO AdminMemberVO) {
+	public List<AdminMemberVO> findByMid(PagingVo paging) {
 		
-		return sqlSession.selectList(NAMESPACE+".findBymid",AdminMemberVO);
+		return sqlSession.selectList(NAMESPACE+".findBymid",paging);
 	}
 
 	@Override

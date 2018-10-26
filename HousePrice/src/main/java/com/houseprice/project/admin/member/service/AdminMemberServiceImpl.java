@@ -35,9 +35,9 @@ public class AdminMemberServiceImpl implements AdminMemberService{
 	}
 
 	@Override
-	public List<AdminMemberVO> findBymid(AdminMemberVO adminMemberVO) {
+	public List<AdminMemberVO> findBymid(PagingVo paging) {
 		
-		return adminmemberDAO.findByMid(adminMemberVO);
+		return adminmemberDAO.findByMid(paging);
 	}
 
 	@Override

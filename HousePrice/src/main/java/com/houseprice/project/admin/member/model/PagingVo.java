@@ -7,7 +7,7 @@ public class PagingVo{
     private int pageStartNum;    // 출력할 페이지 시작 번호
     private int listCnt;          // 출력할 리스트 갯수
     private int total;            // 리스트 총 갯수    
-    
+    private String mid;
     {
         pageCnt = 5;
         index = 0;
@@ -15,7 +15,15 @@ public class PagingVo{
         listCnt = 5;
     }
     
-    public PagingVo() {}
+    public String getMid() {
+		return mid;
+	}
+
+	public void setMid(String mid) {
+		this.mid = mid;
+	}
+
+	public PagingVo() {}
     
     public int getStart() {
         return index*listCnt+1;

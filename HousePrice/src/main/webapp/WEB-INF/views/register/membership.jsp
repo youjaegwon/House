@@ -80,7 +80,7 @@ $(function() {
             },
             mpw: {
                 required : true,
-                minlength : 3
+                minlength : 4
             },
            
             mname: {

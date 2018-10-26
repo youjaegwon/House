@@ -37,17 +37,17 @@ public class AdminMemberController {
 	@RequestMapping(value = "/userUpdate", method = RequestMethod.POST)
 	public String userUpdate(@RequestParam String mid, Model model) throws Exception{
 		adminmemberService.userUpdate(mid);
-		return "/admin/member/move";
+		return "redirect:/admin/member/move";
 	}
 	@RequestMapping(value ="/findBymid",method=RequestMethod.GET)
-	public String searchId(@ModelAttribute("searchId") AdminMemberVO adminmemberVO,Model model,PagingVo paging ) throws Exception {
+	public String searchId(Model model,PagingVo paging ) throws Exception {
 		
-		List<AdminMemberVO> idlist= adminmemberService.findBymid(adminmemberVO);
+		List<AdminMemberVO> idlist= adminmemberService.findBymid(paging);
 		paging.setTotal(adminmemberService.countArticles2(paging));
 		model.addAttribute("idlist", idlist);
 		model.addAttribute("p", paging);
-		if(adminmemberVO.getMid() != null && adminmemberVO.getMid().trim().length()>0)
-			model.addAttribute("searchId", adminmemberVO.getMid());
+		if(paging.getMid() != null && paging.getMid().trim().length()>0)
+			model.addAttribute("searchId", paging.getMid());
 		return "/admin/member/admin_member_list";
 	}
 }

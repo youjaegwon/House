@@ -5,20 +5,15 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.houseprice.project.register.model.MemberVO;
 import com.houseprice.project.register.service.MembershipService;
 
@@ -33,13 +28,9 @@ public class MembershipController {
 	
 	// db insert 
 	@RequestMapping(value="/membership", method=RequestMethod.POST)
-	public String insert( MemberVO ms/*,BindingResult bindingResult*/,Model model) {
+	public String insert( MemberVO ms ,Model model) {
 		
-//		if(bindingResult.hasErrors()) {
-//			
-//			return "/register/membership";
-//		}
-		// 비밀번호 암호화
+
 		String hashpw = BCrypt.hashpw(ms.getMpw(), BCrypt.gensalt());
 		ms.setMpw(hashpw);
 		
@@ -63,22 +54,7 @@ public class MembershipController {
         
         return map;
     }
-	//비밀번호 재확인
-//	@RequestMapping(value="/checkPw",method=RequestMethod.GET)
-//	public String pwcheck(@RequestParam String mpw,Model model) {
-//		MemberVO membership=service.findByid(mid);
-//		
-//		
-//		model.addAttribute("check", membership);
-//		
-//		MemberVO memberVO = loginService.login(loginDTO);
-//		
-//		if (memberVO == null || !BCrypt.checkpw(loginDTO.getMpw(), memberVO.getMpw())) {
-//			return;
-//		}
-//		return "/register/checkPw";
-//		
-//	}
+
 	// 회원가입
 	@RequestMapping(value="/membership", method=RequestMethod.GET)
 	public String membership(MemberVO membership,Model model) {
@@ -99,7 +75,6 @@ public class MembershipController {
 		if(!BCrypt.checkpw(mpw, membership.getMpw())) {
 			return "/register/findpwError";
 		}
-//		membership.setMpw(null);
 		return "/register/memberdetail";
 	}
 	//정보변경

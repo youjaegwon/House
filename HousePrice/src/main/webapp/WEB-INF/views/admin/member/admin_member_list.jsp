@@ -10,31 +10,35 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#ReadingInfoSelectBtn").click(function() {
+			
+			$(".ReadingInfoSelectBtn").click(function() {
 				var formData = $("#ReadingInfoSelectForm").serialize();
+				var mid = $(this).parent().parent().children().eq(0).text();
 				$.ajax({
 					type : "POST",
 					url : "/admin/member/expertUpdate",
 					cache : false,
-					data : formData,
+					data : {"mid":mid},
 					success : onSuccess
 				});
 			});
-			$("#ReadingInfoSelectBtn2").click(function() {
+			$(".ReadingInfoSelectBtn2").click(function() {
 				var formData2 = $("#ReadingInfoSelectForm2").serialize();
+				var mid = $(this).parent().parent().children().eq(0).text();
 				$.ajax({
 					type : "POST",
 					url : "/admin/member/userUpdate",
 					cache : false,
-					data : formData2,
+					data : {"mid":mid},
 					success : onSuccess2
+				
 				});
 			});
-		});
+ 		});
 		function onSuccess(){alert("전문가로 권한변경");
-        self.location = "/admin/member/move";}
+        self.location = "/admin/member/move?index="+${p.index};}
 		function onSuccess2(){alert("사용자로 권한변경");
-	    self.location = "/admin/member/move";}
+ 	    self.location = "/admin/member/move?index="+${p.index};}
 	</script>
 	<%@ include file="../../include/admin/left_header.jsp"%>
 	<%@ include file="../../include/admin/main_header.jsp"%>
@@ -68,24 +72,19 @@
 								<tbody>
 								<c:choose>
 								<c:when test="${not empty searchId}">
-										<c:forEach var="find" items="${idlist }">
+										<c:forEach var="find" items="${idlist}">
 											<tr>
 												<td>${find.mid }</td>
 												<td>${find.mdate }</td>
 												<td>${find.mproyn }</td>
 												<td>${find.aname}</td>
 												<c:if test="${3 eq find.ano}">
-												<td><form id="ReadingInfoSelectForm">
-														<input type="hidden" value="${find.mid}" name="mid"><input
-															id="ReadingInfoSelectBtn" type="button" value="등록">
-													</form></td>
-											</c:if>
-											<c:if test="${2 eq find.ano}">
-												<td><form id="ReadingInfoSelectForm2">
-														<input type="hidden" value="${find.mid}" name="mid"><input
-															id="ReadingInfoSelectBtn2" type="button" value="해제">
-													</form></td>
-											</c:if>
+													<td><input class="ReadingInfoSelectBtn" type="button" value="등록"></td>
+												</c:if>
+												<c:if test="${2 eq find.ano}">
+													<td><input class="ReadingInfoSelectBtn2" type="button" value="해제"></td>
+												</c:if>
+											
 												
 											</tr>
 										
@@ -102,16 +101,10 @@
 											<td>${member.mproyn}</td>
 											<td>${member.aname}</td>
 											<c:if test="${3 eq member.ano}">
-												<td><form id="ReadingInfoSelectForm">
-														<input type="hidden" value="${member.mid}" name="mid"><input
-															id="ReadingInfoSelectBtn" type="button" value="등록">
-													</form></td>
+												<td><input class="ReadingInfoSelectBtn" type="button" value="등록"></td>
 											</c:if>
 											<c:if test="${2 eq member.ano}">
-												<td><form id="ReadingInfoSelectForm2">
-														<input type="hidden" value="${member.mid}" name="mid"><input
-															id="ReadingInfoSelectBtn2" type="button" value="해제">
-													</form></td>
+												<td><input class="ReadingInfoSelectBtn2" type="button" value="해제"></td>
 											</c:if>
 										</tr>
 									</c:forEach>
@@ -153,12 +146,21 @@
 									 
 							</c:if>
 						</ul>
-						<form action="/admin/member/move" method="get" id='frmPaging'>
-						
+						<c:if test="${not empty searchId}">
+						<form action="findBymid" method="get" id='frmPaging'>
+							<input type='hidden' name='mid' value='${searchId}'>
 							<input type='hidden' name='index' id='index' value='${p.index}'>
 							<input type='hidden' name='pageStartNum' id='pageStartNum' value='${p.pageStartNum}'> 
 							<input type='hidden' name='listCnt' id='listCnt' value='${p.listCnt}'>
 						</form>
+						</c:if>
+						<c:if test="${empty searchId}">
+						<form action="/admin/member/move" method="get" id='frmPaging'>
+							<input type='hidden' name='index' id='index' value='${p.index}'>
+							<input type='hidden' name='pageStartNum' id='pageStartNum' value='${p.pageStartNum}'> 
+							<input type='hidden' name='listCnt' id='listCnt' value='${p.listCnt}'>
+						</form>
+						</c:if>
 								</div>
 							</div>
 						</div>
