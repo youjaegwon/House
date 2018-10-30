@@ -122,73 +122,66 @@ $(function() {
 </head>
 <%@ include file="../include/head.jsp" %>
 <body>
-
 <%@ include file="../include/main_header.jsp" %>
-<div class="container-fluid">
-	<h1>회원가입</h1>
-	<form action="membership" method="post" id="membership">
-		<fieldset>
-			<table>
-				<tr>
-					<th>아이디</th>
-					 <td>
-					 <input type="text" name="mid" id="mid" placeholder="아이디" />
-					 <input type="button" id="idck" value="중복 검사">
-						<div id="checkMsg"></div>
-					</td> 
-					
-				</tr>
-				
-				<tr>
-					<th>패스워드</th>
-					 <td>
-					 <input type="password" id="mpw" name="mpw" placeholder="패스워드"/> 
-						
-					</td> 
-					
-					
-				</tr>
-				<tr>
-					<th>이름</th>
-					 <td><input type="text" id="mname" name="mname" placeholder="이름"/>
-						
-					</td> 
-					
-				</tr>
-				<tr>
-					<th>휴대폰</th>
-					 <td><input type="text" id="mphone" name="mphone" placeholder="휴대폰">
-						
-					</td> 
-					
-				</tr>
-				
-				<tr>
-					<th>권한</th>
-					 <td><input type="radio" name="mproyn" id="radio1" value="Y">
-						<label for="radio1">전문가</label>
-						<input type="radio" name="mproyn" id="radi2" value="N" checked="checked">
-						<label for="radio2">일반</label>
-					
-					 </td> 
-					
-				</tr>
-		<!-- 				권한 번호(ano) -->
-				<tr>
-
-				<td>
-				<input type="hidden" name="ano" value="3">
-				</td>
-				</tr>
-				
-				<tr>
-					
-					<td><input id="send" type="submit" value="회원가입"/></td>
-				</tr>
-			</table>
-		</fieldset>
-	</form>
-</div>
+<div id="heading-breadcrumbs">
+        <div class="container">
+          <div class="row d-flex align-items-center flex-wrap">
+            <div class="col-md-7">
+              <h1 class="h2">회원가입</h1>
+            </div>
+            <div class="col-md-5">
+              <ul class="breadcrumb d-flex justify-content-end">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active">회원가입</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="content">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="box">
+                <h2 class="text-uppercase">New account</h2>
+                <p class="lead">회원이 아니신가요?</p>
+                <hr>
+                <form action="membership" method="post" id="membership">
+                  <div class="form-group">
+                    <label for="email-login">아이디</label>
+                    <input id="email-login" type="text" class="form-control" name="mid" placeholder="아이디">
+                    <input type="button" id="idck" value="중복 검사">
+                    <div id="checkMsg"></div>
+                  </div>
+                  <div class="form-group">
+                    <label for="password-login">패스워드</label>
+                    <input id="password-login" name="mpw" type="password" class="form-control" placeholder="패스워드">
+                  </div>
+                  <div class="form-group">
+                    <label for="name-login">이름</label>
+                    <input id="name-login" name="mname" type="text" class="form-control" placeholder="이름">
+                  </div>
+                  <div class="form-group">
+                    <label for="name-login">휴대폰</label>
+                    <input id="name-login" name="mphone" type="text" class="form-control" placeholder="휴대폰">
+                  </div>
+                  <div class="form-group">
+                    <input type="radio" name="mproyn" id="radio1" value="Y">
+                    <label for="radio1">전문가</label>
+                    <input type="radio" name="mproyn" id="radi2" value="N" checked="checked">
+                    <label for="radio2">일반</label>
+                    <input type="hidden" name="ano" value="3">
+                  </div>
+                  <div class="text-center">
+                    <button id="send" type="submit" class="btn btn-template-outlined"><i class="fa fa-user-md"></i> 회원가입</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 <%@ include file="../include/main_footer.jsp" %>
+<%@ include file="../include/plugin_js.jsp" %>
 </body>
 </html>

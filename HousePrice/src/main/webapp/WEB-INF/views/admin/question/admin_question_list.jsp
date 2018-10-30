@@ -15,9 +15,9 @@
 						<div class="header">
 							<h4 class="title">질문관리</h4>
 						</div>
-						<div class="col-sm-6">
+						<div class="col-sm-5">
 						</div>
-						<form action="/admin/question/searchlist" method="get" class="form-group col-sm-6">
+						<form action="/admin/question/searchlist" method="get" class="form-group col-sm-7">
 							<input type='hidden' name='index' value='${p.index}'> <input
 								type='hidden' name='pageStartNum' 
 								value='${p.pageStartNum}'> <input type='hidden'

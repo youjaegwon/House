@@ -37,7 +37,7 @@ public class MembershipController {
 		String result=service.insert(ms);
 		model.addAttribute("ms", result);
 		System.out.println("가입성공");
-			return "/register/joinSuccess";
+			return "/login/login";
 		
 
 	}
