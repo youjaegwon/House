@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.houseprice.project.mappers.blog.blogMapper">
+<insert id="save">
+INSERT INTO h_bfile VALUES(#{bfile_name}, sysdate, #{bfile_path}, SEQ_H_BFILE.NEXTVAL, #{bfile_originalName}, #{bno})
+</insert>
+
+<select id="findById" resultType="UploadFile">
+SELECT * FROM h_bfile WHERE ID=#{id}
+</select>
+
+<insert id="insert">
+INSERT INTO h_blog (BNO, BTITLE, BCONTENT, BREGDATE, MID, Y_N, hit) VALUES(SEQ_H_BLOG.NEXTVAL, #{btitle}, #{bcontent}, TO_DATE(sysdate, 'YYYY-MM-DD'), #{mid},'미게시',0)
+</insert>
+
+<select id="select" resultType="BlogVO">
+SELECT bno, bcontent, mid , btitle , hit, bregdate FROM H_BLOG WHERE BNO = #{bno}
+</select>
+
+<select id="selectList" resultType="BlogVO">
+<![CDATA[select bno, btitle, bcontent, bregdate,fid,mid,hit from(select b.bno bno, nvl(btitle, '미정') btitle, nvl(bcontent, '미정') bcontent, bregdate, nvl(fid, 0) fid, mid, Y_N, hit from (select b.bno, btitle, bcontent, bregdate, Y_N, (select id from h_bfile f where f.bno = b.bno and rownum<2) fid, mid ,hit from h_blog b order by bno desc) b left join h_bfile f on b.fid = f.id where Y_N ='게시' order by bno desc)]]>
+</select>
+
+<select id="selectListSave" resultType="BlogVO">
+<![CDATA[select rn, b.bno bno, nvl(btitle, '미정') btitle, nvl(bcontent, '미정') bcontent, bregdate, nvl(fid, 0) fid, mid, Y_N from (select rownum rn, b.bno, btitle, bcontent, bregdate, Y_N, (select id from h_bfile f where f.bno = b.bno and rownum<2) fid, mid from h_blog b order by bno desc) b left join h_bfile f on b.fid = f.id where rn between #{startLow} and #{endLow} order by rn asc]]>
+</select>
+
+<delete id="delete">
+DELETE FROM H_BLOG WHERE BNO=#{BNO }
+</delete>
+
+<update id="update">
+UPDATE H_BLOG SET BTITLE = #{btitle}, BCONTENT = #{bcontent}, BREGDATE = sysdate, Y_N='게시' WHERE BNO = #{bno}
+</update>
+
+<update id="update2">
+UPDATE H_BLOG SET BTITLE = #{btitle}, BCONTENT = #{bcontent}, BREGDATE = sysdate WHERE BNO = #{bno}
+</update>
+
+<update id="hitUpdate">
+UPDATE H_BLOG SET HIT = HIT+1 WHERE BNO = #{bno}
+</update>
+
+<update id="update3">
+UPDATE H_BLOG SET BREGDATE = sysdate, Y_N='게시' WHERE BNO = #{bno}
+</update>
+
+<update id="updateN_Y">
+UPDATE H_BLOG SET BREGDATE = sysdate, Y_N='미게시' WHERE BNO = #{bno}
+</update>
+
+<select id="pageGetCount">
+SELECT COUNT(*) count FROM H_BLOG
+</select>
+
+<delete id="selectDelete">
+DELETE FROM H_BLOG WHERE BNO=#{BNO }
+</delete>
+</mapper>

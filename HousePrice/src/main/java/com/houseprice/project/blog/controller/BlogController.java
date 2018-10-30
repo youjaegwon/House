@@ -3,63 +3,259 @@ package com.houseprice.project.blog.controller;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.houseprice.project.login.model.LoginDTO;
+import com.houseprice.project.blog.model.BlogVO;
+import com.houseprice.project.blog.model.DownloadFile;
+import com.houseprice.project.blog.model.page.PageGroupResult;
+import com.houseprice.project.blog.model.page.PageInfo;
+import com.houseprice.project.blog.model.page.PageManager;
+import com.houseprice.project.blog.service.BlogService;
+
+
 
 @Controller
 @RequestMapping("/blog")
 public class BlogController {
-	// 로그인 페이지
-	@RequestMapping(value = "/insert", method = RequestMethod.GET)
-	public String blogGET() {
-		return "/blog/blog_write";
+	
+	@Autowired
+	private BlogService service;
+	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String main(Model model, String message,HttpServletRequest request) {
+		
+		List<BlogVO> list=service.selectList();
+		model.addAttribute("list", list);
+		model.addAttribute("message", message);
+		
+		return "/views/blog/main";
 	}
 	
-	// 다중파일업로드
-    @RequestMapping(value = "/fileupload", method = RequestMethod.POST)
-    @ResponseBody
-    public String multiplePhotoUpload(HttpServletRequest request) {
-        // 파일정보
-        StringBuffer sb = new StringBuffer();
-        try {
-            // 파일명을 받는다 - 일반 원본파일명
-            String oldName = request.getHeader("file-name");
-
-            // 파일 기본경로 _ 상세경로
-            String filePath = "C:/github/House/HousePrice/src/main/webapp/resources/photoUpload/";
-            String saveName = sb.append(new SimpleDateFormat("yyyyMMddHHmmss")
-                          .format(System.currentTimeMillis()))
-                          .append(UUID.randomUUID().toString())
-                          .append(oldName.substring(oldName.lastIndexOf("."))).toString();
-            InputStream is = request.getInputStream();
-            OutputStream os = new FileOutputStream(filePath + saveName);
-            int numRead;
-            byte b[] = new byte[Integer.parseInt(request.getHeader("file-size"))];
-            while ((numRead = is.read(b, 0, b.length)) != -1) {
-                os.write(b, 0, numRead);
-            }
-            os.flush();
-            os.close();
-            // 정보 출력
-            sb = new StringBuffer();
-            sb.append("&bNewLine=true")
-              .append("&sFileName=").append(oldName)
-              .append("&sFileURL=").append("http://localhost:9090/Spring/resources/photoUpload/")
-        .append(saveName);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return sb.toString();
-    }
+	//저장된 글
+	@RequestMapping(value = "/selectSave", method = RequestMethod.GET)
+	public String selectSave(Model model, String message, HttpServletRequest request) {
+		
+		int requestPage=1;
+		if(request.getParameter("reqPage") != null) { requestPage= Integer.parseInt(request.getParameter("reqPage")); }
+		
+		BlogVO blogVO = new BlogVO();
+		
+		int count = service.pageGetCount();
+		System.out.println(count);
+		PageManager pageManager = new PageManager(requestPage);
+		PageGroupResult pageGroupResult = pageManager.getPageGroupResult(count);
+		int endLow = PageInfo.ROW_COUNT_PER_PAGE * requestPage;
+		int startLow = endLow -(PageInfo.ROW_COUNT_PER_PAGE - 1);
+		blogVO.setStartLow(startLow);
+		blogVO.setEndLow(endLow);
+		List<BlogVO> list=service.selectListSave(blogVO);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("message", message);
+		
+		model.addAttribute("pageGroupResult", pageGroupResult);
+		
+		return "/views/blog/manageList";
+	}
+	
+	// 글작성 페이지
+	@RequestMapping(value = "/blogInsert", method = RequestMethod.POST)
+	public String InsertGO(BlogVO blogVO ,Model model) {
+		
+		int bno = service.insert(blogVO);	
+		
+		System.out.println(bno);
+		
+		model.addAttribute("bno", bno);
+		
+		return "/views/blog/blogInsert";
+	}
+	
+	//블로그 목록 -> 디테일 
+	@RequestMapping(value = "/updateGO", method = RequestMethod.POST)
+	public String updateGO(@RequestParam(value = "bno") int bno, Model model) {
+		
+		BlogVO blogVO = service.select(bno);
+		
+		model.addAttribute("data", blogVO);
+		
+		return "/views/blog/blogModify";
+	}
+	
+	@RequestMapping(value = "/updateSaveGO", method = RequestMethod.POST)
+	public String updateSaveGO(@RequestParam(value = "bno") int bno, Model model) {
+		
+		BlogVO blogVO = service.select(bno);
+		
+		model.addAttribute("data", blogVO);
+		
+		return "/views/blog/blogUpdate";
+	}
+	
+	//글작성 페이지
+	@RequestMapping(value = "/blogUpdate", method = RequestMethod.POST)
+	public String insert(Model model, BlogVO blogVO) {
+		int bno = service.update(blogVO);
+		
+		model.addAttribute("bno", bno);
+		
+		return "redirect:/blogDetail";
+		
+	}
+	
+	//글게시 페이지
+	@ResponseBody
+	@RequestMapping(value = "/updateY_N", method = RequestMethod.POST)
+	public String updateY_N(@RequestParam(value = "checkArrRoom[]", required=true) List<Integer> checkArr, Model model) {
+		
+		service.update3(checkArr);
+		
+		return null;
+	}
+	//글게시 페이지
+	@ResponseBody
+	@RequestMapping(value = "/updateN_Y", method = RequestMethod.POST)
+	public String updateN_Y(@RequestParam(value = "checkArrRoom[]", required=true) List<Integer> checkArr, Model model) {
+		
+		service.updateN_Y(checkArr);
+		
+		return null;
+	}
+	
+	//관리자 리스에서 삭제
+	@ResponseBody
+	@RequestMapping(value = "/selectDelete", method = RequestMethod.POST)
+	public String selectDelete(@RequestParam(value = "checkArrRoom[]", required=true) List<Integer> checkArr, Model model) {
+		
+		service.selectDelete(checkArr);
+		
+		return null;
+			
+	}
+	
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String update(@RequestParam("btitle") String btitle, @RequestParam("bno") int bno, Model model, @RequestParam("bcontent") String bcontent,BlogVO blogVO) {
+		
+		blogVO.setBno(bno);
+		blogVO.setBcontent(btitle);
+		blogVO.setBcontent(bcontent);
+		
+		bno = service.update2(blogVO);
+		
+		model.addAttribute("bno", bno);
+		
+		return "redirect:/blogDetail";
+	}
+	
+	//삭제
+	@RequestMapping(value = "/blogDelete", method = RequestMethod.POST)
+	public String delete(Model model, @RequestParam(value="bno") int bno) {
+		
+		String result=service.delete(bno);
+		model.addAttribute("message",result);
+		
+		return "redirect:/";
+		
+	}
+	
+	//상세
+			@RequestMapping(value = "/blogDetail", method = RequestMethod.GET)
+			public String blogDetail(@RequestParam(value = "bno") int bno, Model model) {
+				
+				model.addAttribute("bno", bno);
+				
+				return "/views/blog/detail";
+		}
+			//조회수 증가
+			@ResponseBody //ajax 요청할때 success에 리턴시키려면 필요ㄴ
+			@RequestMapping(value = "/hitUpdate", method = RequestMethod.POST)
+			public BlogVO hitUpdate(@RequestParam(value = "bno") int bno, Model model) {
+				
+				service.hitUpdate(bno);
+				BlogVO blogVO = service.select(bno);
+				System.out.println("after");
+				
+				return blogVO;
+			}
+			
+			//상세
+			@RequestMapping(value = "/blogDetailSave", method = RequestMethod.GET)
+			public String blogDetailSave(@RequestParam(value = "bno") int bno, Model model) {
+				
+				BlogVO blogVO = service.select(bno);
+				model.addAttribute("data", blogVO);
+				
+				return "/views/blog/detailSave";
+			}
+			
+			
+		
+	@ResponseBody
+	@RequestMapping(value = "/uploadImage", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public Map<String,String> uploadImage(@RequestParam("file") MultipartFile file,@RequestParam("bno") int bno, Model model, 
+			HttpServletRequest request, HttpServletResponse response){
+		
+		String URL = service.fileSave(file, bno);
+		
+		Map<String,String> result = new HashMap<String, String>();
+		if(URL == null) {
+			result.put("success", "false");
+		}else {
+			result.put("success", "true");
+			result.put("data", URL);			
+		}
+		
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/filedownload", method=RequestMethod.GET,produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	public FileSystemResource filedownload(@RequestParam int id, HttpServletRequest request, HttpServletResponse response) {
+		DownloadFile downloadFile = service.getDownloadFile(id);
+		String browser = request.getHeader("User-Agent");
+		String downloadFileName = null;
+		if(browser.contains("Chrome")||
+			browser.contains("MSIE")||
+			browser.contains("Trident")) {
+			try {				
+				downloadFileName = URLEncoder.encode(downloadFile.getOriginalFaileName(),"UTF-8").replaceAll("\\+", "%20");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+			response.setHeader("Content-Disposition", "attachment;filename="+downloadFileName+";");
+		}else {
+			try {				
+				downloadFileName = 
+						new String(downloadFile.getOriginalFaileName().getBytes("UTF-8"),"ISO-8859-1").replaceAll("\\+", "_");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+			response.setHeader("Content-Disposition", "attachment;filename="+downloadFileName+";");
+		}
+		return new FileSystemResource(downloadFile.getFile());
+	}
+		
 }

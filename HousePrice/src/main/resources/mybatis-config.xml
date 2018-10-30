@@ -7,5 +7,8 @@
 		<typeAlias type="com.houseprice.project.register.model.MemberVO" alias="MemberVO"/>
 		<typeAlias type="com.houseprice.project.question.model.QuestionVO" alias="QuestionVO"/>
 		<typeAlias type="com.houseprice.project.admin.member.model.AdminMemberVO" alias="AdminMemberVO"/>
+		<typeAlias alias="BlogVO" type="com.houseprice.project.blog.model.BlogVO"/>
+		<typeAlias alias="UploadFile" type="com.houseprice.project.blog.model.UploadFile"/>
 	</typeAliases>
 </configuration>
+

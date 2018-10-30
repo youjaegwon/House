@@ -4,9 +4,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing 
 		infrastructure -->
@@ -20,6 +22,7 @@
 	<resources mapping="/question/**" location="/resources/question/" />
 	<resources mapping="/register/**" location="/resources/register/" />
 	<resources mapping="/user/**" location="/resources/user/" />
+	<resources mapping="/img/**" location="/resources/img/" />
 	<!--viewResolver 설정 -->
 	<beans:bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -61,14 +64,11 @@
 		</interceptor>
 	</interceptors>
 	
- 	<!-- 파일 업로드 -->
-    <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <!-- max upload size in bytes -->
-        <beans:property name="maxUploadSize" value="20971520" /> <!-- 20MB -->
-        <!-- max size of file in memory (in bytes) -->
-        <beans:property name="maxInMemorySize" value="1048576" /> <!-- 1MB -->
-    </beans:bean>
+ 			<!-- 파일 업로드에 필요한 beans-->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
+		<beans:property name="maxUploadSize" value="10000000" />
+		<beans:property name="maxInMemorySize" value="10000000" />	
+	</beans:bean>
     
-
 	<context:component-scan base-package="com.houseprice.project" />
 </beans:beans>
