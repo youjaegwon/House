@@ -87,7 +87,7 @@ public class MembershipController {
 		model.addAttribute("result", result);
 		HttpSession httpSession = request.getSession();
 		httpSession.invalidate();
-		return "/register/result";
+		return "/login/login";
 	}
 	
 }
