@@ -13,7 +13,7 @@
             <div class="col-md-6">
               <div class="d-flex justify-content-md-end justify-content-between">
               <c:if test="${empty login}">
-                <div class="login"><a href="#" data-toggle="modal" data-target="#login-modal" class="login-btn"><i class="fa fa-sign-in"></i><span class="d-none d-md-inline-block">로그인</span></a><a href="/register/membership" class="signup-btn"><i class="fa fa-user"></i><span class="d-none d-md-inline-block">회원가입</span></a></div>
+                <div class="login"><a href="#" data-toggle="modal" data-target="#login-modal" class="login-btn"><i class="fa fa-sign-in" style="margin-top:10px;"></i><span class="d-none d-md-inline-block">로그인</span></a><a href="/register/membership" class="signup-btn"><i class="fa fa-user" style="margin-top:10px;"></i><span class="d-none d-md-inline-block">회원가입</span></a></div>
               </c:if>
               <c:if test="${not empty login}">
                 <c:choose>
@@ -38,9 +38,9 @@
                 </c:choose>
               </c:if>
                 <ul class="social-custom list-inline">
-                  <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                  <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                  <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                  <li class="list-inline-item"><a href="#"><i class="fa fa-facebook" style="margin-top:10px;"></i></a></li>
+                  <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus" style="margin-top:10px;"></i></a></li>
+                  <li class="list-inline-item"><a href="#"><i class="fa fa-twitter" style="margin-top:10px;"></i></a></li>
                 </ul>
               </div>
             </div>

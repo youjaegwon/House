@@ -76,7 +76,7 @@
 									<tr>
 										<th style="width: 60px; text-align:center;">번호</th>
 										<th style="width: 250px; text-align:center;">제목</th>
-										<th style="width: 150px; text-align:center;">작성시간</th>
+										<th style="width: 100px; text-align:center;">작성시간</th>
 										<th style="width: 60px; text-align:center;">답변여부</th>
 									</tr>
 									<c:if test="${empty questions }">
@@ -87,12 +87,12 @@
 									<c:if test="${not empty questions }">
 										<c:forEach items="${questions}" var="questions">
 											<tr>
-												<td>${questions.rnum}</td>
-												<td><a
+												<td style="text-align:center;">${questions.rnum}</td>
+												<td style="text-align:center;"><a
 													href="${path}/question/read?cno=${questions.cno}">${questions.ctitle}</a>
 												</td>
-												<td>${questions.cregdate}</td>
-												<td>${questions.answered}</td>
+												<td style="text-align:center;">${questions.cregdate}</td>
+												<td style="text-align:center;">${questions.answered}</td>
 											</tr>
 										</c:forEach>
 									</c:if>
@@ -113,7 +113,7 @@
 									<!--페이지번호 -->
 									<c:forEach var='i' begin="${p.pageStartNum}"
 										end="${p.pageLastNum}" step="1">
-										<li class='pageIndex${i} page-item'><a class="page-link" onclick='pageIndex(${i});'>${i}</a></li>
+										<li class='pageIndex${i} page-item active'><a class="page-link" onclick='pageIndex(${i});'>${i}</a></li>
 									</c:forEach>
 
 									<c:if test="${p.lastChk}">

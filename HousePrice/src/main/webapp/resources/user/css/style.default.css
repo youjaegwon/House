@@ -539,11 +539,6 @@ table {
   font-size: 0.9rem;
 }
 
-table img {
-  min-width: 50px !important;
-  max-width: 50px !important;
-  height: 50px;
-}
 
 table input[type="number"] {
   max-width: 50px;
@@ -2132,7 +2127,6 @@ ul ul a.nav-link {
 footer.main-footer {
   padding: 60px 0;
   padding-bottom: 0;
-  background: #555;
   color: #fff;
 }
 

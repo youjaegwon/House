@@ -15,13 +15,12 @@
 						<div class="header">
 							<h4 class="title">질문관리</h4>
 						</div>
-						<div class="col-sm-5">
-						</div>
-						<form action="/admin/question/searchlist" method="get" class="form-group col-sm-7">
+						<form action="/admin/question/searchlist" method="get"
+							class="form-group col-sm-7">
 							<input type='hidden' name='index' value='${p.index}'> <input
-								type='hidden' name='pageStartNum' 
-								value='${p.pageStartNum}'> <input type='hidden'
-								name='listCnt' id='listCnt' value='${p.listCnt}'>
+								type='hidden' name='pageStartNum' value='${p.pageStartNum}'>
+							<input type='hidden' name='listCnt' id='listCnt'
+								value='${p.listCnt}'>
 							<div class="box-footer">
 								<div class="form-group col-sm-2">
 									<select class="form-control" name="searchType" id="searchType">
@@ -44,13 +43,10 @@
 								</div>
 							</div>
 						</form>
+						<div class="col-sm-5"></div>
 						<div class="content table-responsive table-full-width">
 							<form action="/admin/question/delete" method="get" id='userForm'
 								name='userForm'>
-								<button type="submit" class="btn btn-primary" id="writeBtn">
-									<i class="fa fa-pencil"></i>선택 삭제
-								</button>
-
 								<table class="table table-hover table-striped">
 									<thead>
 										<th><input type="checkbox" id="allCheck"
@@ -82,6 +78,9 @@
 										</c:if>
 									</tbody>
 								</table>
+								<button type="submit" class="btn btn-primary" id="writeBtn">
+									<i class="fa fa-eraser"></i>삭제
+								</button>
 							</form>
 						</div>
 						<div class="box-footer">
