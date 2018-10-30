@@ -41,14 +41,20 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-9">
-					<h2>비밀번호 확인</h2>
+				
+			<div class="col-lg-5">
+				<div class="panel-heading">
+					<h2  class="h4 panel-title">비밀번호 확인</h2>
+				</div>
 					<h4>중요정보에 접근하므로 비밀번호를 다시 확인합니다.</h4>
 					<form action="/register/detail" method="post">
-						<h3>${login.mid}</h3>
-						<input type="hidden" name="mid" value="${login.mid}"> <input
-							type="password" name="mpw"> <input type="submit"
-							value="확인">
+						
+						<h3><input class="form-control" type="text" name="mid" value="${login.mid}" readonly></h3>
+					<div class="input-group">
+						<input class="form-control" type="password" name="mpw"  placeholder="비밀번호를 입력하세요">
+						<input class="btn btn-template-main" type="submit" value="확인">
+					</div> 
+						
 					</form>
 				</div>
 			</div>

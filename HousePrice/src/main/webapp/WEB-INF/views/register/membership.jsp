@@ -149,26 +149,28 @@ $(function() {
                 <form action="membership" method="post" id="membership">
                   <div class="form-group">
                     <label for="email-login">아이디</label>
-                    <input id="email-login" type="text" class="form-control" name="mid" placeholder="아이디">
-                    <input type="button" id="idck" value="중복 검사">
+                    <div class="input-group">
+                    <input id="mid" type="text" class="form-control" name="mid" placeholder="아이디">
+                    <input name="mid" class="btn btn-lg btn-outline-primary" type="button" id="idck" value="중복 검사">
+                    </div>
                     <div id="checkMsg"></div>
                   </div>
                   <div class="form-group">
                     <label for="password-login">패스워드</label>
-                    <input id="password-login" name="mpw" type="password" class="form-control" placeholder="패스워드">
+                    <input id="mpw" name="mpw" type="password" class="form-control" placeholder="패스워드">
                   </div>
                   <div class="form-group">
                     <label for="name-login">이름</label>
-                    <input id="name-login" name="mname" type="text" class="form-control" placeholder="이름">
+                    <input id="mname" name="mname" type="text" class="form-control" placeholder="이름">
                   </div>
                   <div class="form-group">
                     <label for="name-login">휴대폰</label>
-                    <input id="name-login" name="mphone" type="text" class="form-control" placeholder="휴대폰">
+                    <input id="mphone" name="mphone" type="text" class="form-control" placeholder="휴대폰">
                   </div>
                   <div class="form-group">
                     <input type="radio" name="mproyn" id="radio1" value="Y">
                     <label for="radio1">전문가</label>
-                    <input type="radio" name="mproyn" id="radi2" value="N" checked="checked">
+                    <input type="radio" name="mproyn" id="radio2" value="N" checked="checked">
                     <label for="radio2">일반</label>
                     <input type="hidden" name="ano" value="3">
                   </div>

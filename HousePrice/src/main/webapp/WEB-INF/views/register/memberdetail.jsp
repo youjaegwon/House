@@ -3,16 +3,18 @@
 <%@ page session="true" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
-<<<<<<< HEAD
 <style type="text/css">
-.error{
-	color:red;
+.error {
+	color: red;
 }
 </style>
 <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="${path}/register/js/jquery.validate.min.js"></script>
-<script type="text/javascript" src="${path}/register/js/messages_ko.min.js"></script>
-<script type="text/javascript" src="${path}/register/js/additional-methods.min.js"></script>
+<script type="text/javascript"
+	src="${path}/register/js/jquery.validate.min.js"></script>
+<script type="text/javascript"
+	src="${path}/register/js/messages_ko.min.js"></script>
+<script type="text/javascript"
+	src="${path}/register/js/additional-methods.min.js"></script>
 <script type="text/javascript">
 
 $(function() {
@@ -66,29 +68,7 @@ $(function() {
 });
 }); 
 </script>
-<%@ include file="../include/head.jsp" %>
-<body>
-<%@ include file="../include/main_header.jsp" %>
-<div class="container-fluid">
-<form action="update" method="post" id="update">
-<table>
 
-<tr>
-<td><input name="mid" id="mid" type="hidden" value="${member.mid }"></td>
-</tr>
-
-<tr>
-<td>비밀번호<input name="mpw" id="mpw"  type="password" ></td>
-</tr>
-
-<tr>
-<td>이름<input name="mname" id="mname" type="text" value=${member.mname }></td>
-</tr>
-
-<tr>
-<td>핸드폰<input name="mphone" id="mphone" type="text" value=${member.mphone }></td>
-</tr>
-=======
 <%@ include file="../include/head.jsp"%>
 <body>
 	<%@ include file="../include/main_header.jsp"%>
@@ -128,38 +108,40 @@ $(function() {
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-9">
-					<form action="update" method="post">
-						<table>
+				
+				<div class="col-lg-6"> 
+				<form action="update" method="post" id="update">
+				<hr>
+				<h2 class="text-uppercase">Update</h2>
+				 <p class="lead">회원정보 수정</p>
+				 <hr>
+					<div class="form-group">
+						 <label for="mid">아이디</label>
+						 <input class="form-control" name="mid" type="text" value="${member.mid }" readonly>
+					</div>
+				
+					<div class="form-group">
+						<label for="mpw">비밀번호</label>
+						<input class="form-control" name="mpw" type="password" placeholder="패스워드">
+					</div>
+					<div class="form-group">
+						<label for="mname">이름</label>
+						<input class="form-control" name="mname" type="text" value=${member.mname } placeholder="이름">
+					</div>
 
-							<tr>
-								<td><input name="mid" type="hidden" value="${member.mid }"></td>
-							</tr>
+					<div class="form-group">
+						<label for="mphone">핸드폰</label>
+						<input class="form-control" name="mphone" type="text" value=${member.mphone } placeholder="휴대폰">
+					</div>
 
-							<tr>
-								<td>비밀번호<input name="mpw" type="password"></td>
-							</tr>
-
-							<tr>
-								<td>이름<input name="mname" type="text"
-									value=${member.mname }></td>
-							</tr>
-
-							<tr>
-								<td>핸드폰<input name="mphone" type="text"
-									value=${member.mphone }></td>
-							</tr>
->>>>>>> a46fa7d29e71e7b1a5455b679ec88042a313aea6
-
-							<tr>
-								<td><input type="submit" value="수정"></td>
-							</tr>
-
-						</table>
-					</form>
+					<input class="btn btn-lg btn-template-main" type="submit" value="수정">
+					<hr>
+				</form>
 				</div>
-			</div>
-		</div>
+				</div>
+			  </div>
+			 
+			
 	</section>
 	<%@ include file="../include/main_footer.jsp"%>
 	<%@ include file="../include/plugin_js.jsp"%>
