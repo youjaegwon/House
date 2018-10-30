@@ -5,33 +5,31 @@
 <%@ include file="../include/head.jsp"%>
 <body class="hold-transition login-page">
 	<%@ include file="../include/main_header.jsp"%>
-	<div class="container-fluid">
-		<div class="card card-container">
-			<!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
-			<img id="profile-img" class="profile-img-card"
-				src="https://png.pngtree.com/element_our/md/20180516/md_5afc6f72777ce.jpg" />
-			<p id="profile-name" class="profile-name-card"></p>
-			<form class="form-signin" action="${path}/login/loginPost"
-				method="post">
-				<span id="reauth-email" class="reauth-email"></span> <input
-					type="text" id="inputEmail" name="mid" class="form-control"
-					placeholder="아이디" required autofocus> <input
-					type="password" id="inputPassword" name="mpw" class="form-control"
-					placeholder="비밀번호" required>
-				<div id="remember" class="checkbox">
-					<label> <input type="checkbox" value="remember-me">
-						로그인 유지
-					</label>
-				</div>
-				<button class="btn btn-lg btn-primary btn-block btn-signin"
-					type="submit">로그인</button>
-			</form>
-			<!-- /form -->
-			<p>비밀번호를 잊으셨나요? <a href="/login/findpw" class="forgot-password">비밀번호 찾기</a></p>
-			<p>회원이 아니신가요? <a href="/register/membership" class="forgot-password">회원가입 </a></p>
-		</div>
-		<!-- /card-container -->
-	</div>
+	<div id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modalLabel" aria-hidden="true" class="modal fade">
+        <div role="document" class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 id="login-modalLabel" class="modal-title">로그인</h4>
+              <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+              <form action="${path}/login/loginPost" method="post">
+                <div class="form-group">
+                  <input id="email_modal" name="mid" type="text" placeholder="아이디" class="form-control">
+                </div>
+                <div class="form-group">
+                  <input id="password_modal" name="mpw" type="password" placeholder="비밀번호" class="form-control">
+                </div>
+                <p class="text-center">
+                  <button class="btn btn-template-outlined"><i class="fa fa-sign-in"></i> Log in</button>
+                </p>
+              </form>
+              <p class="text-center text-muted">비밀번호를 잊으셨나요?&nbsp;<a href="/login/findpw"><strong>비밀번호찾기</strong></a></p>
+              <p class="text-center text-muted">회원이 아니신가요?&nbsp;<a href="/register/membership"><strong>회원가입</strong></a></p>
+            </div>
+          </div>
+        </div>
+      </div>
 	<!-- /.login-box -->
 	<%@ include file="../include/main_footer.jsp"%>
 	<%@ include file="../include/plugin_js.jsp"%>
