@@ -13,9 +13,9 @@
 				<div class="col-md-12">
 					<div class="card">
 						<div class="header">
-							<h4 class="title">질문관리</h4>
+							<h4 class="title">답변관리</h4>
 						</div>
-						<form action="/admin/question/searchlist" method="get"
+						<form action="/admin/answer/searchlist" method="get"
 							class="form-group col-sm-7">
 							<input type='hidden' name='index' value='${p.index}'> <input
 								type='hidden' name='pageStartNum' value='${p.pageStartNum}'>
@@ -45,34 +45,34 @@
 						</form>
 						<div class="col-sm-5"></div>
 						<div class="content table-responsive table-full-width">
-							<form action="/admin/question/delete" method="get" id='userForm'
+							<form action="/admin/answer/delete" method="get" id='userForm'
 								name='userForm'>
 								<table class="table table-hover table-striped">
 									<thead>
 										<th><input type="checkbox" id="allCheck"
 											onclick="allChk(this);" /></th>
-										<th>글번호</th>
+										<th>질문번호</th>
 										<th>제목</th>
 										<th>작성자아이디</th>
 										<th>등록일자</th>
 									</thead>
 									<tbody>
-										<c:if test="${empty questions}">
+										<c:if test="${empty answers}">
 											<tr>
 												<td colspan="5">
-													<h2>질문이 없습니다.</h2>
+													<h2>답변이 없습니다.</h2>
 												</td>
 											</tr>
 										</c:if>
-										<c:if test="${not empty questions}">
-											<c:forEach var="question" items="${questions}">
+										<c:if test="${not empty answers}">
+											<c:forEach var="answers" items="${answers}">
 												<tr>
 													<td><input ﻿ name="RowCheck" type="checkbox"
-														value="${question.cno}" /></td>
-													<td>${question.cno}</td>
-													<td>${question.ctitle}</td>
-													<td>${question.mid}</td>
-													<td>${question.cregdate}</td>
+														value="${answers.cno}" /></td>
+													<td>${answers.cno}</td>
+													<td>${answers.atitle}</td>
+													<td>${answers.mid}</td>
+													<td>${answers.aregdate}</td>
 												</tr>
 											</c:forEach>
 										</c:if>
@@ -109,7 +109,7 @@
 											onclick='pageLast(${p.pageStartNum},${p.total},${p.listCnt},${p.pageCnt});'>&raquo;</a></li>
 									</c:if>
 								</ul>
-								<form action="/admin/question/list" method="get" id='frmPaging'>
+								<form action="/admin/answer/list" method="get" id='frmPaging'>
 									<!--출력할 페이지번호, 출력할 페이지 시작 번호, 출력할 리스트 갯수 -->
 									<input type='hidden' name='index' id='index' value='${p.index}'>
 									<input type='hidden' name='pageStartNum' id='pageStartNum'

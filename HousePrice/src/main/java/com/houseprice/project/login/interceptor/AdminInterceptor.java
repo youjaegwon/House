@@ -35,7 +35,7 @@ private static final Logger logger = LoggerFactory.getLogger(AuthInterceptor.cla
 
         HttpSession httpSession = request.getSession();
         MemberVO memberVO = (MemberVO)httpSession.getAttribute("login");
-        if (memberVO.getAno() == 3) {
+        if (memberVO.getAno() == 3 || memberVO.getAno() == 2) {
             logger.info("관리자 url 접근 제한");
             saveDestination(request);
             response.sendRedirect("/login/admin");
