@@ -8,6 +8,8 @@ public class AnswerVO {
 	private String aregdate;
 	private int cno;
 	private String mid;
+	// 테이블 번호
+	private int rnum;
 	public int getAno() {
 		return ano;
 	}
@@ -43,6 +45,12 @@ public class AnswerVO {
 	}
 	public void setMid(String mid) {
 		this.mid = mid;
+	}
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 	
 }

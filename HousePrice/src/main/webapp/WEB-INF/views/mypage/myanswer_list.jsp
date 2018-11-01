@@ -45,11 +45,11 @@
 				<div class="col-lg-9">
 					<div class="box-primary">
 						<div class="box-header with-border">
-							<h3 class="box-title">내 질문</h3>
+							<h3 class="box-title">내 답변</h3>
 						</div>
 						<div class="box-footer">
 							<div class="form-group col-sm-6">
-								<form action="/question/mypagesearch" method="get">
+								<form action="/answer/mypagesearch" method="get">
 									<div class="input-group">
 										<!--출력할 페이지번호, 출력할 페이지 시작 번호, 출력할 리스트 갯수 -->
 										<input type='hidden' name='mid' value='${login.mid}'>
@@ -77,22 +77,20 @@
 										<th style="width: 60px; text-align:center;">번호</th>
 										<th style="width: 250px; text-align:center;">제목</th>
 										<th style="width: 100px; text-align:center;">작성시간</th>
-										<th style="width: 60px; text-align:center;">답변여부</th>
 									</tr>
-									<c:if test="${empty questions }">
+									<c:if test="${empty answers }">
 										<tr>
-											<td colspan="4" style="text-align:center;"><h3>질문이 없습니다.</h3></td>
+											<td colspan="4" style="text-align:center;"><h3>답변이 없습니다.</h3></td>
 										</tr>
 									</c:if>
-									<c:if test="${not empty questions }">
-										<c:forEach items="${questions}" var="questions">
+									<c:if test="${not empty answers}">
+										<c:forEach items="${answers}" var="answers">
 											<tr>
-												<td style="text-align:center;">${questions.rnum}</td>
+												<td style="text-align:center;">${answers.rnum}</td>
 												<td style="text-align:center;"><a
-													href="${path}/question/read?cno=${questions.cno}">${questions.ctitle}</a>
+													href="${path}/question/read?cno=${answers.ano}">${answers.atitle}</a>
 												</td>
-												<td style="text-align:center;">${questions.cregdate}</td>
-												<td style="text-align:center;">${questions.answered}</td>
+												<td style="text-align:center;">${answers.aregdate}</td>
 											</tr>
 										</c:forEach>
 									</c:if>
@@ -125,7 +123,7 @@
 											onclick='pageLast(${p.pageStartNum},${p.total},${p.listCnt},${p.pageCnt});'>&raquo;</a></li>
 									</c:if>
 								</ul>
-								<form action="/question/mypage" method="get" id='frmPaging'>
+								<form action="/answer/mypage" method="get" id='frmPaging'>
 									<!--출력할 페이지번호, 출력할 페이지 시작 번호, 출력할 리스트 갯수 -->
 									<input type='hidden' name='mid' id='mid' value='${login.mid}'>
 									<input type='hidden' name='index' id='index' value='${p.index}'>

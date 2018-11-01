@@ -4,8 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
         
 <mapper namespace="com.houseprice.project.mappers.blog.blogMapper">
+
+<!-- save sql DB에 있는 속성 순서 주의 -->
 <insert id="save">
-INSERT INTO h_bfile VALUES(#{bfile_name}, sysdate, #{bfile_path}, SEQ_H_BFILE.NEXTVAL, #{bfile_originalName}, #{bno})
+<selectKey keyProperty="id" resultType="int" order="BEFORE">
+    select SEQ_H_BFILE.NEXTVAL FROM DUAL
+</selectKey>
+INSERT INTO h_bfile VALUES(#{bfile_name}, sysdate, #{bfile_path}, #{bno}, #{id}, #{bfile_originalName} )
 </insert>
 
 <select id="findById" resultType="UploadFile">
@@ -13,7 +18,11 @@ SELECT * FROM h_bfile WHERE ID=#{id}
 </select>
 
 <insert id="insert">
-INSERT INTO h_blog (BNO, BTITLE, BCONTENT, BREGDATE, MID, Y_N, hit) VALUES(SEQ_H_BLOG.NEXTVAL, #{btitle}, #{bcontent}, TO_DATE(sysdate, 'YYYY-MM-DD'), #{mid},'미게시',0)
+<selectKey keyProperty="bno" resultType="int" order="BEFORE">
+    select SEQ_H_BLOG.NEXTVAL FROM DUAL
+</selectKey>
+
+INSERT INTO h_blog (BNO, BTITLE, BCONTENT, BREGDATE, MID, Y_N, hit) VALUES(#{bno}, #{btitle}, #{bcontent}, TO_DATE(sysdate, 'YYYY-MM-DD'), #{mid},'미게시',0)
 </insert>
 
 <select id="select" resultType="BlogVO">
@@ -33,6 +42,9 @@ DELETE FROM H_BLOG WHERE BNO=#{BNO }
 </delete>
 
 <update id="update">
+<selectKey resultType="int" order="BEFORE">
+    select bno FROM H_BLOG
+</selectKey>
 UPDATE H_BLOG SET BTITLE = #{btitle}, BCONTENT = #{bcontent}, BREGDATE = sysdate, Y_N='게시' WHERE BNO = #{bno}
 </update>
 
@@ -52,7 +64,7 @@ UPDATE H_BLOG SET BREGDATE = sysdate, Y_N='게시' WHERE BNO = #{bno}
 UPDATE H_BLOG SET BREGDATE = sysdate, Y_N='미게시' WHERE BNO = #{bno}
 </update>
 
-<select id="pageGetCount">
+<select id="pageGetCount" resultType="int">
 SELECT COUNT(*) count FROM H_BLOG
 </select>
 

@@ -5,8 +5,6 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import com.houseprice.project.blog.mapper.BlogMapper;
 import com.houseprice.project.blog.model.BlogVO;
 import com.houseprice.project.blog.model.UploadFile;
 
@@ -17,8 +15,11 @@ public class BlogRepository {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public int save(UploadFile uploadFile) {	
-		return sqlSession.insert(NAMESPACE + ".save", uploadFile);
+	public int save(UploadFile uploadFile) {
+		System.out.println(uploadFile.toString());
+		System.out.println(uploadFile.getId());
+		sqlSession.insert(NAMESPACE + ".save", uploadFile);
+		return uploadFile.getId();
 	}
 
 	public UploadFile findById(int id) {
@@ -27,7 +28,8 @@ public class BlogRepository {
 
 	public int insert(BlogVO blogVO) {
 		
-		return sqlSession.insert(NAMESPACE + ".insert", blogVO);
+		sqlSession.insert(NAMESPACE + ".insert", blogVO);
+		return blogVO.getBno();
 	}
 
 	public BlogVO select(int bno) {
@@ -49,7 +51,8 @@ public class BlogRepository {
 
 	public int update(BlogVO blogVO) {
 		
-		return sqlSession.update(NAMESPACE + ".update", blogVO);
+		sqlSession.update(NAMESPACE + ".update", blogVO);
+		return blogVO.getBno();
 	}
 
 	public int update2(BlogVO blogVO) {
@@ -75,6 +78,7 @@ public class BlogRepository {
 	}
 
 	public int pageGetCount() {
+		
 		return sqlSession.selectOne(NAMESPACE+".pageGetCount");
 	}
 

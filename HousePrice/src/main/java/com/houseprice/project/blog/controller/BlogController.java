@@ -51,7 +51,7 @@ public class BlogController {
 		model.addAttribute("list", list);
 		model.addAttribute("message", message);
 		
-		return "/views/blog/main";
+		return "blog/main";
 	}
 	
 	//저장된 글
@@ -64,7 +64,7 @@ public class BlogController {
 		BlogVO blogVO = new BlogVO();
 		
 		int count = service.pageGetCount();
-		System.out.println(count);
+		System.out.println(count+count+count+count+count+count+count+count+count+count+count+count);
 		PageManager pageManager = new PageManager(requestPage);
 		PageGroupResult pageGroupResult = pageManager.getPageGroupResult(count);
 		int endLow = PageInfo.ROW_COUNT_PER_PAGE * requestPage;
@@ -78,7 +78,9 @@ public class BlogController {
 		
 		model.addAttribute("pageGroupResult", pageGroupResult);
 		
-		return "/views/blog/manageList";
+		
+		
+		return "blog/manageList";
 	}
 	
 	// 글작성 페이지
@@ -87,11 +89,9 @@ public class BlogController {
 		
 		int bno = service.insert(blogVO);	
 		
-		System.out.println(bno);
-		
 		model.addAttribute("bno", bno);
 		
-		return "/views/blog/blogInsert";
+		return "blog/blogInsert";
 	}
 	
 	//블로그 목록 -> 디테일 
@@ -102,7 +102,7 @@ public class BlogController {
 		
 		model.addAttribute("data", blogVO);
 		
-		return "/views/blog/blogModify";
+		return "blog/blogModify";
 	}
 	
 	@RequestMapping(value = "/updateSaveGO", method = RequestMethod.POST)
@@ -112,17 +112,18 @@ public class BlogController {
 		
 		model.addAttribute("data", blogVO);
 		
-		return "/views/blog/blogUpdate";
+		return "blog/blogUpdate";
 	}
 	
 	//글작성 페이지
 	@RequestMapping(value = "/blogUpdate", method = RequestMethod.POST)
 	public String insert(Model model, BlogVO blogVO) {
+		
 		int bno = service.update(blogVO);
 		
 		model.addAttribute("bno", bno);
 		
-		return "redirect:/blogDetail";
+		return "redirect:/blog/blogDetail";
 		
 	}
 	
@@ -163,11 +164,12 @@ public class BlogController {
 		blogVO.setBcontent(btitle);
 		blogVO.setBcontent(bcontent);
 		
+		System.out.println(blogVO.getBno());
 		bno = service.update2(blogVO);
 		
 		model.addAttribute("bno", bno);
 		
-		return "redirect:/blogDetail";
+		return "redirect:/blog/blogDetail";
 	}
 	
 	//삭제
@@ -185,9 +187,11 @@ public class BlogController {
 			@RequestMapping(value = "/blogDetail", method = RequestMethod.GET)
 			public String blogDetail(@RequestParam(value = "bno") int bno, Model model) {
 				
+				System.out.println(bno);
+				
 				model.addAttribute("bno", bno);
 				
-				return "/views/blog/detail";
+				return "blog/detail";
 		}
 			//조회수 증가
 			@ResponseBody //ajax 요청할때 success에 리턴시키려면 필요ㄴ
@@ -208,7 +212,7 @@ public class BlogController {
 				BlogVO blogVO = service.select(bno);
 				model.addAttribute("data", blogVO);
 				
-				return "/views/blog/detailSave";
+				return "blog/detailSave";
 			}
 			
 			
@@ -217,6 +221,7 @@ public class BlogController {
 	@RequestMapping(value = "/uploadImage", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public Map<String,String> uploadImage(@RequestParam("file") MultipartFile file,@RequestParam("bno") int bno, Model model, 
 			HttpServletRequest request, HttpServletResponse response){
+		
 		
 		String URL = service.fileSave(file, bno);
 		

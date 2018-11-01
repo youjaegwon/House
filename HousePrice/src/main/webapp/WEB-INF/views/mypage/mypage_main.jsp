@@ -32,7 +32,7 @@
                 <div class="panel-body">
                   <ul class="nav nav-pills flex-column text-sm">
                     <li class="nav-item"><a href="/question/mypage?mid=${login.mid}" class="nav-link">내 질문</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">내 답변</a></li>
+                    <li class="nav-item"><a href="/answer/mypage?mid=${login.mid}" class="nav-link">내 답변</a></li>
                     <li class="nav-item"><a href="/register/detail" class="nav-link">회원정보 수정</a></li>
                   </ul>
                 </div>

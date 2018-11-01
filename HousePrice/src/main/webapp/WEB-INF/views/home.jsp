@@ -86,16 +86,12 @@
 						</div>
 						<div class="text">
 							<h4>
-								<a href="#">Fashion Now </a>
+								<a href="#">블로그제목</a>
 							</h4>
 							<p class="author-category">
-								By <a href="#">John Snow</a> in <a href="blog.html">Webdesign</a>
+								By <a href="#">작성자</a> in <a href="blog.html">작성일</a>
 							</p>
-							<p class="intro">Fifth abundantly made Give sixth hath.
-								Cattle creature i be don't them behold green moved fowl Moved
-								life us beast good yielding. Have bring.</p>
-							<a href="#" class="btn btn-template-outlined">Continue
-								Reading</a>
+							<a href="#" class="btn btn-template-outlined">더보기</a>
 						</div>
 					</div>
 				</div>
