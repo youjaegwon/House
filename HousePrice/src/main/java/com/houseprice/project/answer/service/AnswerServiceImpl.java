@@ -32,7 +32,7 @@ public class AnswerServiceImpl implements AnswerService{
 	}
 
 	@Override
-	public void update(QuestionVO questionVO) throws Exception {
+	public void update(AnswerVO questionVO) throws Exception {
 		
 		questionDAO.update(questionVO);
 	}

@@ -32,7 +32,7 @@ public class AnswerDAOImpl implements AnswerDAO{
 	}
 
 	@Override
-	public void update(QuestionVO questionVO) throws Exception {
+	public void update(AnswerVO questionVO) throws Exception {
 		
 		sqlSession.update(NAMESPACE + ".qupdate", questionVO);
 	}

@@ -97,14 +97,14 @@ public class AnswerController {
 	public String modifyGET(@RequestParam int cno, Model model) throws Exception {
 
 		logger.info("질문 수정 페이지 이동...");
-		model.addAttribute("question", questionService.read(cno));
-
+		model.addAttribute("answer", questionService.read(cno));
+		model.addAttribute("question", as.read(cno));
 		return "/answer/answer_modify";
 	}
 
 	// 수정 페이지 이동
 	@RequestMapping(value= "/modify", method = RequestMethod.POST)
-	public String modifyPOST(String mid,QuestionVO questionVO, RedirectAttributes redirectAttributes) throws Exception {
+	public String modifyPOST(String mid,AnswerVO questionVO, RedirectAttributes redirectAttributes) throws Exception {
 
 		logger.info("질문 수정 등록...");
 		questionService.update(questionVO);

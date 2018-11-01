@@ -13,7 +13,7 @@ public interface AnswerDAO {
 
 	AnswerVO read(int cno) throws Exception;
 
-	void update(QuestionVO questionVO) throws Exception;
+	void update(AnswerVO questionVO) throws Exception;
 
 	List<QuestionVO> listAll(PagingVo paging) throws Exception;
 
