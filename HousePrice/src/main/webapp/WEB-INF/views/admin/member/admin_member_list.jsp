@@ -55,9 +55,17 @@
 						<div>
 						 	<input type='hidden' name='index' value='${p.index}'>
 							<input type='hidden' name='pageStartNum' id='pageStartNum' value='${p.pageStartNum}'> 
-							<input type='hidden' name='listCnt' id='listCnt' value='${p.listCnt}'> 
-							<input type="text" placeholder="아이디입력" id="mid" name="mid">
-							<input type="submit" value="검색">
+							<input type='hidden' name='listCnt' id='listCnt' value='${p.listCnt}'> 					
+							
+							<div class="form-group col-sm-10">
+							<div class="input-group">
+							<input type="text" class="form-control" name="mid" id="mid" placeholder="아이디입력"> <span class="input-group-btn">
+							<button type="submit" class="btn btn-primary btn-flat">
+							<i class="fa fa-search"></i> 검색
+							</button>
+							</span>
+							</div>
+							</div>
 						</div>
 						</form>
 						<div class="content table-responsive table-full-width">
