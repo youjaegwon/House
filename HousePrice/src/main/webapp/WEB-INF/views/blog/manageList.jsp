@@ -1,18 +1,16 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
-<head>
-	<title>Home</title>
-	
+<%@ include file="../include/head.jsp"%>
+<script type="text/javascript" src="${path}/question/js/paging.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js" ></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
 
-</head>
-
 <script type="text/javascript">
 $(document).on("click", "#form1",function(){
-	$("#form").submit(function(event) {
+	$("#formA").submit(function(event) {
 		event.preventDefault();
 		var checkArr = []; //배열 초기화
 		
@@ -42,7 +40,7 @@ $(document).on("click", "#form1",function(){
 });
 
 $(document).on("click", "#form2",function(){
-	$("#form").submit(function(event) {
+	$("#formA").submit(function(event) {
 		event.preventDefault();
 		var checkArr = []; //배열 초기화
 		
@@ -72,7 +70,7 @@ $(document).on("click", "#form2",function(){
 });
 
 $(document).on("click", "#form3",function(){
-	$("#form").submit(function(event) {
+	$("#formA").submit(function(event) {
 		event.preventDefault();
 		var checkArr = []; //배열 초기화
 		
@@ -102,7 +100,6 @@ $(document).on("click", "#form3",function(){
 });
 
 </script>
-
 <script>
 $(document).ready(function(){
     //최상단 체크박스 클릭
@@ -119,45 +116,131 @@ $(document).ready(function(){
     });
 });
 </script>
+
 <body>
-<div id="result"></div>
-${message }
-<form id="form" method="post">
-<input id="form1" type="submit" value="선택게시">
-<input id="form2" type="submit" value="게시취소">
-<input id="form3" type="submit" value="선택삭제">
+	<%@ include file="../include/main_header.jsp"%>
+	<div id="heading-breadcrumbs">
+		<div class="container">
+			<div class="row d-flex align-items-center flex-wrap">
+				<div class="col-md-7">
+					<h1 class="h2">마이 페이지</h1>
+				</div>
+				<div class="col-md-5">
+					<ul class="breadcrumb d-flex justify-content-end">
+						<li class="breadcrumb-item"><a href="/">Home</a></li>
+						<li class="breadcrumb-item active">마이페이지</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<section class="bar">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3">
+					<!-- MENUS AND WIDGETS -->
+					<div class="panel panel-default sidebar-menu with-icons">
+						<div class="panel-heading">
+							<h3 class="h4 panel-title">Categories</h3>
+						</div>
+						<div class="panel-body">
+							<ul class="nav nav-pills flex-column text-sm">
+								<li class="nav-item"><a href="/question/mypage?mid=${login.mid}" class="nav-link">내 질문</a></li>
+								<li class="nav-item"><a href="/answer/mypage?mid=${login.mid}" class="nav-link">내 답변</a></li>
+								<li class="nav-item"><a href="/register/detail" class="nav-link">회원정보 수정</a></li>
+								<li class="nav-item"><a href="/blog/selectSave" class="nav-link">저장된 게시물</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-9">
+					<div class="box-primary">
+						<div class="box-header with-border">
+							<h3 class="box-title">내 질문</h3>
+						</div>
+						<div class="box-footer">
+							<div class="form-group col-sm-6">
+								<form action="/question/mypagesearch" method="get">
+									<div class="input-group">
+										<!--출력할 페이지번호, 출력할 페이지 시작 번호, 출력할 리스트 갯수 -->
+										<input type='hidden' name='mid' value='${login.mid}'>
+										<input type='hidden' name='index' value='${p.index}'>
+										<input type='hidden' name='pageStartNum' id='pageStartNum' value='${p.pageStartNum}'> 
+										<input type='hidden' name='listCnt' value='${p.listCnt}'> <input type="text" class="form-control" name="keyword" width="200px" id="keywordInput" placeholder="제목">
+										 <span class="input-group-btn">
+										 <button type="submit" class="btn btn-primary btn-flat"id="searchBtn"> <i class="fa fa-search"></i> 검색 </button>
+										</span>
+									</div>
+								</form>
+							</div>
+						</div>
 
-	<table>
-		<tr>
-		<td><input type="checkbox" id="checkall" name="checkall"></td><td>No.</td><td>제목</td><td>조회수</td><td>게시여부</td>
-		</tr>
-		<c:forEach var="list" items="${list }">
-		<tr >
-		<td><input type="checkbox" name="chk" id="${list.bno }" value="${list.bno }"></td><td>${list.bno }</td><td><a href ="/blog/blogDetailSave?bno=${list.bno }">${list.btitle }</a></td><td>${list.hit }</td><td>${list.y_n }</td>
-		</tr>
-		</c:forEach>
-	</table>
-	</form>
+						<div class="box-body">
+						<form id="formA" method="post">
+							<input id="form1" type="submit" value="선택게시">
+							<input id="form2" type="submit" value="게시취소">
+							<input id="form3" type="submit" value="선택삭제"></p>
+							<table class="table table-bordered">
+								<tbody>
+									<tr>
+										<th style="width: 60px; text-align:center;"><input type="checkbox" id="checkall" name="checkall"></th>
+										<th style="width: 60px; text-align:center;">No.</th>
+										<th style="width: 250px; text-align:center;">제목</th>
+										<th style="width: 100px; text-align:center;">조회수</th>
+										<th style="width: 170px; text-align:center;">작성시간</th>
+										<th style="width: 80px; text-align:center;">게시여부</th>
+									</tr>
+									<%-- <c:if test="${empty questions }">
+										<tr>
+											<td colspan="6" style="text-align:center;"><h3>게시글이 없습니다.</h3></td>
+										</tr>
+									</c:if> 
+									<%-- <c:if test="${not empty questions }"> --%>
+										<c:forEach items="${list}" var="list">
+											<tr>
+												<td style="text-align:center;"><input type="checkbox" name="chk" id="${list.bno }" value="${list.bno }"></td>
+												<td style="text-align:center;">${list.bno }</td>
+												<td style="text-align:center;"><a href ="/blog/blogDetailSave?bno=${list.bno }">${list.btitle }</td>
+												<td style="text-align:center;">${list.hit}</td>
+												<td style="text-align:center;">${list.bregdate}</td>
+												<td style="text-align:center;">${list.y_n}</td>
+											</tr>
+										</c:forEach>
+									<%-- </c:if> --%>
+								</tbody>
+							</table>
+							</form>
+						</div>
+						<form action="/blog/" method="get"><input type="submit" value="목록으로"></form>
+						<form action="/blog/blogInsert" method="post"><input type="submit" value="글작성"> <input type="hidden" name="mid" value="kokoa223"></form>
+						<div class="box-footer">
+							<div class="text-center">
+								<!-- 5. paging view -->
+								<ul class="pagination">
+									<c:if test="${pageGroupResult.beforePage ==true}">
+										<!--이전 페이지 이동 -->
+										<li class="page-item"><a class="page-link" href="selectSave?reqPage=${pageGroupResult.selectPageNumber - 1}">&lsaquo;</a></li>
+									</c:if>
 
-<form action="/blog/" method="get"><input type="submit" value="목록으로"></form>
-<form action="/blog/blogInsert" method="post"><input type="submit" value="글작성"> <input type="hidden" name="mid" value="kokoa223"></form>
+									<!--페이지번호 -->
+									<c:forEach begin="${pageGroupResult.groupStartNumber}" end="${pageGroupResult.groupEndNumber}" var="count" step="1">
+										<li class='pageIndex${i} page-item active'><a class="page-link"  href="selectSave?reqPage=${count}">${count}</a></li>
+									</c:forEach>
 
-<table>
-		<tr>
-			<c:if test="${pageGroupResult.beforePage ==true}">
-				<td><a href="selectSave?reqPage=${pageGroupResult.selectPageNumber - 1}">[이전]</a>
-				</td>
-			</c:if>
-			
-			<c:forEach begin="${pageGroupResult.groupStartNumber}" end="${pageGroupResult.groupEndNumber}" var="count" step="1">
-				<td><a href="selectSave?reqPage=${count}">${count}</a></td>
-			</c:forEach>
-			<c:if test="${pageGroupResult.afterPage ==true}">
-				<td><a href="selectSave?reqPage=${pageGroupResult.selectPageNumber + 1}">[다음]</a>
-				</td>
-			</c:if>
-		</tr>
-	</table>
-
+									<c:if test="${pageGroupResult.afterPage ==true}">
+										<!--다음 페이지 이동 -->
+										<li class="page-item"><a class="page-link" href="selectSave?reqPage=${pageGroupResult.selectPageNumber + 1}">&rsaquo;</a></li>
+										<!--마지막 페이지 이동 -->
+									</c:if>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<%@ include file="../include/main_footer.jsp"%>
+	<%@ include file="../include/plugin_js.jsp"%>
 </body>
 </html>

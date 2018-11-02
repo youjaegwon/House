@@ -96,13 +96,11 @@ public BlogVO select(int bno) {
 	
 	BlogVO blogVO = repository.select(bno);
 	
-	
-	
 	return blogVO;
 }
 
-public List<BlogVO> selectList() {
-	return repository.selectList();
+public List<BlogVO> selectList(BlogVO blogVO) {
+	return repository.selectList(blogVO);
 }
 
 public List<BlogVO> selectListSave(BlogVO blogVO) {
@@ -214,6 +212,16 @@ public void selectDelete(List<Integer> checkArr) {
 public int pageGetCount() {
 	
 	return repository.pageGetCount();
+}
+
+public int pageGetMain() {
+	
+	return repository.pageGetMain();
+}
+
+public List<BlogVO> mainSelect() {
+	
+	return repository.mainSelect();
 }
 
 

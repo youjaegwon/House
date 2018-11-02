@@ -56,8 +56,7 @@
 									</ul>
 								</div>
 								<div class="col-md-7">
-									<img src="${path}/user/img/template-easy-customize.png" alt=""
-										class="img-fluid">
+									<img src="${path}/user/img/template-easy-customize.png" alt="" class="img-fluid">
 								</div>
 							</div>
 						</div>
@@ -73,28 +72,29 @@
 				<h2>Blog</h2>
 			</div>
 			<div class="row">
+			
+			<c:forEach var="list" items="${list }">
 				<div class="col-lg-3">
 					<div class="home-blog-post">
 						<div class="image">
-							<img src="${path}/user/img/portfolio-4.jpg" alt="..."
-								class="img-fluid">
-							<div
-								class="overlay d-flex align-items-center justify-content-center">
-								<a href="#" class="btn btn-template-outlined-white"><i
-									class="fa fa-chain"> </i> Read More</a>
+							<img src="/blog/filedownload?id=${list.fid}" onERROR="this.src='${path}/resources/img/una_mattina.png'" alt="Example blog post alt" class="img-fluid" width="300px" height="300px" class="img-fluid">
+							<div class="overlay d-flex align-items-center justify-content-center">
+								<a href="/blog/blogDetail?bno=${list.bno }" class="btn btn-template-outlined-white"><i class="fa fa-chain"> </i> Read More</a>
 							</div>
 						</div>
+						
 						<div class="text">
 							<h4>
-								<a href="#">블로그제목</a>
+								<a href="/blog/blogDetail?bno=${list.bno }">${list.btitle}</a>
 							</h4>
 							<p class="author-category">
-								By <a href="#">작성자</a> in <a href="blog.html">작성일</a>
+								By <a href="/blog/blogDetail?bno=${list.bno }">${list.mid}</a> in <a href="blog.html">${list.bregdate}</a>
 							</p>
-							<a href="#" class="btn btn-template-outlined">더보기</a>
+							<a href="/blog/blogDetail?bno=${list.bno }" class="btn btn-template-outlined">더보기</a>
 						</div>
 					</div>
 				</div>
+				</c:forEach>
 			</div>
 		</div>
 	</section>
@@ -108,8 +108,7 @@
 			</div>
 			<h3 class="text-uppercase">현재 이슈에 대한 더 많은 정보가 필요하신가요?</h3>
 			<p class="text-center">
-				<a href="index2.html" class="btn btn-template-outlined-white btn-lg">See
-					More</a>
+				<a href="index2.html" class="btn btn-template-outlined-white btn-lg">See More</a>
 			</p>
 		</div>
 	</section>

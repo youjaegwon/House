@@ -45,11 +45,31 @@ public class BlogController {
 	private BlogService service;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String main(Model model, String message,HttpServletRequest request) {
+	public String main(Model model, String message, HttpServletRequest request) {
 		
-		List<BlogVO> list=service.selectList();
+		System.out.println(request.getParameter("reqPage"));
+		
+		int requestPage=1;
+		if(request.getParameter("reqPage") != null) { requestPage= Integer.parseInt(request.getParameter("reqPage")); }
+		
+		BlogVO blogVO = new BlogVO();
+		
+		int count = service.pageGetMain();
+		
+		PageManager pageManager = new PageManager(requestPage);
+		PageGroupResult pageGroupResult = pageManager.getPageGroupResult(count);
+		int endLow = PageInfo.ROW_COUNT_PER_PAGE * requestPage;
+		int startLow = endLow -(PageInfo.ROW_COUNT_PER_PAGE - 1);
+		
+		blogVO.setStartLow(startLow);
+		blogVO.setEndLow(endLow);
+		
+		List<BlogVO> list=service.selectList(blogVO);
+		
 		model.addAttribute("list", list);
 		model.addAttribute("message", message);
+		
+		model.addAttribute("pageGroupResult", pageGroupResult);
 		
 		return "blog/main";
 	}
@@ -65,20 +85,21 @@ public class BlogController {
 		
 		int count = service.pageGetCount();
 		System.out.println(count+count+count+count+count+count+count+count+count+count+count+count);
+		
 		PageManager pageManager = new PageManager(requestPage);
 		PageGroupResult pageGroupResult = pageManager.getPageGroupResult(count);
 		int endLow = PageInfo.ROW_COUNT_PER_PAGE * requestPage;
 		int startLow = endLow -(PageInfo.ROW_COUNT_PER_PAGE - 1);
+		
 		blogVO.setStartLow(startLow);
 		blogVO.setEndLow(endLow);
+		
 		List<BlogVO> list=service.selectListSave(blogVO);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("message", message);
 		
 		model.addAttribute("pageGroupResult", pageGroupResult);
-		
-		
 		
 		return "blog/manageList";
 	}
@@ -183,6 +204,7 @@ public class BlogController {
 		
 	}
 	
+	
 	//상세
 			@RequestMapping(value = "/blogDetail", method = RequestMethod.GET)
 			public String blogDetail(@RequestParam(value = "bno") int bno, Model model) {
@@ -215,13 +237,11 @@ public class BlogController {
 				return "blog/detailSave";
 			}
 			
-			
 		
 	@ResponseBody
 	@RequestMapping(value = "/uploadImage", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public Map<String,String> uploadImage(@RequestParam("file") MultipartFile file,@RequestParam("bno") int bno, Model model, 
 			HttpServletRequest request, HttpServletResponse response){
-		
 		
 		String URL = service.fileSave(file, bno);
 		
