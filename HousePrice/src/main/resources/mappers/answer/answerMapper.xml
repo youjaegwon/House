@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.houseprice.project.mappers.answer.answerMapper">
+
+	<insert id="qcreate">
+		INSERT INTO h_answer
+		VALUES (
+		SEQ_H_ANSWER_ANO.nextval
+		, #{atitle}
+		, #{acontent}
+		, sysdate
+		, #{cno}
+		, #{mid}
+		)
+	</insert>
+
+	<select id="qread" resultType="AnswerVO">
+		SELECT
+		*
+		FROM
+		h_answer
+		WHERE
+		cno = #{cno}
+	</select>
+
+	<update id="qupdate">
+		UPDATE H_ANSWER SET
+		atitle = #{atitle},
+		acontent = #{acontent},
+		aregdate = sysdate
+		WHERE
+		ano = #{ano}
+		and mid = #{mid}
+	</update>
+
+	<select id="qlistAll" resultType="AnswerVO">
+        <![CDATA[
+        SELECT * FROM 
+		(SELECT ROWNUM RNUM, Q.* FROM 
+		(SELECT * FROM
+		(SELECT Q.*, NVL2(A.ANO,'답변','미답변') ANSWERED 
+		FROM H_QUESTION Q LEFT OUTER JOIN H_ANSWER A ON Q.cno = A.cno) Q
+		ORDER BY q.CREGDATE DESC, Q.CNO DESC) Q
+		WHERE ROWNUM <= #{last}) Q
+		WHERE Q.RNUM >= #{start}
+        ]]>
+	</select>
+
+	<select id="countArticles" resultType="int">
+    <![CDATA[
+    	SELECT
+       	 COUNT(*)
+    	FROM H_ANSWER
+    ]]>
+	</select>
+	<select id="countArticles2" resultType="int">
+    <![CDATA[
+    	SELECT
+       	 COUNT(*)
+    	FROM H_ANSWER WHERE mid = #{mid} 
+    ]]>
+	</select>
+	<select id="countArticles3" resultType="int">
+    <![CDATA[
+    	SELECT
+       	 COUNT(*)
+    	FROM H_ANSWER WHERE mid = #{mid} and atitle like '%' ||  #{keyword} || '%'
+    ]]>
+	</select>
+	<update id="hitupdate" parameterType="int">
+		UPDATE H_QUESTION SET
+		CHIT = CHIT + 1
+		WHERE cno=#{cno}
+	</update>
+
+	<select id="qmylistAll" resultType="AnswerVO">
+        <![CDATA[
+        SELECT * FROM 
+		(SELECT ROWNUM RNUM, Q.* FROM 
+		(SELECT * FROM
+		(SELECT Q.*
+		FROM H_ANSWER  Q LEFT OUTER JOIN  H_QUESTION A ON Q.cno = A.cno WHERE Q.mid = #{mid}) Q
+		ORDER BY q.aREGDATE DESC, Q.aNO DESC) Q
+		WHERE ROWNUM <= #{last}) Q
+		WHERE Q.RNUM >= #{start}
+        ]]>
+	</select>
+	
+	<select id="qsearchlistAll" resultType="AnswerVO">
+        <![CDATA[
+        SELECT * FROM 
+		(SELECT ROWNUM RNUM, Q.* FROM 
+		(SELECT * FROM
+		(SELECT Q.*
+		FROM H_ANSWER  Q LEFT OUTER JOIN  H_QUESTION A ON Q.cno = A.cno WHERE Q.mid = #{mid} and atitle like '%' ||  #{keyword} || '%') Q
+		ORDER BY q.aREGDATE DESC, Q.aNO DESC) Q
+		WHERE ROWNUM <= #{last}) Q
+		WHERE Q.RNUM >= #{start}
+        ]]>
+	</select>
+</mapper>

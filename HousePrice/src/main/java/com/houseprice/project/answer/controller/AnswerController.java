@@ -1,9 +1,10 @@
-package com.houseprice.project.question.controller;
+package com.houseprice.project.answer.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.hql.ast.QuerySyntaxException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.houseprice.project.answer.model.AnswerVO;
 import com.houseprice.project.answer.service.AnswerService;
 import com.houseprice.project.question.model.QuestionVO;
 import com.houseprice.project.question.paging.PagingVo;
@@ -21,16 +23,16 @@ import com.houseprice.project.question.search.QuestionSearchVO;
 import com.houseprice.project.question.service.QuestionService;
 
 @Controller
-@RequestMapping("/question")
-public class QuestionController {
+@RequestMapping("/answer")
+public class AnswerController {
 
-	private static final Logger logger = LoggerFactory.getLogger(QuestionController.class);
-
-	@Autowired
-	private QuestionService questionService;
+	private static final Logger logger = LoggerFactory.getLogger(AnswerController.class);
 
 	@Autowired
-	private AnswerService answerService;
+	private AnswerService questionService;
+
+	@Autowired
+	private QuestionService as;
 	// 목록 페이지 이동
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(PagingVo paging, Model model) throws Exception {
@@ -52,21 +54,22 @@ public class QuestionController {
 		}
 		logger.info("리스트 페이지 이동...");
 		paging.setTotal(questionService.countArticles(paging));
-		model.addAttribute("questions", list);
+		model.addAttribute("answers", list);
 		model.addAttribute("p",paging);
-		return "/question/question_list";
+		return "/answer/answer_list";
 	}
 
 	// 등록 페이지 이동
 	@RequestMapping(value = "/write", method = RequestMethod.GET)
-	public String writeGET() {
+	public String writeGET(@RequestParam int cno, Model model) throws Exception{
 		logger.info("질문 작성 페이지 이동...");
-		return "/question/question_write";
+		model.addAttribute("question", as.read(cno));
+		return "/answer/answer_write";
 	}
 
 	// 등록 처리
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
-	public String writePOST(QuestionVO questionVO,
+	public String writePOST(AnswerVO questionVO,
 			RedirectAttributes redirectAttributes) throws Exception {
 
 		logger.info("질문 작성 페이지 등록...");
@@ -84,9 +87,9 @@ public class QuestionController {
 
 		logger.info("질문 상세 페이지 이동...");
 		questionService.hitupdate(cno);
-		model.addAttribute("question", questionService.read(cno));
-		model.addAttribute("answer", answerService.read(cno));
-		return "/question/question_read";
+		model.addAttribute("answer", questionService.read(cno));
+
+		return "/answer/answer_read";
 	}
 
 	// 수정 페이지 이동
@@ -94,14 +97,14 @@ public class QuestionController {
 	public String modifyGET(@RequestParam int cno, Model model) throws Exception {
 
 		logger.info("질문 수정 페이지 이동...");
-		model.addAttribute("question", questionService.read(cno));
-
-		return "/question/question_modify";
+		model.addAttribute("answer", questionService.read(cno));
+		model.addAttribute("question", as.read(cno));
+		return "/answer/answer_modify";
 	}
 
 	// 수정 페이지 이동
 	@RequestMapping(value= "/modify", method = RequestMethod.POST)
-	public String modifyPOST(String mid,QuestionVO questionVO, RedirectAttributes redirectAttributes) throws Exception {
+	public String modifyPOST(String mid,AnswerVO questionVO, RedirectAttributes redirectAttributes) throws Exception {
 
 		logger.info("질문 수정 등록...");
 		questionService.update(questionVO);
@@ -116,9 +119,9 @@ public class QuestionController {
 		List<QuestionVO> list = questionService.listAll(paging);
 		logger.info("마이 페이지 내질문 이동...");
 		paging.setTotal(questionService.countArticles2(paging));
-		model.addAttribute("questions", questionService.mylist(paging));
+		model.addAttribute("answers", questionService.mylist(paging));
 		model.addAttribute("p",paging);
-		return "/mypage/myquestion_list";
+		return "/mypage/myanswer_list";
 	}
 	// 마이페이지 내질문 이동
 	@RequestMapping(value = "/mypagesearch", method = RequestMethod.GET)
@@ -128,8 +131,8 @@ public class QuestionController {
 		logger.info("마이페이지 검색...");
 		PagingVo paging = new PagingVo();
 		paging.setTotal(questionService.countArticles3(questionsearchVO));
-		model.addAttribute("questions", questionService.searchlist(questionsearchVO));
+		model.addAttribute("answers", questionService.searchlist(questionsearchVO));
 		model.addAttribute("p",paging);
-		return "/mypage/myquestion_list";
+		return "/mypage/myanswer_list";
 	}
 }

@@ -84,7 +84,7 @@
               <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item dropdown"><a href="javascript: void(0)">내년도 집값 예상</a>
                 </li>
-                <li class="nav-item dropdown menu-large"><a href="#" >블로그</a>
+                <li class="nav-item dropdown menu-large"><a href="/blog/" >블로그</a>
                 </li>
                  <li class="nav-item dropdown menu-large"><a href="#" >뉴스</a>
                 </li>

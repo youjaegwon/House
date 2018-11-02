@@ -32,7 +32,7 @@
                 <div class="panel-body">
                   <ul class="nav nav-pills flex-column text-sm">
                     <li class="nav-item"><a href="/question/mypage?mid=${login.mid}" class="nav-link">내 질문</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">내 답변</a></li>
+                    <li class="nav-item"><a href="/answer/mypage?mid=${login.mid}" class="nav-link">내 답변</a></li>
                     <li class="nav-item"><a href="/register/detail" class="nav-link">회원정보 수정</a></li>
                   </ul>
                 </div>
@@ -47,7 +47,7 @@
                   <div id="collapseOne" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion" class="collapse show">
                     <div class="card-body">
                       <div class="row">
-                        <div class="col-md-4"><img src="img/template-easy-customize.png" alt="" class="img-fluid"></div>
+                        <div class="col-md-4"><img src="${path}/user/img/template-easy-customize.png" alt="" class="img-fluid"></div>
                         <div class="col-md-8">
                           <p>One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections.</p>
                           <p>One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections.                                    </p>
@@ -63,7 +63,7 @@
                   <div id="collapseTwo" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion" class="collapse">
                     <div class="card-body">
                       <div class="row">
-                        <div class="col-md-4"><img src="img/template-easy-code.png" alt="" class="img-fluid"></div>
+                        <div class="col-md-4"><img src="${path}/user/img/template-easy-code.png" alt="" class="img-fluid"></div>
                         <div class="col-md-8">
                           <p>It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather. Drops of rain could be heard hitting the pane, which made him feel quite sad.</p>
                           <p>It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather. Drops of rain could be heard hitting the pane, which made him feel quite sad.</p>

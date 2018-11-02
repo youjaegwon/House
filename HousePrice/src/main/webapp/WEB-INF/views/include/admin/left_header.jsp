@@ -30,7 +30,7 @@
 				<li><a href="/admin/question/list"> <i class="pe-7s-note2"></i>
 						<p>질문</p>
 				</a></li>
-				<li><a href="typography.html"> <i class="pe-7s-news-paper"></i>
+				<li><a href="/admin/answer/list"> <i class="pe-7s-news-paper"></i>
 						<p>답변</p>
 				</a></li>
 				<li class="active-pro"><a href="/admin/main/move"> <i
