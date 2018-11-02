@@ -212,7 +212,11 @@ $(document).ready(function(){
 							</form>
 						</div>
 						<form action="/blog/" method="get"><input type="submit" value="목록으로"></form>
-						<form action="/blog/blogInsert" method="post"><input type="submit" value="글작성"> <input type="hidden" name="mid" value="kokoa223"></form>
+						<c:if test="${not empty login }">
+							<c:if test="${login.ano eq 1}">
+						<form action="/blog/blogInsert" method="post"> <input type="hidden" name="mid" value="${login.mid}"> </form>
+							</c:if>
+						</c:if>
 						<div class="box-footer">
 							<div class="text-center">
 								<!-- 5. paging view -->
