@@ -34,7 +34,6 @@
                     <li class="nav-item"><a href="/question/mypage?mid=${login.mid}" class="nav-link">내 질문</a></li>
                     <li class="nav-item"><a href="/answer/mypage?mid=${login.mid}" class="nav-link">내 답변</a></li>
                     <li class="nav-item"><a href="/register/detail" class="nav-link">회원정보 수정</a></li>
-                    <li class="nav-item"><a href="/blog/selectSave" class="nav-link">저장된 게시물</a></li>
                   </ul>
                 </div>
               </div>

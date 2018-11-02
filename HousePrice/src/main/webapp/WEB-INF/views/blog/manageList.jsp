@@ -156,7 +156,7 @@ $(document).ready(function(){
 				<div class="col-lg-9">
 					<div class="box-primary">
 						<div class="box-header with-border">
-							<h3 class="box-title">내 질문</h3>
+							<h3 class="box-title">블로그 관리</h3>
 						</div>
 						<div class="box-footer">
 							<div class="form-group col-sm-6">
@@ -212,7 +212,11 @@ $(document).ready(function(){
 							</form>
 						</div>
 						<form action="/blog/" method="get"><input type="submit" value="목록으로"></form>
-						<form action="/blog/blogInsert" method="post"><input type="submit" value="글작성"> <input type="hidden" name="mid" value="kokoa223"></form>
+						<c:if test="${not empty login }">
+							<c:if test="${login.ano eq 1}">
+						<form action="/blog/blogInsert" method="post"> <input type="hidden" name="mid" value="${login.mid}"> </form>
+							</c:if>
+						</c:if>
 						<div class="box-footer">
 							<div class="text-center">
 								<!-- 5. paging view -->
