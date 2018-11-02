@@ -24,7 +24,7 @@
 				<li><a href="typography.html"> <i class="pe-7s-news-paper"></i>
 						<p>뉴스 크롤링</p>
 				</a></li>
-				<li><a href="icons.html"> <i class="pe-7s-science"></i>
+				<li><a href="/admin/blog/selectSave"> <i class="pe-7s-science"></i>
 						<p>블로그</p>
 				</a></li>
 				<li><a href="/admin/question/list"> <i class="pe-7s-note2"></i>

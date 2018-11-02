@@ -156,7 +156,7 @@ $(document).ready(function(){
 				<div class="col-lg-9">
 					<div class="box-primary">
 						<div class="box-header with-border">
-							<h3 class="box-title">내 질문</h3>
+							<h3 class="box-title">블로그 관리</h3>
 						</div>
 						<div class="box-footer">
 							<div class="form-group col-sm-6">
