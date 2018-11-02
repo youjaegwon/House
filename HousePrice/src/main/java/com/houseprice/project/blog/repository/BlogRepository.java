@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import com.houseprice.project.blog.model.BlogVO;
 import com.houseprice.project.blog.model.UploadFile;
 
@@ -16,8 +17,6 @@ public class BlogRepository {
 	private SqlSession sqlSession;
 	
 	public int save(UploadFile uploadFile) {
-		System.out.println(uploadFile.toString());
-		System.out.println(uploadFile.getId());
 		sqlSession.insert(NAMESPACE + ".save", uploadFile);
 		return uploadFile.getId();
 	}
@@ -37,8 +36,10 @@ public class BlogRepository {
 		return sqlSession.selectOne(NAMESPACE + ".select", bno);
 	}
 
-	public List<BlogVO> selectList() {
-		return sqlSession.selectList(NAMESPACE + ".selectList");
+	public List<BlogVO> selectList(BlogVO blogVO) {
+		System.out.println(blogVO.getEndLow());
+		System.out.println(blogVO.getStartLow());
+		return sqlSession.selectList(NAMESPACE + ".selectList", blogVO);
 	}
 	
 	public List<BlogVO> selectListSave(BlogVO blogVO) {
@@ -80,6 +81,16 @@ public class BlogRepository {
 	public int pageGetCount() {
 		
 		return sqlSession.selectOne(NAMESPACE+".pageGetCount");
+	}
+	
+	public int pageGetMain() {
+		
+		return sqlSession.selectOne(NAMESPACE+".pageGetMain");
+	}
+	//list 형식으로 받아올라믄 selectList
+	public List<BlogVO> mainSelect() {
+
+		return sqlSession.selectList(NAMESPACE+".mainSelect");
 	}
 
 	

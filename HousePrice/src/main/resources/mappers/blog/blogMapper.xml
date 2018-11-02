@@ -10,7 +10,10 @@
 <selectKey keyProperty="id" resultType="int" order="BEFORE">
     select SEQ_H_BFILE.NEXTVAL FROM DUAL
 </selectKey>
-INSERT INTO h_bfile VALUES(#{bfile_name}, sysdate, #{bfile_path}, #{bno}, #{id}, #{bfile_originalName} )
+
+
+
+INSERT INTO h_bfile (bfile_name, bregdate, bfile_path, bno, id, bfile_originalName) VALUES (#{bfile_name}, sysdate, #{bfile_path}, #{bno}, #{id}, #{bfile_originalName} )
 </insert>
 
 <select id="findById" resultType="UploadFile">
@@ -30,11 +33,15 @@ SELECT bno, bcontent, mid , btitle , hit, bregdate FROM H_BLOG WHERE BNO = #{bno
 </select>
 
 <select id="selectList" resultType="BlogVO">
-<![CDATA[select bno, btitle, bcontent, bregdate,fid,mid,hit from(select b.bno bno, nvl(btitle, '미정') btitle, nvl(bcontent, '미정') bcontent, bregdate, nvl(fid, 0) fid, mid, Y_N, hit from (select b.bno, btitle, bcontent, bregdate, Y_N, (select id from h_bfile f where f.bno = b.bno and rownum<2) fid, mid ,hit from h_blog b order by bno desc) b left join h_bfile f on b.fid = f.id where Y_N ='게시' order by bno desc)]]>
+<![CDATA[select rn, b.bno bno, nvl(btitle, '미정') btitle, nvl(bcontent, '미정') bcontent, b.bregdate bregdate, nvl(fid, 0) fid, mid from (select rownum rn, b.bno, btitle, bcontent, bregdate, Y_N, (select id from h_bfile f where f.bno = b.bno and rownum<2) fid, mid from h_blog b order by bno desc) b left join h_bfile f on b.fid = f.id where rn between #{startLow} and #{endLow} and Y_N = '게시' order by rn asc]]>
 </select>
 
 <select id="selectListSave" resultType="BlogVO">
-<![CDATA[select rn, b.bno bno, nvl(btitle, '미정') btitle, nvl(bcontent, '미정') bcontent, bregdate, nvl(fid, 0) fid, mid, Y_N from (select rownum rn, b.bno, btitle, bcontent, bregdate, Y_N, (select id from h_bfile f where f.bno = b.bno and rownum<2) fid, mid from h_blog b order by bno desc) b left join h_bfile f on b.fid = f.id where rn between #{startLow} and #{endLow} order by rn asc]]>
+<![CDATA[select rn, b.bno bno, nvl(btitle, '미정') btitle, nvl(bcontent, '미정') bcontent, b.bregdate bregdate, nvl(fid, 0) fid, mid, Y_N from (select rownum rn, b.bno, btitle, bcontent, bregdate, Y_N, (select id from h_bfile f where f.bno = b.bno and rownum<2) fid, mid from h_blog b order by bno desc) b left join h_bfile f on b.fid = f.id where rn between #{startLow} and #{endLow} order by rn asc]]>
+</select>
+
+<select id="mainSelect" resultType="BlogVO">
+<![CDATA[select rn, b.bno bno, nvl(btitle, '미정') btitle, nvl(bcontent, '미정') bcontent, b.bregdate bregdate, nvl(fid, 0) fid, mid from (select rownum rn, b.bno, btitle, bcontent, bregdate, Y_N, (select id from h_bfile f where f.bno = b.bno and rownum<2) fid, mid from h_blog b order by bno desc) b left join h_bfile f on b.fid = f.id where rn between 1 and 4 and Y_N = '게시' order by rn asc]]>
 </select>
 
 <delete id="delete">
@@ -66,6 +73,10 @@ UPDATE H_BLOG SET BREGDATE = sysdate, Y_N='미게시' WHERE BNO = #{bno}
 
 <select id="pageGetCount" resultType="int">
 SELECT COUNT(*) count FROM H_BLOG
+</select>
+
+<select id="pageGetMain" resultType="int">
+SELECT COUNT(*) count FROM H_BLOG where Y_N='게시'
 </select>
 
 <delete id="selectDelete">

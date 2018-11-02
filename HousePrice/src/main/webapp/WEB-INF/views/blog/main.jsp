@@ -27,14 +27,11 @@
 						<div class="heading">
 							<h2>블로그 목록</h2>
 						</div>
-						<form action="/blog/selectSave" method="get">
-							<input type="submit" value="저장된 게시글">
-						</form>
 
 <div id="blog-listing-medium" class="col-md-9">
               <section class="post">
                <div class="row">
-               						<c:forEach var="list" items="${list }">
+               						<c:forEach var="list" items="${list}">
                   <div class="col-md-4">
 						 <div class="image"><a href="/blog/blogDetail?bno=${list.bno }">
 						 <img src="/blog/filedownload?id=${list.fid}" onERROR="this.src='${path}/resources/img/una_mattina.png'" alt="Example blog post alt" class="img-fluid" width="300px" height="300px"></a></div>
@@ -48,6 +45,36 @@
 							 	</div>
 						</c:forEach>
 						</div>
+						<div class="box-footer">
+							<div class="text-center">
+								<!-- 5. paging view -->
+								<ul class="pagination">
+									<c:if test="${pageGroupResult.beforePage ==true}">
+										<!--이전 페이지 이동 -->
+										<li class="page-item"><a class="page-link" href="/blog/?reqPage=${pageGroupResult.selectPageNumber - 1}">&lsaquo;</a></li>
+									</c:if>
+
+									<!--페이지번호 -->
+									<c:forEach begin="${pageGroupResult.groupStartNumber}" end="${pageGroupResult.groupEndNumber}" var="count" step="1">
+										<li class='pageIndex${i} page-item active'><a class="page-link"  href="/blog/?reqPage=${count}">${count}</a></li>
+									</c:forEach>
+
+									<c:if test="${pageGroupResult.afterPage ==true}">
+										<!--다음 페이지 이동 -->
+										<li class="page-item"><a class="page-link" href="/blog/?reqPage=${pageGroupResult.selectPageNumber + 1}">&rsaquo;</a></li>
+										<!--마지막 페이지 이동 -->
+									</c:if>
+								</ul>
+								<form action="/question/list" method="get" id='frmPaging'>
+									<!--출력할 페이지번호, 출력할 페이지 시작 번호, 출력할 리스트 갯수 -->
+									<input type='hidden' name='index' id='index' value='${p.index}'>
+									<input type='hidden' name='pageStartNum' id='pageStartNum'
+										value='${p.pageStartNum}'> <input type='hidden'
+										name='listCnt' id='listCnt' value='${p.listCnt}'>
+								</form>
+							</div>
+						</div>
+						
 						</section>
 						</div>
 						<c:if test="${not empty login }">

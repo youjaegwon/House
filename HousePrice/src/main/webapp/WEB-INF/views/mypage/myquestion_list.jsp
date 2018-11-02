@@ -32,12 +32,10 @@
 						</div>
 						<div class="panel-body">
 							<ul class="nav nav-pills flex-column text-sm">
-								<li class="nav-item"><a
-									href="/question/mypage?mid=${login.mid}" class="nav-link">내
-										질문</a></li>
+								<li class="nav-item"><a href="/question/mypage?mid=${login.mid}" class="nav-link">내 질문</a></li>
 								<li class="nav-item"><a href="/answer/mypage?mid=${login.mid}" class="nav-link">내 답변</a></li>
-								<li class="nav-item"><a href="/register/detail"
-									class="nav-link">회원정보 수정</a></li>
+								<li class="nav-item"><a href="/register/detail" class="nav-link">회원정보 수정</a></li>
+								<li class="nav-item"><a href="/blog/selectSave" class="nav-link">저장된 게시물</a></li>
 							</ul>
 						</div>
 					</div>
@@ -54,16 +52,10 @@
 										<!--출력할 페이지번호, 출력할 페이지 시작 번호, 출력할 리스트 갯수 -->
 										<input type='hidden' name='mid' value='${login.mid}'>
 										<input type='hidden' name='index' value='${p.index}'>
-										<input type='hidden' name='pageStartNum' id='pageStartNum'
-											value='${p.pageStartNum}'> <input type='hidden'
-											name='listCnt' value='${p.listCnt}'> <input
-											type="text" class="form-control" name="keyword" width="200px"
-											id="keywordInput" placeholder="제목"> <span
-											class="input-group-btn">
-											<button type="submit" class="btn btn-primary btn-flat"
-												id="searchBtn">
-												<i class="fa fa-search"></i> 검색
-											</button>
+										<input type='hidden' name='pageStartNum' id='pageStartNum' value='${p.pageStartNum}'> 
+										<input type='hidden' name='listCnt' value='${p.listCnt}'> <input type="text" class="form-control" name="keyword" width="200px" id="keywordInput" placeholder="제목">
+										 <span class="input-group-btn">
+										 <button type="submit" class="btn btn-primary btn-flat"id="searchBtn"> <i class="fa fa-search"></i> 검색 </button>
 										</span>
 									</div>
 								</form>
