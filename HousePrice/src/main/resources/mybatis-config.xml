@@ -10,6 +10,10 @@
 		<typeAlias type="com.houseprice.project.answer.model.AnswerVO" alias="AnswerVO"/>
 		<typeAlias alias="BlogVO" type="com.houseprice.project.blog.model.BlogVO"/>
 		<typeAlias alias="UploadFile" type="com.houseprice.project.blog.model.UploadFile"/>
+		
+		<typeAlias type="com.houseprice.project.price.model.AddrDataVO" alias="AddrDataVO"/>
+		<typeAlias type="com.houseprice.project.price.model.ApartPriceVO" alias="ApartPriceVO"/>
+		<typeAlias type="com.houseprice.project.price.condition.SearchCondition" alias="SearchCondition"/>
 	</typeAliases>
 </configuration>
 

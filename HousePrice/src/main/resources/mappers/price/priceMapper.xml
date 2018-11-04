@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.houseprice.project.mappers.price.priceMapper">
+	
+	<resultMap type="AddrDataVO" id="addrResult">
+		<id property="rnumId" column="rnumId"/>
+		<result property="coord_x" column="coord_x"/>
+		<result property="coord_y" column="coord_y"/>
+		<result property="gu_code" column="gu_code"/>
+		<result property="legal_dong_code" column="legal_dong_code"/>
+		<result property="road_addr_full" column="road_addr_full"/>
+		<result property="road_sido" column="road_sido"/>
+		<result property="road_gungu" column="road_gungu"/>
+		<result property="road_donglee" column="road_donglee"/>
+	</resultMap>
+	
+	<resultMap type="ApartPriceVO" id="apartResult">
+		<id property="rnum" column="rnum"/>
+		<result property="cre_year" column="cre_year"/>
+		<result property="cre_month" column="cre_month"/>
+		<result property="road_main_num" column="road_main_num"/>
+		<result property="road_miner_num" column="road_miner_num"/>
+		<result property="com_name" column="com_name"/>
+		<result property="com_dong_name" column="com_dong_name"/>
+		<result property="com_ho_name" column="com_ho_name"/>
+		<result property="com_full_name" column="com_full_name"/>
+		<result property="area" column="area"/>
+		<result property="area_rank" column="area_rank"/>
+		<result property="price" column="price"/>
+		<association property="addrData" column="addrid" javaType="AddrDataVO" resultMap="addrResult"/>
+	</resultMap>
+	
+	<select id="findbyrnumid" parameterType="long" resultMap="addrResult">        
+        select 
+        rnumid, coord_x,  coord_y,  gu_code,  legal_dong_code, road_addr_full,  road_sido,  road_gungu,  road_donglee
+		from apart_data_guan_nomal 
+		where  rnumid=#{id}
+	</select>
+	
+	<select id="findbyrnum" parameterType="SearchCondition" resultMap="apartResult">        
+        select 
+        adata.rnum 					rnum, 
+        adata.cre_year 				cre_year, 
+        adata.cre_month 			cre_month,
+        adata.road_main_num 		road_main_num,
+        adata.road_miner_num 		road_miner_num,
+		adata.com_name 				com_name, 
+		adata.com_dong_name 		com_dong_name, 
+		adata.com_ho_name 			com_ho_name, 
+		adata.com_full_name 		com_full_name, 
+		adata.area 					area, 
+		adata.area_rank 			area_rank, 
+		adata.price 				price,
+		addr_data.rnumid 			rnumid,
+		addr_data.coord_x 			coord_x, 
+		addr_data.coord_y 			coord_y, 
+		addr_data.gu_code 			gu_code, 
+		addr_data.legal_dong_code 	legal_dong_code, 
+		addr_data.road_addr_full 	road_addr_full,
+		addr_data.road_sido 		road_sido, 
+		addr_data.road_gungu 		road_gungu, 
+		addr_data.road_donglee 		road_donglee
+		
+		from apart_data_guan_nomal adata
+		
+		inner join addr_data_guan addr_data 
+		
+		on adata.addrid = addr_data.rnumid
+		<where>
+			<if test="keyword != null">
+				road_addr_full like '%' ||  #{keyword} || '%'
+			</if>
+			<if test="bounds != null">
+				and coord_x &gt; #{bounds.left}  
+				and coord_y &gt; #{bounds.bottom}  
+				and coord_x &lt; #{bounds.right}  
+				and coord_y &lt; #{bounds.top} 
+			</if>			
+		</where>        
+	</select>
+</mapper>

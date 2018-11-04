@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="all">
       <!-- Top bar-->
       <div class="top-bar">
@@ -82,7 +83,7 @@
             <button type="button" data-toggle="collapse" data-target="#navigation" class="navbar-toggler btn-template-outlined"><span class="sr-only">Toggle navigation</span><i class="fa fa-align-justify"></i></button>
             <div id="navigation" class="navbar-collapse collapse">
               <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item dropdown"><a href="javascript: void(0)">내년도 집값 예상</a>
+                <li class="nav-item dropdown"><a href="/price/page">내년도 공시가격 예상</a>
                 </li>
                 <li class="nav-item dropdown menu-large"><a href="/blog/" >블로그</a>
                 </li>
@@ -97,3 +98,4 @@
         </div>
       </header>
       <!-- Navbar End-->
+</div>
