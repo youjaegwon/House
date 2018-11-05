@@ -93,5 +93,9 @@ public class BlogRepository {
 		return sqlSession.selectList(NAMESPACE+".mainSelect");
 	}
 
+	public List<BlogVO> selectFindByBtitle(BlogVO blogVO) {
+		return sqlSession.selectList(NAMESPACE+".selectFindByBtitle", blogVO);
+	}
+
 	
 }

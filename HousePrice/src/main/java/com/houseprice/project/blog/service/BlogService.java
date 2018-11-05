@@ -236,5 +236,9 @@ public List<BlogVO> mainSelect() {
 	return repository.mainSelect();
 }
 
+public List<BlogVO> selectFindByBtitle(BlogVO blogVO) {
+	return repository.selectFindByBtitle(blogVO);
+}
+
 
 }

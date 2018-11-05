@@ -7,12 +7,12 @@
 		<div class="container">
 			<div class="row d-flex align-items-center flex-wrap">
 				<div class="col-md-7">
-					<h1 class="h2">질문/답변</h1>
+					<h1 class="h2">블로그작성</h1>
 				</div>
 				<div class="col-md-5">
 					<ul class="breadcrumb d-flex justify-content-end">
 						<li class="breadcrumb-item"><a href="/">Home</a></li>
-						<li class="breadcrumb-item active">질문/답변</li>
+						<li class="breadcrumb-item active">블로그작성</li>
 					</ul>
 				</div>
 			</div>
@@ -27,21 +27,16 @@
 							<h2>블로그 작성</h2>
 						</div>
 						<form id="form" action="blogUpdate" method="post">
-							<input type="hidden" name="bno" value="${bno }" /> <input
-								type="hidden" name="mid" value="${login.mid}">
-
+							<input type="hidden" name="bno" value="${bno }" /> <input type="hidden" name="mid" value="${login.mid}">
 							<div class="form-group">
-								<input type="text" id='btitle' class="form-control input-lg"
-									name="btitle" placeholder="제목을 입력하세요" />
+								<input type="text" id='btitle' class="form-control input-lg" name="btitle" placeholder="제목을 입력하세요" />
 							</div>
 
 							<textarea id="summernote" name="bcontent">
 		</textarea>
 
 
-							<input type="submit" class="btn btn-primary btn-lg" value="글작성"
-								id="btn" /> <input type="submit" class="btn btn-primary btn-lg"
-								value="글저장" id="btn2" />
+							<input type="submit" class="btn btn-primary btn-lg" value="글작성" id="btn" /> <input type="submit" class="btn btn-primary btn-lg" value="글저장" id="btn2" />
 						</form>
 
 						<div id="result"></div>

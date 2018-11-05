@@ -94,8 +94,14 @@ $(document).ready(function() {
 								</div>
 							</div>
 							<hr>
+							<form action="/blog/" method="get"><input type="submit" value="목록으로"></form>
+							<c:if test="${not empty login }">
+							<c:if test="${login.ano eq 1}">
 							<form action="/blog/blogDelete" method="post"><input type="hidden" name="bno" ><input type="submit" value="삭제하기"></form>
 							<form action="/blog/updateGO" method="post"><input type="hidden" name="bno" ><input type="submit" value="수정하기"></form>
+							</c:if>
+							</c:if>
+							
 						</div>
 						<br />
 						<br />
