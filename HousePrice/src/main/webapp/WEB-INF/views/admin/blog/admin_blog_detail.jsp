@@ -127,82 +127,24 @@ $(document).ready(function(){
 							<h4 class="title">블로그관리</h4>
 							<p class="category">블로그를 위한 게시지정</p>
 						</div>
-						<form action="findBymid" method="get">
-						<div>
-						 	<input type='hidden' name='index' value='${p.index}'>
-							<input type='hidden' name='pageStartNum' id='pageStartNum' value='${p.pageStartNum}'> 
-							<input type='hidden' name='listCnt' id='listCnt' value='${p.listCnt}'> 					
-							
-							<div class="form-group col-sm-10">
-							<div class="input-group">
-							<input type="text" class="form-control" name="mid" id="mid" placeholder="제목입력"> <span class="input-group-btn">
-							<button type="submit" class="btn btn-primary btn-flat">
-							<i class="fa fa-search"></i> 검색
-							</button>
-							</span>
-							</div>
-							</div>
-						</div>
-						</form>
+						<hr>
+${data.bno }
+
+${data.btitle }
+
+${data.mid }
+
+${data.hit }
+
+${data.bregdate }
+
+${data.bcontent }
+
+<form action="/admin/blog/selectSave" method="get"><input type="submit" value="목록으로"></form>
+<form action="/blog/blogDelete" method="post"><input type="hidden" name="bno" value="${data.bno }"><input type="submit" value="삭제하기"></form>
+<form action="/blog/updateSaveGO" method="post"><input type="hidden" name="bno" value="${data.bno }"><input type="submit" value="수정하기"></form>
+
 						<div class="content table-responsive table-full-width">
-						<form id="formA" method="post">
-							<input id="form1" type="submit" value="선택게시">
-							<input id="form2" type="submit" value="게시취소">
-							<input id="form3" type="submit" value="선택삭제"></p>
-							<table class="table table-hover table-striped">
-								<thead>
-									<th><input type="checkbox" id="checkall" name="checkall"></th>
-									<th>No.</th>
-									<th>제목</th>
-									<th>조회수</th>
-									<th>작성시간</th>
-									<th>게시여부</th>
-								</thead>
-								<tbody>
-								
-									<c:forEach var="list" items="${list}">
-										<tr>
-											<td><input type="checkbox" name="chk" id="${list.bno }" value="${list.bno }"></td>
-											<td>${list.bno }</td>
-											<td><a href ="/blog/blogDetailSave?bno=${list.bno }">${list.btitle }</td>
-											<td>${list.hit}</td>
-											<td>${list.bregdate}</td>
-											<td>${list.y_n}</td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-							</form>
-							<div class="box-footer">
-							<div class="text-center">
-								<!-- 5. paging view -->
-								<ul class="pagination">
-									<c:if test="${pageGroupResult.beforePage ==true}">
-										<!--이전 페이지 이동 -->
-										<li class="page-item"><a class="page-link" href="selectSave?reqPage=${pageGroupResult.selectPageNumber - 1}">&lsaquo;</a></li>
-									</c:if>
-
-									<!--페이지번호 -->
-									<c:forEach begin="${pageGroupResult.groupStartNumber}" end="${pageGroupResult.groupEndNumber}" var="count" step="1">
-										<li class='pageIndex${i} page-item active'><a class="page-link"  href="selectSave?reqPage=${count}">${count}</a></li>
-									</c:forEach>
-
-									<c:if test="${pageGroupResult.afterPage ==true}">
-										<!--다음 페이지 이동 -->
-										<li class="page-item"><a class="page-link" href="selectSave?reqPage=${pageGroupResult.selectPageNumber + 1}">&rsaquo;</a></li>
-										<!--마지막 페이지 이동 -->
-									</c:if>
-								</ul>
-							</div>
-						</div>
-						<c:if test="${not empty login }">
-							<c:if test="${login.ano eq 1}">
-								<form action="/blog/blogInsert" method="post">
-									<input type="submit" value="글작성"> <input type="hidden"
-										name="mid" value="${login.mid}">
-								</form>
-							</c:if>
-						</c:if>
 						</div>
 					</div>
 				</div>

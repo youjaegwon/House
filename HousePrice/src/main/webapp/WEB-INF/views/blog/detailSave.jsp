@@ -1,13 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="true" pageEncoding="utf-8"%>
 <html>
-<%@ include file="../include/head.jsp"%>
 <script type="text/javascript" src="${path}/question/js/paging.js"></script>
 <head>
 	<title>Home</title>
 </head>
 <body>
-<%@ include file="../include/main_header.jsp"%>
 
 <div id="heading-breadcrumbs">
 		<div class="container">
@@ -43,7 +41,6 @@ ${data.hit }
 <form action="/blog/updateSaveGO" method="post"><input type="hidden" name="bno" value="${data.bno }"><input type="submit" value="수정하기"></form>
 </c:if>
 </c:if>
-<%@ include file="../include/main_footer.jsp"%>
-	<%@ include file="../include/plugin_js.jsp"%>
+
 </body>
 </html>

@@ -133,7 +133,7 @@ public class BlogController {
 		
 		model.addAttribute("data", blogVO);
 		
-		return "blog/blogUpdate";
+		return "admin/blog/admin_blog_update";
 	}
 	
 	//글작성 페이지
@@ -234,7 +234,7 @@ public class BlogController {
 				BlogVO blogVO = service.select(bno);
 				model.addAttribute("data", blogVO);
 				
-				return "blog/detailSave";
+				return "admin/blog/admin_blog_detail";
 			}
 			
 		
