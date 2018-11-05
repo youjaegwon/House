@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <%@ include file="../include/head.jsp"%>
 <body>
@@ -112,92 +111,4 @@
 	}
 </script>
 
-<script type="text/javascript" charset=utf-8>
-	$(document)
-			.ready(
-					function() {
-						$(document)
-								.on(
-										"click",
-										"#btn2",
-										function() {
-											$("#form")
-													.submit(
-															function(event) {
-																event
-																		.preventDefault();
-																//alert("글저장");
-																var bno = $
-																{
-																	bno
-																}
-																;
-																var form_data = new FormData();
-																form_data
-																		.append(
-																				'btitle',
-																				$(
-																						'#btitle')
-																						.val());
-																form_data
-																		.append(
-																				'bno',
-																				bno);
-																form_data
-																		.append(
-																				'bcontent',
-																				$(
-																						'#summernote')
-																						.val());
-
-																//alert(bno);
-																//alert($('#summernote').val());
-																//alert($('#btitle').val());
-
-																$
-																		.ajax({
-																			type : 'POST',
-																			url : '/blog/update',
-																			data : form_data,
-																			enctype : 'multipart/form-data',
-																			processData : false,
-																			contentType : false,
-																			cache : false,
-																			timeout : 600000,
-																			success : function(
-																					data) {
-																				//  	alert("success");
-																				window.location.href = 'http://localhost:8080/blog/blogDetailSave?bno='
-																						+ bno;
-																			},
-																			error : function(
-																					request,
-																					status,
-																					error) {
-																				alert("error");
-																				alert("code:"
-																						+ request.status
-																						+ "\n"
-																						+ "message:"
-																						+ request.responseText
-																						+ "\n"
-																						+ "error:"
-																						+ error);
-																				$(
-																						"#result")
-																						.html(
-																								"code:"
-																										+ request.status
-																										+ "\n"
-																										+ "message:"
-																										+ request.responseText
-																										+ "\n"
-																										+ "error:"
-																										+ error);
-																			}
-																		});
-															});
-										});
-					});
-</script>
 </html>

@@ -1,11 +1,10 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="true" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
-<head>
 <%@ include file="../include/head.jsp"%>
 <script type="text/javascript" src="${path}/question/js/paging.js"></script>
-	<title>Home</title>
-	<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js" ></script>
 
 <script>
@@ -27,6 +26,15 @@ $(document).ready(function() {
 		cache:false,
         async:false, //기본값은 true
 		success:function(data){	// 성공
+			
+			alert(data.bcontent);
+			alert(data.hit);
+			alert(data.bcontent);
+			alert(data.bregdate);
+			alert(data.btitle);
+			alert(data.bno);
+			
+			$("#mid").html(data.mid);
 			$("#nhit").html(data.hit);
 			$("#bcontent").html(data.bcontent);
 			$("#bregdate").html(data.bregdate);
@@ -42,16 +50,13 @@ $(document).ready(function() {
 	});
 });
 </script>
-
-</head>
 <body>
-<%@ include file="../include/main_header.jsp"%>
-
-<div id="heading-breadcrumbs">
+	<%@ include file="../include/main_header.jsp"%>
+	<div id="heading-breadcrumbs">
 		<div class="container">
 			<div class="row d-flex align-items-center flex-wrap">
 				<div class="col-md-7">
-					<h1 class="h2">블로그</h1>
+					<h1 class="h2">질문/답변</h1>
 				</div>
 				<div class="col-md-5">
 					<ul class="breadcrumb d-flex justify-content-end">
@@ -62,24 +67,40 @@ $(document).ready(function() {
 			</div>
 		</div>
 	</div>
-
-<div id="btitle"></div>
-<div id="nhit"></div>
-<div id="bno"></div>
-<div id="bregdate"></div>
-<div id="bcontent"></div>
-
-
-<form action="/blog/" method="get"><input type="submit" value="목록으로"></form>
-
-<c:if test="${not empty login }">
-<c:if test="${login.ano eq 1}">
-<form action="/blog/blogDelete" method="post"><input type="hidden" name="bno" ><input type="submit" value="삭제하기"></form>
-<form action="/blog/updateGO" method="post"><input type="hidden" name="bno" ><input type="submit" value="수정하기"></form>
-</c:if>
-</c:if>
-
-<%@ include file="../include/main_footer.jsp"%>
+	<div id="content">
+		<div class="container">
+			<section class="bar">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="box-body">
+							<div class="form-group">
+								<h3 class="box-title">제목 : <div id="btitle"/></h3>
+							</div>
+							<div class="form-group" style="height: 400px">
+								<div id="bcontent"/>
+							</div>
+							<div class="box-footer">
+								<div class="user-block">
+									<span class="username">작성자 : <div id="mid"/> </span>
+								</div>
+								<div class="user-block">
+									<span class="username">작성일자 : <div id="bregdate"/> </span>
+								</div>
+								<div class="user-block">
+									<span class="username">조회수 : <div id="nhit"/> </span>
+								</div>
+							</div>
+							<form action="/blog/blogDelete" method="post"><input type="hidden" name="bno" ><input type="submit" value="삭제하기"></form>
+							<form action="/blog/updateGO" method="post"><input type="hidden" name="bno" ><input type="submit" value="수정하기"></form>
+						</div>
+						<br />
+						<br />
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+	<%@ include file="../include/main_footer.jsp"%>
 	<%@ include file="../include/plugin_js.jsp"%>
 </body>
 </html>

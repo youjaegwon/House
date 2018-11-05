@@ -146,12 +146,9 @@
 
 							<c:if test="${p.lastChk}">
 								
-								<li><a
-									onclick='pageNext(${p.pageStartNum},${p.total},${p.listCnt},${p.pageCnt});'>&rsaquo;</a></li>
+								<li><a onclick='pageNext(${p.pageStartNum},${p.total},${p.listCnt},${p.pageCnt});'>&rsaquo;</a></li>
 								
-								<li><a
-									onclick='pageLast(${p.pageStartNum},${p.total},${p.listCnt},${p.pageCnt});'>&raquo;</a></li>
-									 
+								<li><a onclick='pageLast(${p.pageStartNum},${p.total},${p.listCnt},${p.pageCnt});'>&raquo;</a></li>
 							</c:if>
 						</ul>
 						<c:if test="${not empty searchId}">

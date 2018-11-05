@@ -24,7 +24,6 @@ SELECT * FROM h_bfile WHERE ID=#{id}
 <selectKey keyProperty="bno" resultType="int" order="BEFORE">
     select SEQ_H_BLOG.NEXTVAL FROM DUAL
 </selectKey>
-
 INSERT INTO h_blog (BNO, BTITLE, BCONTENT, BREGDATE, MID, Y_N, hit) VALUES(#{bno}, #{btitle}, #{bcontent}, TO_DATE(sysdate, 'YYYY-MM-DD'), #{mid},'미게시',0)
 </insert>
 
@@ -33,11 +32,11 @@ SELECT bno, bcontent, mid , btitle , hit, bregdate FROM H_BLOG WHERE BNO = #{bno
 </select>
 
 <select id="selectList" resultType="BlogVO">
-<![CDATA[select rn, b.bno bno, nvl(btitle, '미정') btitle, nvl(bcontent, '미정') bcontent, b.bregdate bregdate, nvl(fid, 0) fid, mid from (select rownum rn, b.bno, btitle, bcontent, bregdate, Y_N, (select id from h_bfile f where f.bno = b.bno and rownum<2) fid, mid from h_blog b order by bno desc) b left join h_bfile f on b.fid = f.id where rn between #{startLow} and #{endLow} and Y_N = '게시' order by rn asc]]>
+<![CDATA[select * from (select rownum rn, b.bno bno, nvl(btitle, '미정') btitle, nvl(bcontent, '미정') bcontent, b.bregdate bregdate, nvl(fid, 0) fid, mid, Y_N from (select b.bno, btitle, bcontent, bregdate, Y_N, (select id from h_bfile f where f.bno = b.bno and rownum<2) fid, mid from h_blog b order by b.bno desc) b left join h_bfile f on b.fid = f.id) where Y_N = '게시' and rn between 1 and 10]]>
 </select>
 
 <select id="selectListSave" resultType="BlogVO">
-<![CDATA[select rn, b.bno bno, nvl(btitle, '미정') btitle, nvl(bcontent, '미정') bcontent, b.bregdate bregdate, nvl(fid, 0) fid, mid, Y_N from (select rownum rn, b.bno, btitle, bcontent, bregdate, Y_N, (select id from h_bfile f where f.bno = b.bno and rownum<2) fid, mid from h_blog b order by bno desc) b left join h_bfile f on b.fid = f.id where rn between #{startLow} and #{endLow} order by rn asc]]>
+<![CDATA[select * from (select rownum rn, b.bno bno, nvl(btitle, '미정') btitle, nvl(bcontent, '미정') bcontent, b.bregdate bregdate, nvl(fid, 0) fid, mid, Y_N from (select b.bno, btitle, bcontent, bregdate, Y_N, (select id from h_bfile f where f.bno = b.bno and rownum<2) fid, mid from h_blog b order by b.bno desc) b left join h_bfile f on b.fid = f.id) where rn between 1 and 10]]>
 </select>
 
 <select id="mainSelect" resultType="BlogVO">

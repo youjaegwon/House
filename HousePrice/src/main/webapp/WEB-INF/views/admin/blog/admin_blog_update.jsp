@@ -1,59 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
-<%@ include file="../include/head.jsp"%>
-<body>
-	<%@ include file="../include/main_header.jsp"%>
-	<div id="heading-breadcrumbs">
-		<div class="container">
-			<div class="row d-flex align-items-center flex-wrap">
-				<div class="col-md-7">
-					<h1 class="h2">질문/답변</h1>
-				</div>
-				<div class="col-md-5">
-					<ul class="breadcrumb d-flex justify-content-end">
-						<li class="breadcrumb-item"><a href="/">Home</a></li>
-						<li class="breadcrumb-item active">질문/답변</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div id="content">
-		<div class="container">
-			<section class="bar">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="heading">
-							<h2>블로그 작성</h2>
-						</div>
-						<form id="form" action="blogUpdate" method="post">
-							<input type="hidden" name="bno" value="${bno }" /> <input
-								type="hidden" name="mid" value="${login.mid}">
-
-							<div class="form-group">
-								<input type="text" id='btitle' class="form-control input-lg"
-									name="btitle" placeholder="제목을 입력하세요" />
-							</div>
-
-							<textarea id="summernote" name="bcontent">
-		</textarea>
-
-
-							<input type="submit" class="btn btn-primary btn-lg" value="글작성"
-								id="btn" /> <input type="submit" class="btn btn-primary btn-lg"
-								value="글저장" id="btn2" />
-						</form>
-
-						<div id="result"></div>
-					</div>
-				</div>
-			</section>
-		</div>
-		</div>
-</body>
-<%@ include file="../include/main_footer.jsp"%>
-<%@ include file="../include/plugin_js.jsp"%>
+<%@ include file="../../include/admin/head.jsp"%>
+<script type="text/javascript" src="${path}/question/js/paging.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js" ></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
 <link
 	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css"
 	rel="stylesheet">
@@ -61,7 +14,13 @@
 	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 
 
-<script type="text/javascript" charset=utf-8>
+
+<body>
+	<%@ include file="../../include/admin/left_header.jsp"%>
+	<%@ include file="../../include/admin/main_header.jsp"%>
+	
+	
+	<script type="text/javascript" charset=utf-8>
 	$(document).ready(function() {
 		$('#summernote').summernote({
 			height : 300,
@@ -111,6 +70,7 @@
 		});
 	}
 </script>
+
 <script type="text/javascript" charset=utf-8>
 	$(document).ready(function() {
 		$(document).on("click", "#btn2",function(){
@@ -151,4 +111,33 @@
 });
 
 </script>
+	
+<div class="container">
+			<section class="bar">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="heading">
+							<h2>블로그 작성</h2>
+						</div>
+						<form id="form" action="blogUpdate" method="post">
+							<input type="hidden" name="bno" value="${bno }" /> <input
+								type="hidden" name="mid" value="${login.mid}">
+
+							<div class="form-group"> <input type="text" id='btitle' class="form-control input-lg" name="btitle" placeholder="제목을 입력하세요" />
+							</div>
+
+							<textarea id="summernote" name="bcontent"></textarea>
+
+
+							<input type="submit" class="btn btn-primary btn-lg" value="글작성" id="btn" /> <input type="submit" class="btn btn-primary btn-lg" sssvalue="글저장" id="btn2" />
+						</form>
+
+						<div id="result"></div>
+					</div>
+				</div>
+			</section>
+		</div>
+	
+	<%@ include file="../../include/admin/plugin_js.jsp"%>
+</body>
 </html>
