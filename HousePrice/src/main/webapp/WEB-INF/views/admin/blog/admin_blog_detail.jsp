@@ -128,17 +128,42 @@ $(document).ready(function(){
 							<p class="category">블로그를 위한 게시지정</p>
 						</div>
 						<hr>
-${data.bno }
 
-${data.btitle }
 
-${data.mid }
-
-${data.hit }
-
-${data.bregdate }
-
-${data.bcontent }
+	<div id="content">
+		<div class="container">
+			<section class="bar">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="box-body">
+							<div class="form-group">
+								<h3 class="box-title">제목 : ${data.btitle }</h3>
+							</div>
+							<div class="form-group" style="height: 400px">
+								${data.bcontent }
+							</div>
+							<div class="box-footer">
+								<div class="user-block">
+									<span class="username">번호  : ${data.bno } </span>
+								</div>
+								<div class="user-block">
+									<span class="username">작성자 : ${data.mid } </span>
+								</div>
+								<div class="user-block">
+									<span class="username">작성일자 : ${data.bregdate } </span>
+								</div>
+								<div class="user-block">
+									<span class="username">조회수 : ${data.hit } </span>
+								</div>
+							</div>
+						</div>
+						<br />
+						<br />
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
 
 <form action="/admin/blog/selectSave" method="get"><input type="submit" value="목록으로"></form>
 <form action="/blog/blogDelete" method="post"><input type="hidden" name="bno" value="${data.bno }"><input type="submit" value="삭제하기"></form>

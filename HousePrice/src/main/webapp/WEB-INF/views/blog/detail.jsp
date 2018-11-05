@@ -27,13 +27,6 @@ $(document).ready(function() {
         async:false, //기본값은 true
 		success:function(data){	// 성공
 			
-			alert(data.bcontent);
-			alert(data.hit);
-			alert(data.bcontent);
-			alert(data.bregdate);
-			alert(data.btitle);
-			alert(data.bno);
-			
 			$("#mid").html(data.mid);
 			$("#nhit").html(data.hit);
 			$("#bcontent").html(data.bcontent);
@@ -56,7 +49,7 @@ $(document).ready(function() {
 		<div class="container">
 			<div class="row d-flex align-items-center flex-wrap">
 				<div class="col-md-7">
-					<h1 class="h2">질문/답변</h1>
+					<h1 class="h2">상세페이지</h1>
 				</div>
 				<div class="col-md-5">
 					<ul class="breadcrumb d-flex justify-content-end">
