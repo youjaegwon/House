@@ -87,7 +87,7 @@
                 </li>
                 <li class="nav-item dropdown menu-large"><a href="/blog/" >블로그</a>
                 </li>
-                 <li class="nav-item dropdown menu-large"><a href="#" >뉴스</a>
+                 <li class="nav-item dropdown menu-large"><a href="/news/list" >뉴스</a>
                 </li>
                  <li class="nav-item dropdown menu-large"><a href="/question/list" >질문/답변</a>
                 </li>
