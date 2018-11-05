@@ -33,30 +33,30 @@
 							</form>
 						</div>
 						<div class="box-body">
-							<form method="post" action="crawling_save">
 							<table class="table table-bordered">
 								<tbody>
 									<tr>
 										<th style="width: 30px; text-align: center;">번호</th>
-										<th style="width: 250px; text-align: center;">제목</th>
-										<th style="width: 100px; text-align: center;">날짜</th>
-										<th style="width: 30px; text-align: center;">선택</th>
+										<th style="width: 150px; text-align: center;">제목</th>
+										
+										<th style="width: 70px; text-align: center;">날짜</th>
 									</tr>
 									
 									<c:forEach items="${news_crawling}" var="news">
-										<tr data-ano="${news.ano}" data-atitle="${news.atitle}" data-aoriginallink="${news.aoriginallink}" data-apubDate="${news.apubDate}">
+										<tr>
 											<td style="text-align: center;">${news.ano}</td>
-											<td style="text-align: center;"><a
+											<td style="text-align: center;"><details><summary><a
 												href="${news.aoriginallink}" target="_blank">${news.atitle} </a>
+												</summary>
+												<p>${news.description}</p>
+												</details>
+												
 											<td style="text-align: center;">${news.apubDate}</td>
-											<td style="text-align: center;"><input type="checkbox" name="selected_num" value="${news}"></td>
 										</tr>
 									</c:forEach>
 									
 								</tbody>
 							</table>
-							<input type="submit" value="저장하기">
-							</form>
 						</div>
 					</div>
 				</div>
