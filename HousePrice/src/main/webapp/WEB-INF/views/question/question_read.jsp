@@ -72,7 +72,7 @@
 									<h3 class="box-title">답변 : ${answer.atitle}</h3>
 								</div>
 								<div class="form-group" style="height: 400px">
-									${question.ccontent}</div>
+									<c:out value=" ${answer.acontent}"></c:out> </div>
 								<div class="box-footer">
 									<div class="user-block">
 										<span class="username">작성자 : ${answer.mid} </span><br />작성일자 :
