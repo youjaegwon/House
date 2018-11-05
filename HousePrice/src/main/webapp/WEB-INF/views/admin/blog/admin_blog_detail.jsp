@@ -171,7 +171,7 @@ $(document).ready(function(){
 	</div>
 
 <form action="/admin/blog/selectSave" method="get"><input type="submit" value="목록으로"></form>
-<form action="/blog/blogDelete" method="post"><input type="hidden" name="bno" value="${data.bno }"><input type="submit" value="삭제하기"></form>
+<form action="/blog/adminBlogDelete" method="post"><input type="hidden" name="bno" value="${data.bno }"><input type="submit" value="삭제하기"></form>
 <form action="/blog/updateSaveGO" method="post"><input type="hidden" name="bno" value="${data.bno }"><input type="submit" value="수정하기"></form>
 
 						<div class="content table-responsive table-full-width">

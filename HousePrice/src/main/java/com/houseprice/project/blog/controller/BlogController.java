@@ -270,6 +270,16 @@ public class BlogController {
 		return "redirect:/";
 		
 	}
+	//삭제
+	@RequestMapping(value = "/adminBlogDelete", method = RequestMethod.POST)
+	public String adminBlogDelete(Model model, @RequestParam(value="bno") int bno) {
+		
+		String result=service.delete(bno);
+		model.addAttribute("message",result);
+		
+		return "redirect:/admin/blog/selectSave";
+		
+	}
 
 	
 	
