@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html>
 <%@ include file="../../include/admin/head.jsp"%>
+
+
 <script type="text/javascript" src="${path}/question/js/paging.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js" ></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>

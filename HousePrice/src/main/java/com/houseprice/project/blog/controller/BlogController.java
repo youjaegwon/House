@@ -260,6 +260,11 @@ public class BlogController {
 	@RequestMapping(value="/filedownload", method=RequestMethod.GET,produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	public FileSystemResource filedownload(@RequestParam int id, HttpServletRequest request, HttpServletResponse response) {
 		DownloadFile downloadFile = service.getDownloadFile(id);
+		
+		if(downloadFile == null) {
+			return null;
+		}
+		
 		String browser = request.getHeader("User-Agent");
 		String downloadFileName = null;
 		if(browser.contains("Chrome")||
@@ -268,7 +273,6 @@ public class BlogController {
 			try {				
 				downloadFileName = URLEncoder.encode(downloadFile.getOriginalFaileName(),"UTF-8").replaceAll("\\+", "%20");
 			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
 			}
 			response.setHeader("Content-Disposition", "attachment;filename="+downloadFileName+";");
 		}else {

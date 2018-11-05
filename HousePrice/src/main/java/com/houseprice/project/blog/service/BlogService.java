@@ -62,16 +62,28 @@ public String fileSave(MultipartFile file, int bno) {
 
 public DownloadFile getDownloadFile(int id) {
 	//DB에 저장된 파일정보 로드
-			UploadFile fileInfo = repository.findById(id);
-			System.out.println("저장되어있는 파일참조 가져오기");
-			System.out.println(fileInfo.toString());
-			//저장되어 있는 파일 참조 가져오기
-			File responseFile = FileUtil.getFileFromServer(fileInfo.getBfile_name());
 			
-//			System.out.println("responseFile:"+responseFile.getAbsolutePath());
-			DownloadFile downloadFile = new DownloadFile();
-			downloadFile.setFile(responseFile);
-			downloadFile.setOriginalFaileName(fileInfo.getBfile_originalName());
+	UploadFile fileInfo= null;
+	
+	DownloadFile downloadFile = null;
+	
+			try {
+				fileInfo = repository.findById(id);
+				System.out.println("저장되어있는 파일참조 가져오기");
+				System.out.println(fileInfo.toString());	
+				
+				//저장되어 있는 파일 참조 가져오기
+				File responseFile = FileUtil.getFileFromServer(fileInfo.getBfile_name());
+				
+//				System.out.println("responseFile:"+responseFile.getAbsolutePath());
+				downloadFile = new DownloadFile();
+				downloadFile.setFile(responseFile);
+				downloadFile.setOriginalFaileName(fileInfo.getBfile_originalName());
+			} catch (Exception e) {
+				System.out.println("test");
+				return null;
+			}			
+			
 			
 			return downloadFile;
 }

@@ -136,12 +136,17 @@ $(document).ready(function(){
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="box-body">
+						
+						<div>[글번호 : ${data.bno }]</div>
+						
 							<div class="form-group">
 								<h3 class="box-title">제목 : ${data.btitle }</h3>
 							</div>
+							<hr>
 							<div class="form-group" style="height: 400px">
 								${data.bcontent }
 							</div>
+							<hr>
 							<div class="box-footer">
 								<div class="user-block">
 									<span class="username">번호  : ${data.bno } </span>
