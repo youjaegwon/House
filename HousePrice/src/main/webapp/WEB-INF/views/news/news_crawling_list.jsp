@@ -37,14 +37,14 @@
 								<tbody>
 									<tr>
 										<th style="width: 30px; text-align: center;">번호</th>
-										<th style="width: 150px; text-align: center;">제목</th>
+										<th style="width: 250px; text-align: center;">제목</th>
 										
-										<th style="width: 70px; text-align: center;">날짜</th>
+										<th style="width: 50px; text-align: center;">날짜</th>
 									</tr>
 									
 									<c:forEach items="${news_crawling}" var="news">
 										<tr>
-											<td style="text-align: center;">${news.ano}</td>
+											<td style="text-align: center;">${news.ano+1}</td>
 											<td style="text-align: center;"><details><summary><a
 												href="${news.aoriginallink}" target="_blank">${news.atitle} </a>
 												</summary>
