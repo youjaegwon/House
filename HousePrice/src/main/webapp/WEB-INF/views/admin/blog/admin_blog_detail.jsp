@@ -143,7 +143,7 @@ $(document).ready(function(){
 								<h3 class="box-title">제목 : ${data.btitle }</h3>
 							</div>
 							<hr>
-							<div class="form-group" style="width: 350px">
+							<div class="form-group">
 								${data.bcontent }
 							</div>
 							<hr>

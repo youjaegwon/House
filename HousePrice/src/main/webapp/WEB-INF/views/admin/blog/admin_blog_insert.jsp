@@ -7,6 +7,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
 
+
 <body>
 	<%@ include file="../../include/admin/left_header.jsp"%>
 	<%@ include file="../../include/admin/main_header.jsp"%>
@@ -29,7 +30,7 @@
 		</textarea>
 
 
-							<input type="submit" class="btn btn-primary btn-lg" value="글작성" id="btn" /> <input type="submit" class="btn btn-primary btn-lg" value="글저장" id="btn2" />
+							<input type="submit" class="btn btn-primary btn-lg" value="글작성" id="btn" />
 						</form>
 
 						<div id="result"></div>
@@ -99,5 +100,7 @@
 		});
 	}
 </script>
+
+
 
 </html>
