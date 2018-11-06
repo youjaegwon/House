@@ -37,7 +37,7 @@
 						 <img src="/blog/filedownload?id=${list.fid}" onERROR="this.src='${path}/resources/img/una_mattina.png'" alt="Example blog post alt" class="img-fluid" width="300px" height="300px"></a></div>
 					</div>
 					<div class="col-md-8">
-								<h2 class="h3 mt-0"><a href="post.htmls">${list.btitle }</a></h2>
+								<h2 class="h3 mt-0"><a href="/blog/blogDetail?bno=${list.bno }">${list.btitle }</a></h2>
 								<div class="d-flex flex-wrap justify-content-between text-xs">
 								<p class="author-category">By <a href="#">${list.mid }</a></p>
 							 	<p class="date-comments"><a href="blog-post.html"><i class="fa fa-calendar-o"></i> ${list.bregdate }</a><a href="blog-post.html"><i class="fa fa-comment-o"></i> 8 Comments</a></p>

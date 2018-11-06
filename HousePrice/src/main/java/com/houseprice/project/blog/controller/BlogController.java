@@ -104,6 +104,38 @@ public class BlogController {
 		return "blog/manageList";
 	}
 	
+	//검색
+	@RequestMapping(value = "/findByBtitle", method = RequestMethod.GET)
+	public String findByBtitle(Model model, HttpServletRequest request) {
+		
+		int requestPage=1;
+		if(request.getParameter("reqPage") != null) { requestPage= Integer.parseInt(request.getParameter("reqPage")); }
+		
+		BlogVO blogVO = new BlogVO();
+		
+		int count = service.pageGetCount();
+		System.out.println(count+count+count+count+count+count+count+count+count+count+count+count);
+		
+		PageManager pageManager = new PageManager(requestPage);
+		PageGroupResult pageGroupResult = pageManager.getPageGroupResult(count);
+		int endLow = PageInfo.ROW_COUNT_PER_PAGE * requestPage;
+		int startLow = endLow -(PageInfo.ROW_COUNT_PER_PAGE - 1);
+		
+		blogVO.setBtitle(request.getParameter("btitle"));
+		blogVO.setStartLow(startLow);
+		blogVO.setEndLow(endLow);
+		
+		List<BlogVO> list=service.selectFindByBtitle(blogVO);
+		
+		model.addAttribute("list", list);
+		
+		model.addAttribute("pageGroupResult", pageGroupResult);
+		
+		return "admin/blog/admin_blog_list";
+		
+	}
+	
+	
 	// 글작성 페이지
 	@RequestMapping(value = "/blogInsert", method = RequestMethod.POST)
 	public String InsertGO(BlogVO blogVO ,Model model) {
@@ -113,6 +145,16 @@ public class BlogController {
 		model.addAttribute("bno", bno);
 		
 		return "blog/blogInsert";
+	}
+	// 글작성 페이지
+	@RequestMapping(value = "/adminBlogInsert", method = RequestMethod.POST)
+	public String adminBlogInsert(BlogVO blogVO ,Model model) {
+		
+		int bno = service.insert(blogVO);	
+		
+		model.addAttribute("bno", bno);
+		
+		return "admin/blog/admin_blog_insert";
 	}
 	
 	//블로그 목록 -> 디테일 
@@ -145,6 +187,17 @@ public class BlogController {
 		model.addAttribute("bno", bno);
 		
 		return "redirect:/blog/blogDetail";
+		
+	}
+	//관리자 글작성 페이지
+	@RequestMapping(value = "/adminUpdate", method = RequestMethod.POST)
+	public String adminUpdate(Model model, BlogVO blogVO) {
+		
+		int bno = service.update(blogVO);
+		
+		model.addAttribute("bno", bno);
+		
+		return "redirect:/blog/blogDetailSave";
 		
 	}
 	
@@ -193,6 +246,20 @@ public class BlogController {
 		return "redirect:/blog/blogDetail";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/adminUpdate_N", method = RequestMethod.POST)
+	public String adminUpdate_N(@RequestParam("btitle") String btitle, @RequestParam("bno") int bno, Model model, @RequestParam("bcontent") String bcontent,BlogVO blogVO) {
+		
+		blogVO.setBno(bno);
+		blogVO.setBcontent(btitle);
+		blogVO.setBcontent(bcontent);
+		
+		bno = service.update2(blogVO);
+		
+		
+		return ""+blogVO.getBno();
+	}
+	
 	//삭제
 	@RequestMapping(value = "/blogDelete", method = RequestMethod.POST)
 	public String delete(Model model, @RequestParam(value="bno") int bno) {
@@ -203,6 +270,17 @@ public class BlogController {
 		return "redirect:/";
 		
 	}
+	//삭제
+	@RequestMapping(value = "/adminBlogDelete", method = RequestMethod.POST)
+	public String adminBlogDelete(Model model, @RequestParam(value="bno") int bno) {
+		
+		String result=service.delete(bno);
+		model.addAttribute("message",result);
+		
+		return "redirect:/admin/blog/selectSave";
+		
+	}
+
 	
 	
 	//상세
@@ -260,6 +338,11 @@ public class BlogController {
 	@RequestMapping(value="/filedownload", method=RequestMethod.GET,produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	public FileSystemResource filedownload(@RequestParam int id, HttpServletRequest request, HttpServletResponse response) {
 		DownloadFile downloadFile = service.getDownloadFile(id);
+		
+		if(downloadFile == null) {
+			return null;
+		}
+		
 		String browser = request.getHeader("User-Agent");
 		String downloadFileName = null;
 		if(browser.contains("Chrome")||
@@ -268,7 +351,6 @@ public class BlogController {
 			try {				
 				downloadFileName = URLEncoder.encode(downloadFile.getOriginalFaileName(),"UTF-8").replaceAll("\\+", "%20");
 			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
 			}
 			response.setHeader("Content-Disposition", "attachment;filename="+downloadFileName+";");
 		}else {

@@ -136,12 +136,17 @@ $(document).ready(function(){
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="box-body">
+						
+						<div>[글번호 : ${data.bno }]</div>
+						
 							<div class="form-group">
 								<h3 class="box-title">제목 : ${data.btitle }</h3>
 							</div>
-							<div class="form-group" style="height: 400px">
+							<hr>
+							<div class="form-group" style="width: 350px">
 								${data.bcontent }
 							</div>
+							<hr>
 							<div class="box-footer">
 								<div class="user-block">
 									<span class="username">번호  : ${data.bno } </span>
@@ -166,7 +171,7 @@ $(document).ready(function(){
 	</div>
 
 <form action="/admin/blog/selectSave" method="get"><input type="submit" value="목록으로"></form>
-<form action="/blog/blogDelete" method="post"><input type="hidden" name="bno" value="${data.bno }"><input type="submit" value="삭제하기"></form>
+<form action="/blog/adminBlogDelete" method="post"><input type="hidden" name="bno" value="${data.bno }"><input type="submit" value="삭제하기"></form>
 <form action="/blog/updateSaveGO" method="post"><input type="hidden" name="bno" value="${data.bno }"><input type="submit" value="수정하기"></form>
 
 						<div class="content table-responsive table-full-width">

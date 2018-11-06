@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html>
 <%@ include file="../../include/admin/head.jsp"%>
+
+
 <script type="text/javascript" src="${path}/question/js/paging.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js" ></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
@@ -127,15 +129,11 @@ $(document).ready(function(){
 							<h4 class="title">블로그관리</h4>
 							<p class="category">블로그를 위한 게시지정</p>
 						</div>
-						<form action="findBymid" method="get">
+						<form action="/blog/findByBtitle" method="get">
 						<div>
-						 	<input type='hidden' name='index' value='${p.index}'>
-							<input type='hidden' name='pageStartNum' id='pageStartNum' value='${p.pageStartNum}'> 
-							<input type='hidden' name='listCnt' id='listCnt' value='${p.listCnt}'> 					
-							
 							<div class="form-group col-sm-10">
 							<div class="input-group">
-							<input type="text" class="form-control" name="mid" id="mid" placeholder="제목입력"> <span class="input-group-btn">
+							<input type="text" class="form-control" name="btitle" id="btitle" placeholder="제목입력"> <span class="input-group-btn">
 							<button type="submit" class="btn btn-primary btn-flat">
 							<i class="fa fa-search"></i> 검색
 							</button>
@@ -197,7 +195,7 @@ $(document).ready(function(){
 						</div>
 						<c:if test="${not empty login }">
 							<c:if test="${login.ano eq 1}">
-								<form action="/blog/blogInsert" method="post">
+								<form action="/blog/adminBlogInsert" method="post">
 									<input type="submit" value="글작성"> <input type="hidden"
 										name="mid" value="${login.mid}">
 								</form>

@@ -27,12 +27,12 @@ $(document).ready(function() {
         async:false, //기본값은 true
 		success:function(data){	// 성공
 			
-			$("#mid").html(data.mid);
-			$("#nhit").html(data.hit);
+			$("#mid").html('작성자 : '+data.mid);
+			$("#nhit").html('조회수 : ' +data.hit);
 			$("#bcontent").html(data.bcontent);
-			$("#bregdate").html(data.bregdate);
-			$("#btitle").html(data.btitle);
-			$("#bno").html(data.bno);
+			$("#bregdate").html('작성일자 : ' + data.bregdate);
+			$("#btitle").html('제목 : ' + data.btitle);
+			$("#bno").html('[글번호 : ' + data.bno+']');
 			$("input[name='bno']").val(data.bno);
 		},
 		error: function (request,status,error) {
@@ -54,7 +54,7 @@ $(document).ready(function() {
 				<div class="col-md-5">
 					<ul class="breadcrumb d-flex justify-content-end">
 						<li class="breadcrumb-item"><a href="/">Home</a></li>
-						<li class="breadcrumb-item active">질문/답변</li>
+						<li class="breadcrumb-item active">상세페이지</li>
 					</ul>
 				</div>
 			</div>
@@ -66,25 +66,42 @@ $(document).ready(function() {
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="box-body">
+						
+								<div class="user-block">
+									<span class="username" id="bno"></span>
+								</div>
+						
+							<hr>
+						
 							<div class="form-group">
-								<h3 class="box-title">제목 : <div id="btitle"/></h3>
+								<h3 class="box-title" id="btitle"></h3>
 							</div>
-							<div class="form-group" style="height: 400px">
-								<div id="bcontent"/>
+							<hr>
+							<div class="form-group" id="bcontent">
 							</div>
+							
+							<hr>
 							<div class="box-footer">
 								<div class="user-block">
-									<span class="username">작성자 : <div id="mid"/> </span>
+									<span class="username" id="mid"></span>
+								</div>
+								
+								<div class="user-block">
+									<span class="username" id="bregdate"></span>
 								</div>
 								<div class="user-block">
-									<span class="username">작성일자 : <div id="bregdate"/> </span>
-								</div>
-								<div class="user-block">
-									<span class="username">조회수 : <div id="nhit"/> </span>
+									<span class="username" id="nhit"></span>
 								</div>
 							</div>
+							<hr>
+							<form action="/blog/" method="get"><input type="submit" value="목록으로"></form>
+							<c:if test="${not empty login }">
+							<c:if test="${login.ano eq 1}">
 							<form action="/blog/blogDelete" method="post"><input type="hidden" name="bno" ><input type="submit" value="삭제하기"></form>
 							<form action="/blog/updateGO" method="post"><input type="hidden" name="bno" ><input type="submit" value="수정하기"></form>
+							</c:if>
+							</c:if>
+							
 						</div>
 						<br />
 						<br />

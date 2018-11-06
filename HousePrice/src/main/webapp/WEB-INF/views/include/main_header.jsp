@@ -20,7 +20,7 @@
                 <c:choose>
                   <c:when test="${ 1 eq login.ano}">
                     <div class="login">
-                      <a href="/admin/main/move" class="login-btn">
+                      <a href="/admin/member/move" class="login-btn">
                         <span class="d-none d-md-inline-block">관리자페이지</span></a>
                       <a href="/mypage/move" class="signup-btn">
                         <span class="d-none d-md-inline-block">마이페이지</span></a>
