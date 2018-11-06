@@ -10,28 +10,33 @@
 		<div class="container">
 			<div class="row d-flex align-items-center flex-wrap">
 				<div class="col-md-7">
-					<h1 class="h2">주택 공시가격 검색</h1>
+					<h1 class="h2">주택 공시가격 데이터 분석</h1>
 				</div>
 				<div class="col-md-5">
 					<ul class="breadcrumb d-flex justify-content-end">
 						<li class="breadcrumb-item"><a href="/">Home</a></li>
-						<li class="breadcrumb-item active">주택 공시가격 검색</li>
+						<li class="breadcrumb-item active">주택 공시가격 데이터 분석</li>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div id="content">
-		<div class="form-group">
-			<form id="searchForm" method="post">
-			<div class="form-row mt-3">
-				<input id="checkinmap" class="form-control" type="checkbox" >
-				<input id="searchKeyword" class="col-md-8 form-control" type="text" value="" placeholder="검색할 주소를 입력하세요.">
-				<input class="col-md-4 btn btn-template-outlined" type="submit" value="검색">
-			</div>
-			</form>
-		</div>
-		<div id="map" style="width:100%;height:800px;"></div>
+	<div id="content" class="container">
+		<h1 class="h2">내게 맞는 주택 분석</h1>
+		
+		<h1 class="h4 mt-4">넓이를 기준으로 분류한 서울시 주택 가격</h1>
+		<img src="/img/00_price_by_area.png" alt="넓이기준공시가격">
+
+		<h1 class="h4 mt-2">가격 10억 이하의 넓이를 기준으로 분류한 서울시 주택 가격</h1>
+		<img src="/img/01_price_by_area_1.png" alt="최적화된넓이기준공시가격">
+		
+		<h1 class="h4 mt-2">구단위를 기준으로 분류한 서울시 주택 가격</h1>
+		<img src="/img/02_price_by_locale.png" alt="지역기준공시가격">
+		
+		<h1 class="h4 mt-2">가격 10억 이하의 구단위를 기준으로 분류한 서울시 주택 가격</h1>
+		<img src="/img/03_price_by_locale_1.png" alt="최적화된지역기준공시가격">
+		
+		<a href="http://124.53.48.9:8889/notebook/editor?editor=523">HIVE 쿼리에디터로 이동</a>
 	</div>
 	<%@ include file="../include/main_footer.jsp"%>
 	<%@ include file="../include/plugin_js.jsp"%>
