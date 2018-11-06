@@ -108,7 +108,7 @@
 			</div>
 			<h3 class="text-uppercase">현재 이슈에 대한 더 많은 정보가 필요하신가요?</h3>
 			<p class="text-center">
-				<a href="index2.html" class="btn btn-template-outlined-white btn-lg">See More</a>
+				<a href="/news/list" class="btn btn-template-outlined-white btn-lg">See More</a>
 			</p>
 		</div>
 	</section>

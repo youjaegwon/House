@@ -12,17 +12,8 @@
          </div>
 
          <ul class="nav">
-            <li><a href="dashboard.html"> <i class="pe-7s-graph"></i>
-                  <p>대쉬보드</p>
-            </a></li>
             <li><a href="/admin/member/move"> <i class="pe-7s-user"></i>
                   <p>회원관리</p>
-            </a></li>
-            <li><a href="table.html"> <i class="pe-7s-note2"></i>
-                  <p>뉴스</p>
-            </a></li>
-            <li><a href="typography.html"> <i class="pe-7s-news-paper"></i>
-                  <p>뉴스 크롤링</p>
             </a></li>
             <li><a href="/admin/blog/selectSave"> <i class="pe-7s-science"></i>
                   <p>블로그</p>
